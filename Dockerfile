@@ -30,7 +30,8 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash \
 
 
 #copy project folder in to the container
-COPY archive-tests-js /archive-tests-js
+RUN mkdir -p /archive-tests-js
+COPY . /archive-tests-js/
 WORKDIR /archive-tests-js
 
 # Install the all the mohules
