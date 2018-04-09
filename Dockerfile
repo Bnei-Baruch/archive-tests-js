@@ -33,9 +33,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash \
 COPY archive-tests-js /archive-tests-js
 WORKDIR /archive-tests-js
 
-#Config to run headless and no sendbox
-RUN sed -i "s#https://archive.kbb1.com#$TEST_ADDR#g" spec/spec/spec.js
-RUN sed -i "s#headless: false#$BROWSER_FLAGS#g" spec/spec/spec.js
-
 # Install the all the mohules
 RUN npm i
+
+ENTRYPOINT ["/archive-tests-js/docker-entrypoint-pre.sh"]
