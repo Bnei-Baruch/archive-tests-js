@@ -28,7 +28,7 @@ describe('Setup', function () {
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
         it('Daily Lesson - Player Controls', async function () {
-            await page.goto(lessonsPlayerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.step.backward')).toBeDefined();
             expect(await page.$('.step.forward')).toBeDefined();
             expect(await page.$('.play.icon')).toBeDefined();
