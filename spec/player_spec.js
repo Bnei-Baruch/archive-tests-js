@@ -1,4 +1,3 @@
-
 const puppeteer = require('puppeteer');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1920;
@@ -7,12 +6,12 @@ let browser;
 let page;
 let originalTimeout;
 
-describe('Setup', function () {
+describe('Setup ', function () {
     beforeAll((async function () {
         try {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-            browser = await puppeteer.launch({args:testconfig.browser.args});
+            browser = await puppeteer.launch({args: testconfig.browser.args});
             page = await browser.newPage();
             await page.setViewport({width, height});
         } catch (err) {
@@ -20,14 +19,14 @@ describe('Setup', function () {
         }
     }));
 
-
     describe('Player Page Test Suite ', function () {
 
-        it('Daily Lesson - Player Exists', async function () {
+        it('Daily Lesson - Player Exists ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
-        it('Daily Lesson - Player Controls', async function () {
+
+        it('Daily Lesson - Player Controls ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.step.backward')).toBeDefined();
             expect(await page.$('.step.forward')).toBeDefined();
@@ -46,7 +45,7 @@ describe('Setup', function () {
             expect(await page.$('.mediaplayer__onscreen-controls')).toBeDefined();
         });
 
-        it('Daily Lesson - Player Download Section', async function () {
+        it('Daily Lesson - Player Download Section ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
                 return selectors.map(selector => selector.innerText)
@@ -62,16 +61,16 @@ describe('Setup', function () {
             })).toEqual(3);
         });
 
-        it('Daily Lesson - Player Other Parts Section', async function () {
+        it('Daily Lesson - Player Other Parts Section ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
             expect(await page.$$eval('a.item.recommended-same-collection__item', (selectors) => {
                 return selectors.length
             })).toBeGreaterThan(0);
         });
+    });
 
-        afterAll(async function () {
-            await browser.close();
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-        });
+    afterAll(async function () {
+        await browser.close();
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
 });
