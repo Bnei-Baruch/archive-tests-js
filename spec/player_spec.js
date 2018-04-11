@@ -67,6 +67,17 @@ describe('Setup ', function () {
                 return selectors.length
             })).toBeGreaterThan(0);
         });
+
+        it('Daily Lesson - Player Unit Materials - All Sections ', async function () {
+            await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+            let unitMaterialsElements= await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
+                return selectors.map(selector => selector.text)
+            });
+            expect(unitMaterialsElements[0]).toEqual("Summary");
+            expect(unitMaterialsElements[1]).toEqual("Transcription");
+            expect(unitMaterialsElements[2]).toEqual("Sources");
+            expect(unitMaterialsElements[3]).toEqual("Sketches");
+        });
     });
 
     afterAll(async function () {
