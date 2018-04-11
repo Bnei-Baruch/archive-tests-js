@@ -1,12 +1,11 @@
 
 const puppeteer = require('puppeteer');
+const testconfig = require('spec/testconfig');
 const width = 1920;
 const height = 1080;
 let browser;
 let page;
 let originalTimeout;
-const lessonsUrl = 'https://archive.kbb1.com/lessons';
-const lessonsPlayerUrl = 'https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en';
 
 describe('Setup', function () {
     beforeAll((async function () {
@@ -25,7 +24,7 @@ describe('Setup', function () {
     describe('Player Page Test Suite ', function () {
 
         it('Daily Lesson - Player Exists', async function () {
-            await page.goto(lessonsPlayerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
         it('Daily Lesson - Player Controls', async function () {
@@ -48,7 +47,7 @@ describe('Setup', function () {
         });
 
         it('Daily Lesson - Player Download Section', async function () {
-            await page.goto(lessonsPlayerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
                 return selectors.map(selector => selector.innerText)
             });
@@ -64,7 +63,7 @@ describe('Setup', function () {
         });
 
         it('Daily Lesson - Player Other Parts Section', async function () {
-            await page.goto(lessonsPlayerUrl, {waitUntil: 'networkidle2'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
             expect(await page.$$eval('a.item.recommended-same-collection__item', (selectors) => {
                 return selectors.length
             })).toBeGreaterThan(0);
