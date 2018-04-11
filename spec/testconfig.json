@@ -1,7 +1,13 @@
 {
+  "browser": {
+    "args":
+      [
+        "--headless",
+        "--no-sandbox"
+      ]
+  },
   "resources": {
     "dailyLessonUrl": "https://archive.kbb1.com/lessons",
-    "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en'",
-
+    "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en'"
   }
 }

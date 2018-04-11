@@ -1,5 +1,6 @@
 
 const puppeteer = require('puppeteer');
+const testconfig = require(__dirname + '/testconfig.json');
 const width = 1920;
 const height = 1080;
 let browser;
@@ -13,7 +14,7 @@ describe('Setup', function () {
         try {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-            browser = await puppeteer.launch({headless: false});
+            browser = await puppeteer.launch({args:testconfig.browser.args});
             page = await browser.newPage();
             await page.setViewport({width, height});
         } catch (err) {
