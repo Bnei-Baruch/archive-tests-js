@@ -2,6 +2,7 @@
   "browser": { "headless": false },
   "resources": {
     "dailyLessonUrl": "https://archive.kbb1.com/lessons",
-    "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en'"
+    "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en",
+    "unitMaterialsUrl": "https://archive.kbb1.com/en/events/c/iycyvtch?language=en"
   }
 }
