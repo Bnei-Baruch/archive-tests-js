@@ -1,5 +1,15 @@
 {
-  "browser": { "headless": false },
+  "browser": {
+    "args":
+      [
+        "--headless",
+        "--no-sandbox"
+      ],
+    "viewport":{
+      "width":1920,
+      "height":1080
+    }
+  },
   "resources": {
     "dailyLessonUrl": "https://archive.kbb1.com/lessons",
     "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en",
