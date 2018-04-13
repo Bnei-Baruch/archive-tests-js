@@ -58,7 +58,7 @@ describe('Setup ', function () {
         });
 
         it('Daily Lesson - Filters Clickable', async function () {
-            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             const [response] = await Promise.all([
                 page.waitForNavigation(),
                 page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)"),
