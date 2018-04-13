@@ -61,7 +61,7 @@ describe('Setup ', function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             const [response] = await Promise.all([
                 page.waitForNavigation(),
-                page.click(".ui.container.padded.horizontally a.item a:nth-child(1)"),
+                page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)"),
             ]);
             console.log(response)
         });
