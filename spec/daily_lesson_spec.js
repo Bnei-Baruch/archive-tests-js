@@ -59,11 +59,14 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Filters Clickable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            const [response] = await Promise.all([
-                page.waitForNavigation(),
-                page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)"),
-            ]);
-            console.log(response)
+            for(let i=2;i<=4; i++) {
+                await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
+                expect(await page.$eval(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")",
+                    (selector) => {
+                        console.log("Found: "+ selector);
+                        return selector.className;
+                    })).toBe('active item');
+            }
         });
 
         it('Daily Lesson - Pagination ', async function () {
