@@ -70,18 +70,31 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Player Unit Materials - All Sections ', async function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
-            let unitMaterialsElements= await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
+            let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
-            expect(unitMaterialsElements[0]).toEqual("Summary");
-            expect(unitMaterialsElements[1]).toEqual("Transcription");
-            expect(unitMaterialsElements[2]).toEqual("Sources");
-            expect(unitMaterialsElements[3]).toEqual("Sketches");
+            expect(unitMaterialsElementsText[0]).toEqual("Summary");
+            expect(unitMaterialsElementsText[1]).toEqual("Transcription");
+            expect(unitMaterialsElementsText[2]).toEqual("Sources");
+            expect(unitMaterialsElementsText[3]).toEqual("Sketches");
         });
-    });
 
-    afterAll(async function () {
-        await browser.close();
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+        it('Daily Lesson - Player Unit Materials - Clickable', async function () {
+            await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+            let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
+            for(let i = 0;i < unitMaterialsElements.length; i++) {
+                await unitMaterialsElements[i].click();
+                const innerHTML = await page.evaluate(e => e.outerHTML, unitMaterialsElements[i]);
+                const text = await page.evaluate(e => e.text, unitMaterialsElements[i]);
+                expect(innerHTML).toEqual('<a class="active item tab-' + text.toLowerCase() + '">' + text + '</a>')
+            }
+        });
+
+        afterAll(async function () {
+            await browser.close();
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+        });
+
     });
 });
+
