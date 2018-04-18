@@ -2,7 +2,7 @@
   "name": "archivebb-tests",
   "version": "0.0.1",
   "dependencies": {
-    "jasmine": "latest",
+    "jasmine": "3.1.0",
     "jasmine-reporters": "^2.3.0",
     "puppeteer": "1.3.0"
   },
