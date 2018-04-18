@@ -48,17 +48,19 @@ describe('Setup ', function () {
             expect(filters[2]).toEqual("Date");
         });
 
+
         it('Daily Lesson - Main List structure', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
-                return selector.innerText
+                return selector.innerText;
             })).toContain("Results 1 - 10 of")
         });
 
+
         it('Daily Lesson - Filters Clickable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            for (let i = 2; i <= 4; i++) {
+            for(let i = 2;i <= 4; i++) {
                 await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
                 expect(await page.$eval(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")",
                     (selector) => {
@@ -68,12 +70,51 @@ describe('Setup ', function () {
             }
         });
 
+
+        it('Daily Lesson - Filter - Apply Button Enable/Disable', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            // Topics & Sources filters - Apply button expected to be disabled
+            for (let i = 2; i <= 3; i++) {
+                await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
+                expect(await page.$eval(".ui.primary.disabled.right.floated.button", (selector) => {
+                    return selector.disabled;
+                })).toBeTruthy(true);
+            }
+            // Date filter - Apply button expected to be enabled
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + 4 + ")");
+            expect(await page.$eval(".ui.primary.button", (selector) => {
+                return selector.disabled;
+            })).toBeFalsy(false);
+        });
+
+
+        it('Daily Lesson - Filter - Apply Button - Click', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            // Clicking on first item in Filter's dropDown
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
+            // Apply button expected to be enabled
+            await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+            expect(await page.$eval(".ui.blue.tiny.fluid.vertical.menu a:first-child", (selector) => {
+                return selector.className;
+            })).toBe("active item");
+            await Promise.all([
+                page.click(".ui.primary.right.floated.button"),
+                page.waitForSelector(".ui.blue.basic.button"),
+            ]);
+            expect(await page.$eval(".ui.blue.basic.button", (selector) => {
+                return selector.innerText;
+            })).toBe("Jewish culture");
+
+        });
+
+
         it('Daily Lesson - Pagination ', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$eval('.ui.blue.compact.pagination-menu.menu', (selector) => {
                 return selector.className
             })).toBe('ui blue compact pagination-menu menu');
         });
+
 
         it('Daily Lesson - Player ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
