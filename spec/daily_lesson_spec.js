@@ -14,6 +14,7 @@ const teamCityReporter = new reporters.TeamCityReporter({
 jasmine.getEnv().addReporter(teamCityReporter);
 
 describe('Setup ', function () {
+
     beforeAll((async function () {
         try {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -48,7 +49,6 @@ describe('Setup ', function () {
             expect(filters[2]).toEqual("Date");
         });
 
-
         it('Daily Lesson - Main List structure', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
 
@@ -57,8 +57,9 @@ describe('Setup ', function () {
             })).toContain("Results 1 - 10 of")
         });
 
+        // jQuery('.ui.container.padded.horizontally')[0] - need add test that check all displayed filters
 
-        it('Daily Lesson - Filters Clickable', async function () {
+        it('Daily Lesson - Filter - Clickable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             for(let i = 2;i <= 4; i++) {
                 await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
@@ -69,7 +70,6 @@ describe('Setup ', function () {
                     })).toBe('active item');
             }
         });
-
 
         it('Daily Lesson - Filter - Apply Button Enable/Disable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
@@ -86,7 +86,6 @@ describe('Setup ', function () {
                 return selector.disabled;
             })).toBeFalsy(false);
         });
-
 
         it('Daily Lesson - Filter - Apply Button - Click', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
@@ -107,14 +106,12 @@ describe('Setup ', function () {
 
         });
 
-
         it('Daily Lesson - Pagination ', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$eval('.ui.blue.compact.pagination-menu.menu', (selector) => {
                 return selector.className
             })).toBe('ui blue compact pagination-menu menu');
         });
-
 
         it('Daily Lesson - Player ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
@@ -140,6 +137,8 @@ describe('Setup ', function () {
                 expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
             }
         });
+
+
     });
 
     afterAll(async function () {
