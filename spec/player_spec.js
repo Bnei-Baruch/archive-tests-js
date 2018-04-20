@@ -7,6 +7,7 @@ let page;
 let originalTimeout;
 
 describe('Setup ', function () {
+
     beforeAll((async function () {
         try {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
