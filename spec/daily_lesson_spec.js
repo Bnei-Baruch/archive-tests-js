@@ -101,13 +101,14 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Filter - Apply Button - Click ', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            // Clicking on first item in Filter's dropDown
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
-            // Apply button expected to be enabled
+            // Clicking on first item in Filter's dropDown
             await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+            // Apply button expected to be enabled
             expect(await page.$eval(".ui.blue.tiny.fluid.vertical.menu a:first-child", (selector) => {
                 return selector.className;
             })).toBe("active item");
+            // Click Apply and check if filter tag is created
             await Promise.all([
                 page.click(".ui.primary.right.floated.button"),
                 page.waitForSelector(".ui.blue.basic.button"),
@@ -158,6 +159,49 @@ describe('Setup ', function () {
             }
         });
 
+
+        it('Daily Lesson - Date Filter Appearance', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            // Click on Date filter
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+            expect(await page.$eval(".ui.primary.button", (selector) => {
+                return selector.disabled;
+            })).toBeFalsy(false);
+            expect(await page.$eval(".DayPicker", (selector) => {
+                return selector.className;
+            })).toBeDefined();
+            expect(await page.$$eval(".DayPicker-Month", (selector) => {
+                return selector.length;
+            })).toBe(2);
+            expect(await page.$eval(".ui.center.aligned.header", (selector) => {
+                return selector.innerText;
+            })).toBe("Select a date range");
+        });
+
+
+        it('Daily Lesson - Date Filter - Select', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            // Clicking on Date filter
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+            expect(await page.$eval(".ui.primary.button", (selector) => {
+                return selector.disabled;
+            })).toBeFalsy(false);
+            // Click on Dates range dropdown and select "Last 7 days"
+            await page.click(".ui.fluid.item.dropdown");
+            await page.click(".ui.active.visible.fluid.item.dropdown div div:nth-child(3)");
+            expect(await page.$eval(".ui.fluid.item.dropdown .text", (selector) => {
+                return selector.innerText;
+            })).toBe("Last 7 Days");
+            // Click Apply and check if filter tag is created
+            const [response] = await Promise.all([
+                page.click(".ui.primary.button"),
+                page.waitForSelector(".ui.blue.basic.button"),
+            ]);
+            expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
+                return selector.className;
+            })).toBeDefined();
+
+        });
 
     });
 
