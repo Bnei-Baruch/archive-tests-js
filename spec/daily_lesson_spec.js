@@ -101,10 +101,11 @@ describe('Setup => ', function () {
 
         it('Daily Lesson - Filter - Apply Button - Click', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            // Clicking on first item in Filter's dropDown
+            // Click on "Topic" filter
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
-            // Apply button expected to be enabled
+            // Clicking on first item in Filter's dropDown
             await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+            // Selected item expected to be active
             expect(await page.$eval(".ui.blue.tiny.fluid.vertical.menu a:first-child", (selector) => {
                 return selector.className;
             })).toBe("active item");
