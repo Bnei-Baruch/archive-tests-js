@@ -48,15 +48,18 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Player Download Section ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
+
             let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
                 return selectors.map(selector => selector.innerText)
             });
-            expect(download_labels[0]).toEqual("Lesson Video [360p]");
-            expect(download_labels[1]).toEqual("Lesson Video [720p]");
-            expect(download_labels[2]).toEqual("Lesson Audio");
+            expect(download_labels[0]).toEqual('Lesson Video [360p]');
+            expect(download_labels[1]).toEqual('Lesson Video [720p]');
+            expect(download_labels[2]).toEqual('Lesson Audio');
+
             expect(await page.$$eval('.media-downloads__file-download-btn', (selectors) => {
                 return selectors.length
             })).toEqual(3);
+
             expect(await page.$$eval('.media-downloads__file-copy-link-btn', (selectors) => {
                 return selectors.length
             })).toEqual(3);
@@ -64,6 +67,7 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Player Other Parts Section ', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+
             expect(await page.$$eval('a.item.recommended-same-collection__item', (selectors) => {
                 return selectors.length
             })).toBeGreaterThan(0);
@@ -71,17 +75,20 @@ describe('Setup ', function () {
 
         it('Daily Lesson - Player Unit Materials - All Sections ', async function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
             let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
-            expect(unitMaterialsElementsText[0]).toEqual("Summary");
-            expect(unitMaterialsElementsText[1]).toEqual("Transcription");
-            expect(unitMaterialsElementsText[2]).toEqual("Sources");
-            expect(unitMaterialsElementsText[3]).toEqual("Sketches");
+            expect(unitMaterialsElementsText.length).toBe(4);
+            expect(unitMaterialsElementsText[0]).toEqual('Summary');
+            expect(unitMaterialsElementsText[1]).toEqual('Transcription');
+            expect(unitMaterialsElementsText[2]).toEqual('Sources');
+            expect(unitMaterialsElementsText[3]).toEqual('Sketches');
         });
 
         it('Daily Lesson - Player Unit Materials - Clickable', async function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
             let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
             for(let i = 0;i < unitMaterialsElements.length; i++) {
                 await unitMaterialsElements[i].click();
