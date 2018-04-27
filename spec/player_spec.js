@@ -6,7 +6,7 @@ let browser;
 let page;
 let originalTimeout;
 
-describe('Setup ', function () {
+describe('Setup => ', function () {
 
     beforeAll((async function () {
         try {
@@ -20,14 +20,14 @@ describe('Setup ', function () {
         }
     }));
 
-    describe('Player Page Test Suite ', function () {
+    describe('Player Page Test Suite => ', function () {
 
-        it('Daily Lesson - Player Exists ', async function () {
+        it('Daily Lesson - Player Exists', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
 
-        it('Daily Lesson - Player Controls ', async function () {
+        it('Daily Lesson - Player Controls', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.step.backward')).toBeDefined();
             expect(await page.$('.step.forward')).toBeDefined();
@@ -46,7 +46,7 @@ describe('Setup ', function () {
             expect(await page.$('.mediaplayer__onscreen-controls')).toBeDefined();
         });
 
-        it('Daily Lesson - Player Download Section ', async function () {
+        it('Daily Lesson - Player Download Section', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
 
             let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
@@ -65,7 +65,7 @@ describe('Setup ', function () {
             })).toEqual(3);
         });
 
-        it('Daily Lesson - Player Other Parts Section ', async function () {
+        it('Daily Lesson - Player Other Parts Section', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
             expect(await page.$$eval('a.item.recommended-same-collection__item', (selectors) => {
@@ -73,7 +73,7 @@ describe('Setup ', function () {
             })).toBeGreaterThan(0);
         });
 
-        it('Daily Lesson - Player Unit Materials - All Sections ', async function () {
+        it('Daily Lesson - Player Unit Materials - Tabs-Menu - Displayed', async function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
             let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
@@ -86,7 +86,7 @@ describe('Setup ', function () {
             expect(unitMaterialsElementsText[3]).toEqual('Sketches');
         });
 
-        it('Daily Lesson - Player Unit Materials - Clickable', async function () {
+        it('Daily Lesson - Player Unit Materials - Tabs-Menu - Clickable', async function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
             let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
