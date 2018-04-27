@@ -83,20 +83,26 @@ describe('Setup ', function () {
 
         it('Programs - Filter - Apply Button Enable/Disable ', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
-            // Click on Topic filter
-            await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
+
+            await Promise.all([
+                // Click on Topic filter
+                page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)'),
+                // Wait for apply button
+                page.waitForSelector(".ui.primary.disabled.right.floated.button")
+            ]);
+
             // Make sure that Apply button is disabled
             expect(await page.$eval(".ui.primary.disabled.right.floated.button", (selector) => {
                 return selector.disabled;
             })).toBeTruthy(true);
-            // Click on Jewish culture
-            await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
-            await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
-            // Apply button expected to be enabled
-            expect(await page.$eval(".ui.primary.disabled.right.floated.button", (selector) => {
-                return selector.disabled;
-            })).toBeTruthy(false);
 
+            // Click on Jewish culture
+            await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+
+            // Make sure that Apply button is enabled
+            expect(await page.$eval(".ui.primary.right.floated.button", (selector) => {
+                return selector.disabled;
+            })).toBeFalsy(false);
         });
 
         it('Programs - Filter - Apply Button - Click ', async function () {
