@@ -13,7 +13,7 @@ const teamCityReporter = new reporters.TeamCityReporter({
 });
 jasmine.getEnv().addReporter(teamCityReporter);
 
-describe('Setup ', function () {
+describe('Setup => ', function () {
 
     beforeAll((async function () {
         try {
@@ -27,9 +27,9 @@ describe('Setup ', function () {
         }
     }));
 
-    describe('Archive Test Suite => ', function () {
+    describe('Programs Page Test Suite => ', function () {
 
-        it('Programs - Header and Filters - Displayed ', async function () {
+        it('Programs - Header and Filters - Displayed', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'domcontentloaded'});
             // header
             expect(await page.$('.section-header')).toBeDefined();
@@ -48,7 +48,7 @@ describe('Setup ', function () {
             expect(filters[3]).toEqual('Date');
         });
 
-        it('Programs - Pagination Next/Previous/Last/First ', async function () {
+        it('Programs - Pagination Next/Previous/Last/First', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
             // get all div that expected to be disabled
@@ -68,7 +68,7 @@ describe('Setup ', function () {
             }
         });
 
-        it('Programs - Filter - Clickable ', async function () {
+        it('Programs - Filter - Clickable', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
             for (let i = 2; i <= 4; i++) {
@@ -81,7 +81,7 @@ describe('Setup ', function () {
             }
         });
 
-        it('Programs - Filter - Apply Button Enable/Disable ', async function () {
+        it('Programs - Filter - Apply Button Enable/Disable', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
             await Promise.all([
@@ -105,7 +105,7 @@ describe('Setup ', function () {
             })).toBeFalsy(false);
         });
 
-        it('Programs - Filter - Apply Button - Click ', async function () {
+        it('Programs - Filter - Apply Button - Click', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
             // Click on Topic filter
             await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
@@ -127,7 +127,7 @@ describe('Setup ', function () {
 
         });
 
-        it('Programs - Main List structure ', async function () {
+        it('Programs - Filter - Displayed Results 1 - 10 0f', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'domcontentloaded'});
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {

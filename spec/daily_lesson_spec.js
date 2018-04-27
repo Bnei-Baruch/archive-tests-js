@@ -13,7 +13,7 @@ const teamCityReporter = new reporters.TeamCityReporter({
 });
 jasmine.getEnv().addReporter(teamCityReporter);
 
-describe('Setup ', function () {
+describe('Setup => ', function () {
 
     beforeAll((async function () {
         try {
@@ -27,9 +27,9 @@ describe('Setup ', function () {
         }
     }));
 
-    describe('Archive Test Suite ', function () {
+    describe('Daily Lesson Page Test Suite => ', function () {
 
-        it('Daily Lesson - Vertical Menu - Displayed ', async function () {
+        it('Daily Lesson - Vertical Menu - Displayed', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             // choose Daily Lessons section from vertical menu
             await page.click('.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)');
@@ -51,7 +51,7 @@ describe('Setup ', function () {
             expect(filters[7]).toEqual("Project Status");
         });
 
-        it('Daily Lesson - Filter - Displayed ', async function () {
+        it('Daily Lesson - Filter and Headers - Displayed', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             // header
             expect(await page.$('.section-header')).toBeDefined();
@@ -71,7 +71,7 @@ describe('Setup ', function () {
             expect(filters[2]).toEqual("Date");
         });
 
-        it('Daily Lesson - Filter - Clickable ', async function () {
+        it('Daily Lesson - Filter - Clickable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             for(let i = 2;i <= 4; i++) {
                 await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
@@ -83,7 +83,7 @@ describe('Setup ', function () {
             }
         });
 
-        it('Daily Lesson - Filter - Apply Button Enable/Disable ', async function () {
+        it('Daily Lesson - Filter - Apply Button Enable/Disable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // Topics & Sources filters - Apply button expected to be disabled
             for (let i = 2; i <= 3; i++) {
@@ -99,7 +99,7 @@ describe('Setup ', function () {
             })).toBeFalsy(false);
         });
 
-        it('Daily Lesson - Filter - Apply Button - Click ', async function () {
+        it('Daily Lesson - Filter - Apply Button - Click', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // Clicking on first item in Filter's dropDown
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
@@ -118,7 +118,7 @@ describe('Setup ', function () {
 
         });
 
-        it('Daily Lesson - Main List structure ', async function () {
+        it('Daily Lesson - Displayed Results 1 - 10 0f', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
@@ -126,19 +126,19 @@ describe('Setup ', function () {
             })).toContain("Results 1 - 10 of")
         });
 
-        it('Daily Lesson - Player ', async function () {
+        it('Daily Lesson - Player Exist', async function () {
             await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
 
-        it('Daily Lesson - Pagination ', async function () {
+        it('Daily Lesson - Pagination Displayed', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             expect(await page.$eval('.ui.blue.compact.pagination-menu.menu', (selector) => {
                 return selector.className
             })).toBe('ui blue compact pagination-menu menu');
         });
 
-        it('Daily Lesson - Pagination Next/Previous/Last/First ', async function () {
+        it('Daily Lesson - Pagination Next/Previous/Last/First', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
             // get all div that expected to be disabled
@@ -158,44 +158,50 @@ describe('Setup ', function () {
             }
         });
 
-
-        it('Daily Lesson - Date Filter Appearance', async function () {
+        it('Daily Lesson - Date Filter Displayed', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // Click on Date filter
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+            // Apply button enabled
             expect(await page.$eval(".ui.primary.button", (selector) => {
                 return selector.disabled;
             })).toBeFalsy(false);
+            // Calendar defined
             expect(await page.$eval(".DayPicker", (selector) => {
                 return selector.className;
             })).toBeDefined();
+            // Calendar two columns
             expect(await page.$$eval(".DayPicker-Month", (selector) => {
                 return selector.length;
             })).toBe(2);
+            // Drop Down Date Range
             expect(await page.$eval(".ui.center.aligned.header", (selector) => {
                 return selector.innerText;
             })).toBe("Select a date range");
         });
 
-
-        it('Daily Lesson - Date Filter - Select', async function () {
+        it('Daily Lesson - Date Filter - DropDown - Last 7 Days', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+
             // Clicking on Date filter
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
             expect(await page.$eval(".ui.primary.button", (selector) => {
                 return selector.disabled;
             })).toBeFalsy(false);
-            // Click on Dates range dropdown and select "Last 7 days"
+
+            // Click on Dates range drop down and select "Last 7 days"
             await page.click(".ui.fluid.item.dropdown");
             await page.click(".ui.active.visible.fluid.item.dropdown div div:nth-child(3)");
             expect(await page.$eval(".ui.fluid.item.dropdown .text", (selector) => {
                 return selector.innerText;
             })).toBe("Last 7 Days");
+
             // Click Apply and check if filter tag is created
-            const [response] = await Promise.all([
+            await Promise.all([
                 page.click(".ui.primary.button"),
                 page.waitForSelector(".ui.blue.basic.button"),
             ]);
+            // Verify calendar.icon
             expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
                 return selector.className;
             })).toBeDefined();
