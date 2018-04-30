@@ -236,17 +236,12 @@ describe('Setup => ', function () {
             })
         });
 
-        fit('Daily Lesson - Date Filter - Dates Range', async function () {
+        it('Daily Lesson - Date Filter - Dates Range', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // Clicking on Date filter
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+
             // Date input
-            // await page.$eval('.ui.fluid.input input:first-child', (selector) => {
-            //     selector.setAttribute('value', "04/12/2010");
-            // });
-            // await page.$eval('.ui.fluid.input input:last-child', (selector) => {
-            //     selector.setAttribute('value', "05/12/2010");
-            // });
             await page.evaluate(() => {
                 let date_range = document.querySelectorAll('.ui.fluid.input input');
                 date_range[0].value = "04/12/2010";
@@ -254,7 +249,7 @@ describe('Setup => ', function () {
             });
             console.log("Placeholder");
             // Click Apply and check if filter tag is created
-            const [response] = await Promise.all([
+            await Promise.all([
                 page.click(".ui.primary.button"),
                 page.waitForSelector(".ui.blue.basic.button"),
             ]);
