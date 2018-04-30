@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const reporters = require('jasmine-reporters');
+const utils = require('./utils.js');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1490;
 const height = 1080;
@@ -73,7 +74,7 @@ describe('Setup => ', function () {
 
         it('Daily Lesson - Filter - Clickable', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            for(let i = 2;i <= 4; i++) {
+            for (let i = 2; i <= 4; i++) {
                 await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
                 expect(await page.$eval(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")",
                     (selector) => {
@@ -101,10 +102,11 @@ describe('Setup => ', function () {
 
         it('Daily Lesson - Filter - Apply Button - Click', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-            // Clicking on first item in Filter's dropDown
+            // Click on "Topic" filter
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
-            // Apply button expected to be enabled
+            // Clicking on first item in Filter's dropDown
             await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+            // Selected item expected to be active
             expect(await page.$eval(".ui.blue.tiny.fluid.vertical.menu a:first-child", (selector) => {
                 return selector.className;
             })).toBe("active item");
@@ -208,6 +210,58 @@ describe('Setup => ', function () {
 
         });
 
+        it('Daily Lesson - Date Filter - Select', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            let today = utils.getCurrentDate();
+            console.log("Current Date: " + today);
+            // Clicking on Date filter
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+            expect(await page.$eval(".ui.fluid.item.dropdown", (selector) => {
+                return selector.innerText;
+            })).toBe("Today");  // Default value "Today"
+            let dates_range = await page.$$eval(".ui.fluid.input input", (selectors) => {
+                return selectors.map(selector => selector.value);
+            });
+            for (let date of dates_range) {
+                expect('0' + date).toBe(today);  // Default value => Should display Today's date
+            }
+            // Checking all items in the dropDown menu
+            let itemsList = await page.$$eval(".visible.menu.transition span", (selectors) => {
+                return selectors.map(selector => selector.innerText)
+            });
+            let expectedList = ["Today", "Yesterday", "Last 7 Days", "Last 30 Days", "Last Month", "This Month",
+                "Custom Range"];
+            itemsList.forEach(function (item, index) {
+                expect(item).toEqual(expectedList[index])
+            })
+        });
+
+        fit('Daily Lesson - Date Filter - Dates Range', async function () {
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+            // Clicking on Date filter
+            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
+            // Date input
+            // await page.$eval('.ui.fluid.input input:first-child', (selector) => {
+            //     selector.setAttribute('value', "04/12/2010");
+            // });
+            // await page.$eval('.ui.fluid.input input:last-child', (selector) => {
+            //     selector.setAttribute('value', "05/12/2010");
+            // });
+            await page.evaluate(() => {
+                let date_range = document.querySelectorAll('.ui.fluid.input input');
+                date_range[0].value = "04/12/2010";
+                date_range[1].value = "05/12/2010";
+            });
+            console.log("Placeholder");
+            // Click Apply and check if filter tag is created
+            const [response] = await Promise.all([
+                page.click(".ui.primary.button"),
+                page.waitForSelector(".ui.blue.basic.button"),
+            ]);
+            expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
+                return selector.className;
+            })).toBeDefined();
+        });
     });
 
     afterAll(async function () {
