@@ -30,7 +30,7 @@ describe('Setup => ', function () {
 
     describe('Daily Lesson Page Test Suite => ', function () {
 
-        fit('Daily Lesson - Vertical Menu - Displayed', async function () {
+        it('Daily Lesson - Vertical Menu - Displayed', async function () {
             await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
             // choose Daily Lessons section from vertical menu
             await page.click('.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)');
