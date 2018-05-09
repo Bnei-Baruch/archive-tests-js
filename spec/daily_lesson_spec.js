@@ -37,19 +37,21 @@ describe('Setup => ', function () {
             // vertical menu count
             expect(await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a', (selector) => {
                 return selector.length
-            })).toBe(8);
+            })).toBe(9);
 
             let filters = await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a.item', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
-            expect(filters[0]).toEqual("Daily Kabbalah Lesson");
-            expect(filters[1]).toEqual("Programs");
-            expect(filters[2]).toEqual("Lectures & Lessons");
-            expect(filters[3]).toEqual("Library");
-            expect(filters[4]).toEqual("Conventions & Events");
-            expect(filters[5]).toEqual("Topics");
-            expect(filters[6]).toEqual("Publications");
-            expect(filters[7]).toEqual("Project Status");
+
+            expect(filters[0]).toEqual('Daily Kabbalah Lesson');
+            expect(filters[1]).toEqual('Programs');
+            expect(filters[2]).toEqual('Lectures & Lessons');
+            expect(filters[3]).toEqual('Library');
+            expect(filters[4]).toEqual('Conventions & Events' );
+            expect(filters[5]).toEqual('Topics');
+            expect(filters[6]).toEqual('Publications');
+            expect(filters[7]).toEqual('Selected Study Series');
+            expect(filters[8]).toEqual('Project Status');
         });
 
         it('Daily Lesson - Filter and Headers - Displayed', async function () {
@@ -67,9 +69,9 @@ describe('Setup => ', function () {
             let filters = await page.$$eval('.ui.container.padded.horizontally a.item', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
-            expect(filters[0]).toEqual("Topics");
-            expect(filters[1]).toEqual("Sources");
-            expect(filters[2]).toEqual("Date");
+            expect(filters[0]).toEqual('Topics');
+            expect(filters[1]).toEqual('Sources');
+            expect(filters[2]).toEqual('Date');
         });
 
         it('Daily Lesson - Filter - Clickable', async function () {
@@ -116,7 +118,7 @@ describe('Setup => ', function () {
             ]);
             expect(await page.$eval(".ui.blue.basic.button", (selector) => {
                 return selector.innerText;
-            })).toBe("Jewish culture");
+            })).toBe('Jewish culture');
 
         });
 
@@ -125,7 +127,7 @@ describe('Setup => ', function () {
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
                 return selector.innerText;
-            })).toContain("Results 1 - 10 of")
+            })).toContain('Results 1 - 10 of')
         });
 
         it('Daily Lesson - Player Exist', async function () {
