@@ -47,7 +47,6 @@ describe('Setup => ', function () {
             expect(filters[2]).toEqual('Sources');
             expect(filters[3]).toEqual('Date');
         });
-
         it('Programs - Pagination Next/Previous/Last/First', async function () {
             await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
