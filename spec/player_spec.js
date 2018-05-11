@@ -23,12 +23,12 @@ describe('Setup => ', function () {
     describe('Player Page Test Suite => ', function () {
 
         it('Daily Lesson - Player Exists', async function () {
-            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
 
         it('Daily Lesson - Player Controls', async function () {
-            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
             expect(await page.$('.step.backward')).toBeDefined();
             expect(await page.$('.step.forward')).toBeDefined();
             expect(await page.$('.play.icon')).toBeDefined();
@@ -47,7 +47,7 @@ describe('Setup => ', function () {
         });
 
         it('Daily Lesson - Player Download Section', async function () {
-            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
             let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
                 return selectors.map(selector => selector.innerText)
@@ -90,7 +90,7 @@ describe('Setup => ', function () {
             await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
             let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
-            for(let i = 0;i < unitMaterialsElements.length; i++) {
+            for (let i = 0; i < unitMaterialsElements.length; i++) {
                 await unitMaterialsElements[i].click();
                 const innerHTML = await page.evaluate(e => e.outerHTML, unitMaterialsElements[i]);
                 const text = await page.evaluate(e => e.text, unitMaterialsElements[i]);
