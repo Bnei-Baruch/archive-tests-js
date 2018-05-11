@@ -14,8 +14,6 @@ const teamCityReporter = new reporters.TeamCityReporter({
 
 jasmine.getEnv().addReporter(teamCityReporter);
 
-// describe('Setup => ', function () {
-
 beforeAll((async function () {
     try {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -79,5 +77,3 @@ afterAll(async function () {
     await browser.close();
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
 });
-
-// });

@@ -1,12 +1,11 @@
 const puppeteer = require('puppeteer');
+const reporters = require('jasmine-reporters');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1920;
 const height = 1080;
 let browser;
 let page;
 let originalTimeout;
-
-// describe('Setup => ', function () {
 
 const teamCityReporter = new reporters.TeamCityReporter({
     savePath: __dirname,
@@ -111,5 +110,4 @@ describe('Player Page Test Suite => ', function () {
     });
 
 });
-// });
 
