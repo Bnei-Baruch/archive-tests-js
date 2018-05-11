@@ -30,7 +30,7 @@ describe('Setup => ', function () {
     describe('Programs Page Test Suite => ', function () {
 
         it('Programs - Header and Filters - Displayed', async function () {
-            await page.goto(testconfig.resources.programsUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
             // header
             expect(await page.$('.section-header')).toBeDefined();
             // header title
@@ -127,7 +127,7 @@ describe('Setup => ', function () {
         });
 
         it('Programs - Filter - Displayed Results 1 - 10 0f', async function () {
-            await page.goto(testconfig.resources.programsUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
                 return selector.innerText;

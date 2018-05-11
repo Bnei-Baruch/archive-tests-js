@@ -31,23 +31,19 @@ describe('Setup => ', function () {
     describe('Daily Lesson Page Test Suite => ', function () {
 
         it('Daily Lesson - Vertical Menu - Displayed', async function () {
-            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // choose Daily Lessons section from vertical menu
             await page.click('.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)');
             // vertical menu count
-            expect(await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a', (selector) => {
-                return selector.length
-            })).toBe(9);
-
             let filters = await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a.item', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
-
+            expect(filters.length).toBe(9);
             expect(filters[0]).toEqual('Daily Kabbalah Lesson');
             expect(filters[1]).toEqual('Programs');
             expect(filters[2]).toEqual('Lectures & Lessons');
             expect(filters[3]).toEqual('Library');
-            expect(filters[4]).toEqual('Conventions & Events' );
+            expect(filters[4]).toEqual('Conventions & Events');
             expect(filters[5]).toEqual('Topics');
             expect(filters[6]).toEqual('Publications');
             expect(filters[7]).toEqual('Selected Study Series');
@@ -55,7 +51,7 @@ describe('Setup => ', function () {
         });
 
         it('Daily Lesson - Filter and Headers - Displayed', async function () {
-            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             // header
             expect(await page.$('.section-header')).toBeDefined();
             // header title
@@ -63,12 +59,10 @@ describe('Setup => ', function () {
                 return selector.innerHTML
             })).toBe('Daily Lessons');
             // filters
-            expect(await page.$$eval('.ui.container.padded.horizontally a', (selector) => {
-                return selector.length
-            })).toBe(3);
             let filters = await page.$$eval('.ui.container.padded.horizontally a.item', (selectors) => {
                 return selectors.map(selector => selector.text)
             });
+            expect(filters.length).toBe(3);
             expect(filters[0]).toEqual('Topics');
             expect(filters[1]).toEqual('Sources');
             expect(filters[2]).toEqual('Date');
@@ -123,7 +117,7 @@ describe('Setup => ', function () {
         });
 
         it('Daily Lesson - Displayed Results 1 - 10 0f', async function () {
-            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
             expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
                 return selector.innerText;
@@ -131,12 +125,12 @@ describe('Setup => ', function () {
         });
 
         it('Daily Lesson - Player Exist', async function () {
-            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
             expect(await page.$('.mediaplayer')).toBeDefined();
         });
 
         it('Daily Lesson - Pagination Displayed', async function () {
-            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'domcontentloaded'});
+            await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
             expect(await page.$eval('.ui.blue.compact.pagination-menu.menu', (selector) => {
                 return selector.className
             })).toBe('ui blue compact pagination-menu menu');
