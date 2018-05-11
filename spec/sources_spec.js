@@ -39,15 +39,16 @@ describe('Setup => ', function () {
             })).toBe('Library');
         });
 
-        it('Sources - Table Content - Displayed', async function () {
+        fit('Sources - Table Content - Displayed', async function () {
             await page.goto(testconfig.resources.sourcesUrl, {waitUntil: 'networkidle2'});
             // check is defined the whole table
             expect(await page.$('.ui.very.basic.table.index-list.sources__authors')).toBeDefined();
+
             // get all text sources
-            let filters = await page.$$eval('.sources__list--image .ui.bulleted div a', (selectors) => {
+            let filters = await page.$$eval('.sources__list .ui.bulleted div a', (selectors) => {
                 return selectors.map(selector => selector.innerHTML)
             });
-            expect(filters.length).toBe(18);
+            expect(filters.length).toBe(21);
             expect(filters[0].trim()).toEqual('Prefaces');
             expect(filters[1].trim()).toEqual('Letters');
             expect(filters[2].trim()).toEqual('Articles');
@@ -66,8 +67,9 @@ describe('Setup => ', function () {
             expect(filters[15].trim()).toEqual('Biur Pticha');
             expect(filters[16].trim()).toEqual('Selected Excerpts');
             expect(filters[17].trim()).toEqual('Articles');
-
-            // sources__list
+            expect(filters[18].trim()).toEqual('Torah');
+            expect(filters[19].trim()).toEqual('Zohar for All');
+            expect(filters[20].trim()).toEqual('Gatehouse of Intentions');
         });
     });
 
