@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const reporters = require('jasmine-reporters');
+const utils = require('./utils.js');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1920;
 const height = 1080;
@@ -47,31 +48,6 @@ describe('Conventions & Events Page Test Suite => ', function () {
         expect(filters[3]).toEqual('Friends Gatherings');
         expect(filters[4]).toEqual('Meals');
 
-        // await Promise.all([
-        //     page.click('.section-header__menu a:nth-child(1)'),
-        //     page.waitForSelector('.horizontally'),
-        //
-        //     filters = await page.$$eval('.horizontally a', (selectors) => {
-        //         return selectors.map(selector => selector.innerText)
-        //     }),
-        //     expect(filters.length).toBe(2),
-        //     expect(filters[0].trim()).toEqual('Locations'),
-        //     expect(filters[1].trim()).toEqual('Year')
-        // ]);
-        //
-        // await Promise.all([
-        //     page.click('.section-header__menu a:nth-child(2)'),
-        //     page.waitForSelector('.horizontally'),
-        //
-        //     filters = await page.$$eval('.horizontally a', (selectors) => {
-        //         return selectors.map(selector => selector.innerText)
-        //     }),
-        //     expect(filters.length).toBe(2),
-        //     expect(filters[0].trim()).toEqual('Holidays'),
-        //     expect(filters[1].trim()).toEqual('Year')
-        // ]);
-
-
         await page.click('.section-header__menu a:nth-child(1)');
         filters = await page.$$eval('.horizontally a', (selectors) => {
             return selectors.map(selector => selector.innerText)
@@ -111,29 +87,58 @@ describe('Conventions & Events Page Test Suite => ', function () {
         })).toContain('Results 1 - ');
         console.log('\t\t\t================>>> ' + 3);
 
-        await page.click('.section-header__menu a:nth-child(4)');
+
+        await Promise.all([
+            page.click('.section-header__menu a:nth-child(4)'),
+            page.waitForSelector('.ui.header.pagination-results')
+        ]);
+
         filters = await page.$$eval('.horizontally a', (selectors) => {
-            return selectors.map(selector => selector.innerText)
+            return selectors.map(selector => selector.innerText);
         });
         expect(await filters.length).toBe(1);
         expect(await filters[0].trim()).toEqual('Date');
+
+        await utils.delay(2000);
+
+        // await page.focus('.pagination-results');
+
+        // Results
+        expect(await page.$eval('.pagination-results', (selector) => {
+            return selector.innerText;
+        })).toContain('Results 1 - ');
+        console.log('\t\t\t================>>> ' + 4);
+
+
+        // let selectorrrr = await page.evaluate(document.querySelector('.ui.header.pagination-results'));
+        // console.log(selectorrrr);
+
+        // await page.click('.section-header__menu a:nth-child(4)');
+        // filters = await page.$$eval('.horizontally a', (selectors) => {
+        //     return selectors.map(selector => selector.innerText)
+        // });
+        // expect(await filters.length).toBe(1);
+        // expect(await filters[0].trim()).toEqual('Date');
         // // Results
         // expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
         //     return selector.innerText;
         // })).toContain('Results 1 - ');
         // console.log('\t\t\t================>>> ' + 4);
 
-        await page.click('.section-header__menu a:nth-child(4)');
+        await page.click('.section-header__menu a:nth-child(5)');
         filters = await page.$$eval('.horizontally a', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(1);
         expect(await filters[0].trim()).toEqual('Date');
-        // // Results
-        // expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
-        //     return selector.innerText;
-        // })).toContain('Results 1 - ');
-        // console.log('\t\t\t================>>> ' + 5);
+
+        await utils.delay(2000);
+
+        // Results
+        expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
+            return selector.innerText;
+        })).toContain('Results 1 - ');
+        console.log('\t\t\t================>>> ' + 5);
 
     });
 
