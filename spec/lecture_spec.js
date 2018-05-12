@@ -70,10 +70,9 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
 
         for (let i = 2; i <= 4; i++) {
-            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
-            expect(await page.$eval(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")",
+            await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')');
+            expect(await page.$eval('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')',
                 (selector) => {
-                    // console.log("Found: " + selector);
                     return selector.className;
                 })).toBe('active item');
         }
@@ -86,19 +85,19 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
             // Click on Topic filter
             page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)'),
             // Wait for apply button
-            page.waitForSelector(".ui.primary.disabled.right.floated.button")
+            page.waitForSelector('.ui.primary.disabled.right.floated.button')
         ]);
 
         // Make sure that Apply button is disabled
-        expect(await page.$eval(".ui.primary.disabled.right.floated.button", (selector) => {
+        expect(await page.$eval('.ui.primary.disabled.right.floated.button', (selector) => {
             return selector.disabled;
         })).toBeTruthy(true);
 
         // Click on Jewish culture
-        await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+        await page.click('.ui.blue.tiny.fluid.vertical.menu a:first-child');
 
         // Make sure that Apply button is enabled
-        expect(await page.$eval(".ui.primary.right.floated.button", (selector) => {
+        expect(await page.$eval('.ui.primary.right.floated.button', (selector) => {
             return selector.disabled;
         })).toBeFalsy(false);
     });
@@ -108,20 +107,20 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         // Click on Topic filter
         await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
         // Apply button expected to be enabled
-        await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
+        await page.click('.ui.blue.tiny.fluid.vertical.menu a:first-child');
         // Make sure that Jewish culture is activated under Topic section
-        expect(await page.$eval(".ui.blue.tiny.fluid.vertical.menu a:first-child", (selector) => {
+        expect(await page.$eval('.ui.blue.tiny.fluid.vertical.menu a:first-child', (selector) => {
             return selector.className;
-        })).toBe("active item");
+        })).toBe('active item');
 
         await Promise.all([
-            page.click(".ui.primary.right.floated.button"),
-            page.waitForSelector(".ui.blue.basic.button"),
+            page.click('.ui.primary.right.floated.button'),
+            page.waitForSelector('.ui.blue.basic.button'),
         ]);
 
-        expect(await page.$eval(".ui.blue.basic.button", (selector) => {
+        expect(await page.$eval('.ui.blue.basic.button', (selector) => {
             return selector.innerText;
-        })).toBe("Baal HaSulam");
+        })).toBe('Baal HaSulam');
 
     });
 
@@ -130,7 +129,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
 
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
             return selector.innerText;
-        })).toContain("Results 1 - 10 of")
+        })).toContain('Results 1 - 10 of')
     });
 
 });

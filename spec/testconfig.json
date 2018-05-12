@@ -6,6 +6,8 @@
     "unitMaterialsUrl": "https://archive.kbb1.com/en/events/c/iycyvtch?language=en",
     "programsUrl": "https://archive.kbb1.com/programs",
     "lecturesUrl": "https://archive.kbb1.com/lectures/lectures",
-    "sourcesUrl": "https://archive.kbb1.com/sources"
+    "sourcesUrl": "https://archive.kbb1.com/sources",
+    "eventsUrl": "https://archive.kbb1.com/events",
+    "publicationsUrl": "https://archive.kbb1.com/publications"
   }
 }
