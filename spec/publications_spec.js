@@ -28,7 +28,7 @@ beforeAll((async function () {
 
 describe('Publications Page Test Suite => ', function () {
 
-    fit('Header and Filters - Displayed', async function () {
+    it('Header and Filters - Displayed', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
