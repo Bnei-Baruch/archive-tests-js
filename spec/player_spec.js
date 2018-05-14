@@ -7,13 +7,6 @@ let browser;
 let page;
 let originalTimeout;
 
-const teamCityReporter = new reporters.TeamCityReporter({
-    savePath: __dirname,
-    consolidateAll: false
-});
-
-jasmine.getEnv().addReporter(teamCityReporter);
-
 beforeAll((async function () {
     try {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -102,6 +95,47 @@ describe('Player Page Test Suite => ', function () {
             const text = await page.evaluate(e => e.text, unitMaterialsElements[i]);
             expect(innerHTML).toEqual('<a class="active item tab-' + text.toLowerCase() + '">' + text + '</a>')
         }
+    });
+
+    it('Daily Lesson - Player Unit Materials - Transcription', async function () {
+        await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+        await Promise.all([
+            await page.click('.item.tab-transcription'),
+            page.waitForSelector('div.doc2html'),
+        ]);
+        let title = await page.$eval('div.doc2html strong', (selector) => {
+            return selector.innerHTML;
+        });
+        expect(title).toEqual('כולנו כאחד');
+    });
+
+    it('Daily Lesson - Player Unit Materials - Sources', async function () {
+        await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+        await Promise.all([
+            await page.click('.item.tab-sources'),
+            page.waitForSelector('div.doc2html'),
+        ]);
+        let title = await page.$eval('div.doc2html > p:nth-child(2) > strong > span', (selector) => {
+            return selector.innerHTML;
+        });
+        expect(title).toEqual('World kabbalah Convention in Georgia - “All A One”');
+    });
+
+    it('Daily Lesson - Player Unit Materials - Sketches', async function () {
+        await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+        await Promise.all([
+            await page.click('.item.tab-sketches'),
+            page.waitForSelector('.image-gallery-image img'),
+        ]);
+        let img_dimensions = await page.$eval('.image-gallery-image img', (selector) => {
+            return {width: selector.width, height: selector.height};
+        }).catch((e)=>{console.error(e)});
+        console.debug("IMAGE tag properties: " + img_dimensions.width + " " + img_dimensions.height);
+        expect(img_dimensions.width).toBeGreaterThan(0);
+    });
+    afterAll(async function () {
+        await browser.close();
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
 
     afterAll(async function () {

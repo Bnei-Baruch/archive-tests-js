@@ -7,12 +7,7 @@ let browser;
 let page;
 let originalTimeout;
 
-const teamCityReporter = new reporters.TeamCityReporter({
-    savePath: __dirname,
-    consolidateAll: false
-});
 
-jasmine.getEnv().addReporter(teamCityReporter);
 
 beforeAll((async function () {
     try {
