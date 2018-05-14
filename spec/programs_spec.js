@@ -15,15 +15,11 @@ const teamCityReporter = new reporters.TeamCityReporter({
 jasmine.getEnv().addReporter(teamCityReporter);
 
 beforeAll((async function () {
-    try {
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-        browser = await puppeteer.launch(testconfig.browser);
-        page = await browser.newPage();
-        await page.setViewport({width, height});
-    } catch (err) {
-        expect(err.status).toBeGreaterThanOrEqual(200);
-    }
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    browser = await puppeteer.launch(testconfig.browser);
+    page = await browser.newPage();
+    await page.setViewport({width, height});
 }));
 
 describe('Programs Page Test Suite => ', function () {
