@@ -83,7 +83,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         // Make sure that Apply button is disabled
         expect(await page.$eval('.ui.primary.disabled.right.floated.button', (selector) => {
             return selector.disabled;
-        })).toBeTruthy(true);
+        })).toBeTruthy();
 
         // Click on Jewish culture
         await page.click('.ui.blue.tiny.fluid.vertical.menu a:first-child');
@@ -91,7 +91,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         // Make sure that Apply button is enabled
         expect(await page.$eval('.ui.primary.right.floated.button', (selector) => {
             return selector.disabled;
-        })).toBeFalsy(false);
+        })).toBeFalsy();
     });
 
     it('Filter - Apply Button - Click', async function () {
