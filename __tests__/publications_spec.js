@@ -8,15 +8,11 @@ let originalTimeout;
 
 
 beforeAll((async function () {
-    try {
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-        browser = await puppeteer.launch(testconfig.browser);
-        page = await browser.newPage();
-        await page.setViewport({width, height});
-    } catch (err) {
-        expect(err.status).toBeGreaterThanOrEqual(200);
-    }
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    browser = await puppeteer.launch(testconfig.browser);
+    page = await browser.newPage();
+    await page.setViewport({width, height});
 }));
 
 describe('Publications Page Test Suite => ', function () {
@@ -38,10 +34,28 @@ describe('Publications Page Test Suite => ', function () {
         expect(filters[1].trim()).toEqual('Date');
     });
 
+    it('Pagination Next/Previous/Last/First', async function () {
+        await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
+
+        // get all div that expected to be disabled
+        let paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
+        for (let i = 0; i < paginationItems.length; i++) {
+            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
+        }
+
+        // click on last pagination item
+        let activeElements = await page.$$('.ui.blue.compact.pagination-menu.menu a');
+        await activeElements[activeElements.length - 1].click();
+
+        // get all div that expected to be disabled
+        paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
+        for (let i = 0; i < paginationItems.length; i++) {
+            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
+        }
+    });
+
 });
 
-
-// todo - add pagination
 
 afterAll(async function () {
     await browser.close();
