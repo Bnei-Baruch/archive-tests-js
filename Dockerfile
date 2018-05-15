@@ -10,12 +10,6 @@ RUN apt-get install -yq libgconf-2-4 wget curl
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
 # installs, work.
 
-
-RUN wget -O /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-linux-amd64 \
-  && chmod +x /usr/local/bin/confd \
-  && mkdir -p /etc/confd
-
-
 RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
