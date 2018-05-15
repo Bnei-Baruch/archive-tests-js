@@ -78,13 +78,13 @@ describe('Daily Lesson Page Test Suite => ', function () {
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
             expect(await page.$eval(".ui.primary.disabled.right.floated.button", (selector) => {
                 return selector.disabled;
-            })).toBeTruthy(true);
+            })).toBeTruthy();
         }
         // Date filter - Apply button expected to be enabled
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + 4 + ")");
         expect(await page.$eval(".ui.primary.button", (selector) => {
             return selector.disabled;
-        })).toBeFalsy(false);
+        })).toBeFalsy();
     });
 
     it('Filter - Apply Button - Click', async function () {
@@ -154,7 +154,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         // Apply button enabled
         expect(await page.$eval(".ui.primary.button", (selector) => {
             return selector.disabled;
-        })).toBeFalsy(false);
+        })).toBeFalsy();
         // Calendar defined
         expect(await page.$eval(".DayPicker", (selector) => {
             return selector.className;
@@ -176,7 +176,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
         expect(await page.$eval(".ui.primary.button", (selector) => {
             return selector.disabled;
-        })).toBeFalsy(false);
+        })).toBeFalsy();
 
         // Click on Dates range drop down and select "Last 7 days"
         await page.click(".ui.fluid.item.dropdown");
