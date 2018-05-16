@@ -29,9 +29,10 @@ describe('Selected Study Series Page Test Suite => ', function () {
         let filters = await page.$$eval('h2.ui.header', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
-        expect(filters.length).toBe(3);
+        expect(filters.length).toBe(4);
         expect(filters[0].trim()).toEqual('Baal HaSulam');
         expect(filters[1].trim()).toEqual('Rabash');
+        expect(filters[1].trim()).toEqual('Rashbi');
         expect(filters[2].trim()).toEqual('Michael Laitman');
 
         filters = await page.$$eval('h3.ui.header', (selectors) => {
