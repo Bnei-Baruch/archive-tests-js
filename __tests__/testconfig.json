@@ -9,6 +9,8 @@
     "sourcesUrl": "https://archive.kbb1.com/sources",
     "eventsUrl": "https://archive.kbb1.com/events",
     "publicationsUrl": "https://archive.kbb1.com/publications",
-    "seriesUrl": "https://archive.kbb1.com/series"
+    "seriesUrl": "https://archive.kbb1.com/series",
+    "mainUrl": "https://archive.kbb1.com/",
+    "projectStatusUrl": "https://archive.kbb1.com/project-status/"
   }
 }
