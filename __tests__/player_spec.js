@@ -92,7 +92,61 @@ describe('Player Page Test Suite => ', function () {
             expect(innerHTML).toEqual('<a class="active item tab-' + text.toLowerCase() + '">' + text + '</a>')
         }
     });
+    it('Player Unit Materials - Tabs-Menu - Summary', async function () {
+        await page.goto(testconfig.resources.summaryUrl, {waitUntil: 'networkidle2'});
 
+        // Click on Summary tab
+        await Promise.all([
+            page.click(".item.tab-summary"),
+            page.waitForSelector(".ui.basic.segment div"),
+        ]);
+        expect(await page.$eval(".ui.basic.segment div", (selector) => {
+            return selector.innerHTML
+        })).toContain("האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.\n")
+    });
+
+});
+
+it('Player Unit Materials - Tabs-Menu - Transcription', async function () {
+    await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
+    // Click on Summary tab
+    await Promise.all([
+        page.click(".item.tab-transcription"),
+        page.waitForSelector("div .doc2html"),
+    ]);
+    expect(await page.$eval("div .doc2html", (selector) => {
+        return selector.innerText
+    })).toContain("כולנו כאחד\n")
+});
+
+it('Player Unit Materials - Tabs-Menu - Sources', async function () {
+    await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
+    // Click on Summary tab
+    await Promise.all([
+        page.click(".item.tab-sources"),
+        page.waitForSelector("div .doc2html"),
+    ]);
+    expect(await page.$eval("div .doc2html", (selector) => {
+        return selector.innerText
+    })).toContain("World kabbalah Convention in Georgia - “All A One”\n")
+});
+
+it('Player Unit Materials - Tabs-Menu - Sketches', async function () {
+    await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
+    // Click on Summary tab
+    await Promise.all([
+        page.click(".item.tab-sketches"),
+        page.waitForSelector(".image-gallery-image"),
+    ]);
+    expect(await page.$$eval(".image-gallery-thumbnail", (selectors) => {
+        return selectors.length
+    })).toBe(20);
+    expect(await page.$eval(".image-gallery-image img", (selector) => {
+        return selector.src
+    })).toBe("https://archive.kbb1.com/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg")
 });
 
 afterAll(async function () {
