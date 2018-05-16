@@ -17,7 +17,7 @@ beforeAll((async function () {
 
 describe('Selected Study Series Page Test Suite => ', function () {
 
-    it('Header and Filters - Displayed', async function () {
+    it('Header - Displayed', async function () {
         await page.goto(testconfig.resources.seriesUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
@@ -25,12 +25,27 @@ describe('Selected Study Series Page Test Suite => ', function () {
         expect(await page.$eval('.section-header__title', (selector) => {
             return selector.innerHTML
         })).toBe('Selected Study Series');
+
+        let filters = await page.$$eval('h2.ui.header', (selectors) => {
+            return selectors.map(selector => selector.innerText)
+        });
+        expect(filters.length).toBe(3);
+        expect(filters[0].trim()).toEqual('Baal HaSulam');
+        expect(filters[1].trim()).toEqual('Rabash');
+        expect(filters[2].trim()).toEqual('Michael Laitman');
+
+        filters = await page.$$eval('h3.ui.header', (selectors) => {
+            return selectors.map(selector => selector.innerText)
+        });
+        expect(filters.length).toBe(4);
+        expect(filters[0].trim()).toEqual('Prefaces');
+        expect(filters[1].trim()).toEqual('Articles');
+        expect(filters[2].trim()).toEqual('Articles');
+        expect(filters[3].trim()).toEqual('Articles');
+
     });
 
 });
-
-// document.querySelectorAll('h3.ui.header')
-// document.querySelectorAll('h2.ui.header')
 
 
 afterAll(async function () {
