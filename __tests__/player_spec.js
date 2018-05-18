@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const player_utils = require('../player_utils');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1920;
 const height = 1080;
@@ -18,7 +19,11 @@ beforeAll((async function () {
 describe('Player Test Suite => ', function () {
 
     it("playerTimeCode", async function () {
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
+        let timeCodes = await player_utils.getTimeCode(page);
+        expect(timeCodes[0]).toBe("00:00");
+        expect(timeCodes[1]).not.toBe("00:00");
     });
 
     it("timeCodeUpdateByPlay", async function () {
