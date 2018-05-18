@@ -36,7 +36,7 @@ describe('Sources Page Test Suite => ', function () {
         let filters = await page.$$eval('.sources__list .ui.bulleted div a', (selectors) => {
             return selectors.map(selector => selector.innerHTML)
         });
-        expect(filters.length).toBe(21);
+        expect(filters.length).toBe(22);
         expect(filters[0].trim()).toEqual('Prefaces');
         expect(filters[1].trim()).toEqual('Letters');
         expect(filters[2].trim()).toEqual('Articles');
@@ -58,6 +58,7 @@ describe('Sources Page Test Suite => ', function () {
         expect(filters[18].trim()).toEqual('Torah');
         expect(filters[19].trim()).toEqual('Zohar for All');
         expect(filters[20].trim()).toEqual('Gatehouse of Intentions');
+        expect(filters[21].trim()).toEqual('Tree of Life');
     });
 
 });
