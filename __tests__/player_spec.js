@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const testconfig = require(__dirname + '/testconfig.json');
-const width = 1920;
+const width = 1400;
 const height = 1080;
 let browser;
 let page;
@@ -34,6 +34,26 @@ describe('Player Test Suite => ', function () {
     });
 
     it("speedSelector_1X", async function () {
+        // // playerUrl
+        // await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+        //
+        // let playerButtons = await page.$$eval('.mediaplayer__controls button', (selectors) => {
+        //     return selectors.map(selector => selector.innerHTML)
+        // });
+        // expect(playerButtons.length).toBe(10);
+        //
+        // await page.click('.mediaplayer__controls > div.buttons-wrapper > button');
+        //
+        //
+        // console.log('============>>>>');
+        // // Click on Summary tab
+        // await Promise.all([
+        //     page.click(".item.tab-sketches"),
+        //     page.waitForSelector(".image-gallery-image"),
+        // ]);
+
+        // .visible.menu.transition => esli soderzhit zero znachit zakrit poka chto
+
 
     });
 
