@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const testconfig = require(__dirname + '/testconfig.json');
+const utils = require('../utils.js');
 const width = 1920;
 const height = 1080;
 let browser;
@@ -82,14 +83,17 @@ describe('Player Page Test Suite => ', function () {
     });
 
     it('Player Unit Materials - Tabs-Menu - Clickable', async function () {
-        await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
+        await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+        // get first time all classes
         let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
+
         for (let i = 0; i < unitMaterialsElements.length; i++) {
             await unitMaterialsElements[i].click();
-            const innerHTML = await page.evaluate(e => e.outerHTML, unitMaterialsElements[i]);
-            const text = await page.evaluate(e => e.text, unitMaterialsElements[i]);
-            expect(innerHTML).toEqual('<a class="active item tab-' + text.toLowerCase() + '">' + text + '</a>')
+            // get again class name
+            unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
+            console.log('\n\n====================>>> ' + unitMaterialsElements[''+i+'']._remoteObject.description);
+            expect(unitMaterialsElements[''+i+'']._remoteObject.description).toContain('active');
         }
     });
 

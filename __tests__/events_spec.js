@@ -18,7 +18,8 @@ beforeAll((async function () {
 describe('Conventions & Events Page Test Suite => ', function () {
 
     it('Header and Filters - Displayed', async function () {
-        jest.setTimeout(30000);
+        jest.setTimeout(30000); // 30 second timeout
+
         await page.goto(testconfig.resources.eventsUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
