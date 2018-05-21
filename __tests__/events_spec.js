@@ -18,7 +18,7 @@ beforeAll((async function () {
 describe('Conventions & Events Page Test Suite => ', function () {
 
     it('Header and Filters - Displayed', async function () {
-        jest.setTimeout(30000); // 30 second timeout
+        jest.setTimeout(60000); // 60 second timeout
 
         await page.goto(testconfig.resources.eventsUrl, {waitUntil: 'networkidle2'});
         // header
@@ -104,9 +104,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
             return selector.innerText;
         })).toContain('Results 1 - ');
-
     });
-
 });
 
 afterAll(async function () {

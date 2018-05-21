@@ -83,7 +83,6 @@ describe('Player Page Test Suite => ', function () {
     });
 
     it('Player Unit Materials - Tabs-Menu - Clickable', async function () {
-
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
         // get first time all classes
         let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
@@ -92,7 +91,6 @@ describe('Player Page Test Suite => ', function () {
             await unitMaterialsElements[i].click();
             // get again class name
             unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
-            console.log('\n\n====================>>> ' + unitMaterialsElements[''+i+'']._remoteObject.description);
             expect(unitMaterialsElements[''+i+'']._remoteObject.description).toContain('active');
         }
     });
@@ -102,12 +100,12 @@ describe('Player Page Test Suite => ', function () {
 
         // Click on Summary tab
         await Promise.all([
-            page.click(".item.tab-summary"),
-            page.waitForSelector(".ui.basic.segment div"),
+            page.click('.item.tab-summary'),
+            page.waitForSelector('.ui.basic.segment div'),
         ]);
-        expect(await page.$eval(".ui.basic.segment div", (selector) => {
+        expect(await page.$eval('.ui.basic.segment div', (selector) => {
             return selector.innerHTML
-        })).toContain("האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.\n")
+        })).toContain('האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.\n')
     });
 
     it('Player Unit Materials - Tabs-Menu - Transcription', async function () {
@@ -115,17 +113,16 @@ describe('Player Page Test Suite => ', function () {
 
         // Click on Summary tab
         await Promise.all([
-            page.click(".item.tab-transcription"),
-            page.waitForSelector("div .doc2html"),
+            page.click('.item.tab-transcription'),
+            page.waitForSelector('div .doc2html'),
         ]);
-        expect(await page.$eval("div .doc2html", (selector) => {
+        expect(await page.$eval('div .doc2html', (selector) => {
             return selector.innerText
-        })).toContain("כולנו כאחד\n")
+        })).toContain('כולנו כאחד\n')
     });
 
     it('Player Unit Materials - Tabs-Menu - Sources', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
-
         // Click on Summary tab
         await Promise.all([
             page.click(".item.tab-sources"),
@@ -138,20 +135,18 @@ describe('Player Page Test Suite => ', function () {
 
     it('Player Unit Materials - Tabs-Menu - Sketches', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
-
         // Click on Summary tab
         await Promise.all([
-            page.click(".item.tab-sketches"),
-            page.waitForSelector(".image-gallery-image"),
+            page.click('.item.tab-sketches'),
+            page.waitForSelector('.image-gallery-image'),
         ]);
-        expect(await page.$$eval(".image-gallery-thumbnail", (selectors) => {
+        expect(await page.$$eval('.image-gallery-thumbnail', (selectors) => {
             return selectors.length
         })).toBe(20);
-        expect(await page.$eval(".image-gallery-image img", (selector) => {
+        expect(await page.$eval('.image-gallery-image img', (selector) => {
             return selector.src
-        })).toBe("https://archive.kbb1.com/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg")
+        })).toBe('https://archive.kbb1.com/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg')
     });
-
 });
 
 
