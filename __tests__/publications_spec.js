@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const testconfig = require(__dirname + '/testconfig.json');
+const utils = require('../utils.js');
 const width = 1920;
 const height = 1080;
 let browser;
@@ -37,22 +38,25 @@ describe('Publications Page Test Suite => ', function () {
     it('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
+        let allPaginationSelector = '.ui.blue.compact.pagination-menu.menu *';
         // get all div that expected to be disabled
-        let paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
-        for (let i = 0; i < paginationItems.length; i++) {
-            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
-        }
+        let paginationItems = await page.$$(allPaginationSelector);
+        // verify index location of disabled elements
+        expect(paginationItems['0']._remoteObject.description).toContain('disabled');
+        expect(paginationItems['2']._remoteObject.description).toContain('disabled');
+        expect(paginationItems['8']._remoteObject.description).toContain('disabled');
 
         // click on last pagination item
-        let activeElements = await page.$$('.ui.blue.compact.pagination-menu.menu a');
-        await activeElements[activeElements.length - 1].click();
+        await paginationItems[paginationItems.length - 1].click();
 
-        // get all div that expected to be disabled
-        paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
-        for (let i = 0; i < paginationItems.length; i++) {
-            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
-        }
+        await utils.delay(2000);
+        paginationItems = await page.$$(allPaginationSelector);
+
+        expect(paginationItems['4']._remoteObject.description).toContain('disabled');
+        expect(paginationItems['10']._remoteObject.description).toContain('disabled');
+        expect(paginationItems['12']._remoteObject.description).toContain('disabled');
     });
+
 
 });
 

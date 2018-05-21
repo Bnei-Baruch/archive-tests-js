@@ -22,5 +22,6 @@ module.exports = {
             setTimeout(resolve, timeout);
         });
     }
+
 };
 

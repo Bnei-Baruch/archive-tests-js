@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const testconfig = require(__dirname + '/testconfig.json');
+const utils = require('../utils.js');
 const width = 1920;
 const height = 1080;
 let browser;
@@ -30,14 +31,8 @@ describe('Project Status Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(filters.length).toBe(6);
-        // expect(filters[0].trim()).toEqual('Baal HaSulam');
-        // expect(filters[1].trim()).toEqual('Rabash');
-        // expect(filters[2].trim()).toEqual('Michael Laitman');
-
     });
-
 });
-
 
 afterAll(async function () {
     await browser.close();

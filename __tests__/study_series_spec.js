@@ -45,9 +45,7 @@ describe('Selected Study Series Page Test Suite => ', function () {
         expect(filters[2].trim()).toEqual('Articles');
         expect(filters[3].trim()).toEqual('Zohar for All');
         expect(filters[4].trim()).toEqual('Articles');
-
     });
-
 });
 
 
