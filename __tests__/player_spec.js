@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const player_utils = require('../player_utils');
+const utils = require('../utils');
 const testconfig = require(__dirname + '/testconfig.json');
 const width = 1400;
 const height = 1080;
@@ -27,7 +28,12 @@ describe('Player Test Suite => ', function () {
     });
 
     it("timeCodeUpdateByPlay", async function () {
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
+        await player_utils.waitPlayerToLoad(page);
+        await player_utils.playByClick(page);
+        utils.delay(5000);
+        expect(await player_utils.getPlayerCurrentTime(page)).toBeGreaterThan(0);
     });
 
     it("timeCodeUpdateByScroll", async function () {

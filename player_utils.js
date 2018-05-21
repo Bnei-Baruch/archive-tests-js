@@ -32,7 +32,7 @@ module.exports = {
         };
     },
 
-    waitPlayerToLoad: async function (paage) {
+    waitPlayerToLoad: async function (page) {
         let readyState = 0;
         await page.waitForSelector("video");
         do {
@@ -43,19 +43,23 @@ module.exports = {
         } while (readyState === 0);
     },
 
-    getPlayerCurrentTime: async function () {
+    getPlayerCurrentTime: async function (page) {
         return await page.$eval("video", (selector) => {
             return selector.currentTime;
         });
     },
 
-    getPlayerDuration: async function () {
+    getPlayerDuration: async function (page) {
         return await page.$eval("video", (selector) => {
             return selector.duration;
         });
     },
 
-    playByClick: async function (){
+    playByClick: async function (page){
         page.click('.play.icon')
+    },
+
+    stopByClick: async function (page){
+        page.click('.pause.icon')
     }
 };
