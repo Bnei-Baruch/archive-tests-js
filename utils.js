@@ -21,7 +21,13 @@ module.exports = {
         return new Promise((resolve) => {
             setTimeout(resolve, timeout);
         });
-    }
+    },
+
+    sleep: async function(milliseconds) {
+        let startTime = new Date().getTime();
+        while (new Date().getTime() < startTime + milliseconds){}
+}
+
 
 };
 
