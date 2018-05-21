@@ -28,11 +28,12 @@ describe('Player Test Suite => ', function () {
     });
 
     it("timeCodeUpdateByPlay", async function () {
+        jest.setTimeout(60000);
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         await player_utils.waitPlayerToLoad(page);
         await player_utils.playByClick(page);
-        utils.delay(5000);
+        await utils.sleep(5000);
         expect(await player_utils.getPlayerCurrentTime(page)).toBeGreaterThan(0);
     });
 

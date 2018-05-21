@@ -1,3 +1,7 @@
+
+const PLAYER_PLAY_BUTTON = "i.play.icon";
+const PLAYER_PAUSE_BUTTON = "i.pause.icon";
+
 module.exports = {
 
     getTimeCode: async function(page){
@@ -40,7 +44,7 @@ module.exports = {
                 return selector.readyState;
             });
             console.debug("ReadyState ===> " + readyState)
-        } while (readyState === 0);
+        } while (readyState < 2);
     },
 
     getPlayerCurrentTime: async function (page) {
@@ -56,10 +60,16 @@ module.exports = {
     },
 
     playByClick: async function (page){
-        page.click('.play.icon')
+        await Promise.all([
+            page.waitForSelector(PLAYER_PLAY_BUTTON),
+            page.click(PLAYER_PLAY_BUTTON)
+        ]);
     },
 
     stopByClick: async function (page){
-        page.click('.pause.icon')
-    }
+        await Promise.all([
+            page.waitForSelector(PLAYER_PAUSE_BUTTON),
+            page.click(PLAYER_PAUSE_BUTTON)
+        ]);
+    },
 };
