@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const player_utils = require('../player_utils');
 const utils = require('../utils');
-const testconfig = require(__dirname + '/testconfig.json');
+const testconfig = require('./testconfig');
 const width = 1400;
 const height = 1080;
 let browser;
@@ -38,6 +38,24 @@ describe('Player Test Suite => ', function () {
     });
 
     it("timeCodeUpdateByScroll", async function () {
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+
+        await player_utils.waitPlayerToLoad(page);
+        const rect = await page.$eval(".mediaplayer__seekbar .seekbar__knob", (selector) => {
+            const {top, left, bottom, right} = selector.getBoundingClientRect();
+            return {top, left, bottom, right};
+        });
+
+        console.debug("Rect >> top: " + rect.top + " left: " + rect.left + " bottom: " + rect.bottom +
+            " right: " + rect.right);
+        let current_mouse_x = rect.left + ((rect.right - rect.left) / 2);
+        let current_mouse_y = rect.top + ((rect.top - rect.bottom) / 2);
+        console.debug("Before Drag: " + await player_utils.getPlayerCurrentTime(page));
+        await page.mouse.move(current_mouse_x, current_mouse_y);
+        await page.mouse.down();
+        await page.mouse.move(current_mouse_x + 100, current_mouse_y);
+        await page.mouse.up();
+        console.debug("After Drag: " + await player_utils.getPlayerCurrentTime(page));
 
     });
 
