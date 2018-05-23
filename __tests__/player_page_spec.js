@@ -88,10 +88,16 @@ describe('Player Page Test Suite => ', function () {
         let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
 
         for (let i = 0; i < unitMaterialsElements.length; i++) {
-            await unitMaterialsElements[i].click();
+
+            await Promise.all([
+                unitMaterialsElements[i].click(),
+                console.log('\n\n=============>>> ' + unitMaterialsElements[i]._remoteObject.description),
+                page.waitForSelector(unitMaterialsElements[i]._remoteObject.description),
+            ]);
+
             // get again class name
             unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
-            expect(unitMaterialsElements[''+i+'']._remoteObject.description).toContain('active');
+            expect(unitMaterialsElements[i]._remoteObject.description).toContain('active');
         }
     });
 
