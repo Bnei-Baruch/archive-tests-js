@@ -45,28 +45,32 @@ describe('Player Test Suite => ', function () {
 
     });
 
+    it("videoSize", async function () {
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+        // click on playback rate
+        await page.click('.mediaplayer__video-size');
+        let videoSizeElements = await page.$$eval('.mediaplayer__video-size span', (selectors) => {
+            return selectors.map(selector => selector.innerText);
+        });
+        expect(videoSizeElements.length).toBe(2);
+        expect(videoSizeElements[0].trim()).toEqual('720p');
+        expect(videoSizeElements[1].trim()).toEqual('360p');
+    });
+
+
     it("speedSelector_1X", async function () {
-        // playerUrl
-        // await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
-        //
-        // let playerButtons = await page.$$eval('.mediaplayer__controls button', (selectors) => {
-        //     return selectors.map(selector => selector.innerHTML)
-        // });
-        // expect(playerButtons.length).toBe(10);
-
-        // await page.click('.mediaplayer__controls > div.buttons-wrapper > button');
-        //
-        //
-        // console.log('============>>>>');
-        // // Click on Summary tab
-        // await Promise.all([
-        //     page.click(".item.tab-sketches"),
-        //     page.waitForSelector(".image-gallery-image"),
-        // ]);
-
-        // .visible.menu.transition => esli soderzhit zero znachit zakrit poka chto
-
-
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+        // click on playback rate
+        await page.click('.mediaplayer__playback-rate');
+        let rateElements = await page.$$eval('.visible.menu.transition div span', (selectors) => {
+            return selectors.map(selector => selector.innerText);
+        });
+        expect(rateElements.length).toBe(5);
+        expect(rateElements[0].trim()).toEqual('2x');
+        expect(rateElements[1].trim()).toEqual('1.5x');
+        expect(rateElements[2].trim()).toEqual('1.25x');
+        expect(rateElements[3].trim()).toEqual('1x');
+        expect(rateElements[4].trim()).toEqual('0.75x');
     });
 
     it("speedSelector_1_5X", async function () {
@@ -98,6 +102,17 @@ describe('Player Test Suite => ', function () {
     });
 
     it("playerButtons", async function () {
+        await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
+        // verify that displayed all buttons 10
+        // let timeCodes = await player_utils.getTimeCode(page);
+
+        let playerButtons = await page.$$eval('.mediaplayer__controls button', (selectors) => {
+            return selectors.map(selector => selector.innerHTML)
+        });
+        expect(playerButtons.length).toBe(10);
+        // console.log('\n==========>> ' + playerButtons[0].innerHTML);
+
+        // playerButtons.forEach(console.log('\n===>> ' + playerButtons.innerHTML));
 
     });
 
