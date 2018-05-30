@@ -11,7 +11,7 @@ module.exports = {
                 readyState = await page.$eval("video", (selector) => {
                     return selector.readyState;
                 });
-                console.debug("ReadyState ===> " + readyState)
+                // console.debug("ReadyState ===> " + readyState)
             } while (readyState === 0);
         return await page.$$eval('.mediaplayer__timecode time', (selectors) => {
             return selectors.map(selector => selector.innerText)
@@ -43,7 +43,7 @@ module.exports = {
             readyState = await page.$eval("video", (selector) => {
                 return selector.readyState;
             });
-            console.debug("ReadyState ===> " + readyState)
+            // console.debug("ReadyState ===> " + readyState)
         } while (readyState < 2);
     },
 

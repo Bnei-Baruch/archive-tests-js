@@ -10,7 +10,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -42,6 +42,7 @@ describe('Programs Page Test Suite => ', function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
         let allPaginationSelector = '.ui.blue.compact.pagination-menu.menu *';
+
         // get all div that expected to be disabled
         let paginationItems = await page.$$(allPaginationSelector);
         // verify index location of disabled elements
@@ -99,8 +100,12 @@ describe('Programs Page Test Suite => ', function () {
 
     it('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
+
+        let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)';
         // Click on Topic filter
-        await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
+        await page.click(element);
+        await page.waitForSelector(element, {'timeout': 60000});
+
         // Apply button expected to be enabled
         await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
         // Make sure that Jewish culture is activated under Topic section

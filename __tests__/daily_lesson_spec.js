@@ -9,7 +9,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -18,9 +18,12 @@ beforeAll((async function () {
 describe('Daily Lesson Page Test Suite => ', function () {
 
     it('Vertical Menu - Displayed', async function () {
+        let element = '.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)';
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+
+        await page.waitForSelector(element);
         // choose Daily Lessons section from vertical menu
-        await page.click('.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)');
+        await page.click(element);
         // vertical menu count
         let filters = await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a.item', (selectors) => {
             return selectors.map(selector => selector.text)
@@ -85,8 +88,12 @@ describe('Daily Lesson Page Test Suite => ', function () {
 
     it('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+
+        let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)';
         // Click on "Topic" filter
-        await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)");
+        await page.click(element);
+        await page.waitForSelector(element, {'timeout': 60000});
+
         // Clicking on first item in Filter's dropDown
         await page.click(".ui.blue.tiny.fluid.vertical.menu a:first-child");
         // Selected item expected to be active

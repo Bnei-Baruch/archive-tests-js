@@ -10,7 +10,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -64,8 +64,8 @@ describe('Main Page Test Suite => ', function () {
         filters = await page.$$eval('.layout__footer div.column', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
-        expect(filters[0]).toEqual('Kabbalah Media\n' +
-            'Copyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved\n');
+        expect(filters[0]).toContain('Kabbalah Media\n' +
+            'Copyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved');
     });
 
 });

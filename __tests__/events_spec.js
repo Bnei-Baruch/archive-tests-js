@@ -9,7 +9,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -18,7 +18,7 @@ beforeAll((async function () {
 describe('Conventions & Events Page Test Suite => ', function () {
 
     it('Header and Filters - Displayed', async function () {
-        jest.setTimeout(60000); // 60 second timeout
+        // jest.setTimeout(60000); // 60 second timeout
 
         await page.goto(testconfig.resources.eventsUrl, {waitUntil: 'networkidle2'});
         // header
