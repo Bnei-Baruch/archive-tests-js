@@ -11,7 +11,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -28,7 +28,6 @@ describe('Player Test Suite => ', function () {
     });
 
     it("timeCodeUpdateByPlay", async function () {
-        jest.setTimeout(60000);
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         await player_utils.waitPlayerToLoad(page);
@@ -48,6 +47,7 @@ describe('Player Test Suite => ', function () {
 
         console.debug("Rect >> top: " + rect.top + " left: " + rect.left + " bottom: " + rect.bottom +
             " right: " + rect.right);
+
         let current_mouse_x = rect.left + ((rect.right - rect.left) / 2);
         let current_mouse_y = rect.top + ((rect.top - rect.bottom) / 2);
         console.debug("Before Drag: " + await player_utils.getPlayerCurrentTime(page));

@@ -9,7 +9,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -72,12 +72,8 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
     it('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
 
-        await Promise.all([
-            // Click on Topic filter
-            page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)'),
-            // Wait for apply button
-            page.waitForSelector('.ui.primary.disabled.right.floated.button')
-        ]);
+        await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
+        await page.waitForSelector('.ui.primary.disabled.right.floated.button');
 
         // Make sure that Apply button is disabled
         expect(await page.$eval('.ui.primary.disabled.right.floated.button', (selector) => {
@@ -95,8 +91,11 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
 
     it('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
+        let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)';
         // Click on Topic filter
-        await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
+        await page.click(element);
+        await page.waitForSelector(element, {'timeout': 60000});
+
         // Apply button expected to be enabled
         await page.click('.ui.blue.tiny.fluid.vertical.menu a:first-child');
         // Make sure that Jewish culture is activated under Topic section
@@ -104,10 +103,13 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
             return selector.className;
         })).toBe('active item');
 
-        await Promise.all([
-            page.click('.ui.primary.right.floated.button'),
-            page.waitForSelector('.ui.blue.basic.button'),
-        ]);
+        await page.click('.ui.primary.right.floated.button');
+        await page.waitForSelector('.ui.blue.basic.button');
+
+        // await Promise.all([
+        //     page.click('.ui.primary.right.floated.button'),
+        //     page.waitForSelector('.ui.blue.basic.button'),
+        // ]);
 
         expect(await page.$eval('.ui.blue.basic.button', (selector) => {
             return selector.innerText;

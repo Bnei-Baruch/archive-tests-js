@@ -10,7 +10,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -84,47 +84,55 @@ describe('Player Page Test Suite => ', function () {
 
     it('Player Unit Materials - Tabs-Menu - Clickable', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
+        let element = '.ui.blue.pointing.secondary.menu a';
         // get first time all classes
-        let unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
+        let unitMaterialsElements = await page.$$(element);
 
         for (let i = 0; i < unitMaterialsElements.length; i++) {
-
-            await Promise.all([
-                unitMaterialsElements[i].click(),
-                console.log('\n\n=============>>> ' + unitMaterialsElements[i]._remoteObject.description),
-                page.waitForSelector(unitMaterialsElements[i]._remoteObject.description),
-            ]);
+            await unitMaterialsElements[i].click();
+            utils.delay(1000);
+            await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
+            //  fetch active and verify it's the one we clicked
 
             // get again class name
-            unitMaterialsElements = await page.$$('.ui.blue.pointing.secondary.menu a');
+            unitMaterialsElements = await page.$$(element);
+
+            await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
+            utils.delay(1000);
+
             expect(unitMaterialsElements[i]._remoteObject.description).toContain('active');
+            console.log('\n ' + i);
         }
     });
 
     it('Player Unit Materials - Tabs-Menu - Summary', async function () {
         await page.goto(testconfig.resources.summaryUrl, {waitUntil: 'networkidle2'});
 
+        let element = '.ui.basic.segment div';
         // Click on Summary tab
         await Promise.all([
             page.click('.item.tab-summary'),
-            page.waitForSelector('.ui.basic.segment div'),
+            page.waitForSelector(element),
         ]);
-        expect(await page.$eval('.ui.basic.segment div', (selector) => {
+        expect(await page.$eval(element, (selector) => {
             return selector.innerHTML
-        })).toContain('האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.\n')
+        })).toContain('האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.')
     });
 
     it('Player Unit Materials - Tabs-Menu - Transcription', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
+        let element = 'div .doc2html';
+
         // Click on Summary tab
         await Promise.all([
             page.click('.item.tab-transcription'),
-            page.waitForSelector('div .doc2html'),
+            page.waitForSelector(element),
         ]);
-        expect(await page.$eval('div .doc2html', (selector) => {
+        expect(await page.$eval(element, (selector) => {
             return selector.innerText
-        })).toContain('כולנו כאחד\n')
+        })).toContain('כולנו כאחד')
     });
 
     it('Player Unit Materials - Tabs-Menu - Sources', async function () {
@@ -136,7 +144,7 @@ describe('Player Page Test Suite => ', function () {
         ]);
         expect(await page.$eval("div .doc2html", (selector) => {
             return selector.innerText
-        })).toContain("World kabbalah Convention in Georgia - “All A One”\n")
+        })).toContain('World kabbalah Convention in Georgia - “All A One”')
     });
 
     it('Player Unit Materials - Tabs-Menu - Sketches', async function () {
