@@ -91,18 +91,23 @@ describe('Player Page Test Suite => ', function () {
 
         for (let i = 0; i < unitMaterialsElements.length; i++) {
             await unitMaterialsElements[i].click();
-            utils.delay(1000);
+            utils.sleep(1000);
             await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
             //  fetch active and verify it's the one we clicked
 
             // get again class name
             unitMaterialsElements = await page.$$(element);
+            console.log('\n ' + i + ' => ' + unitMaterialsElements[i]._remoteObject.description);
+
+            // let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
+            //     return selectors.map(selector => selector.text)
+            // });
+
 
             await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
-            utils.delay(1000);
+            utils.sleep(1000);
 
             expect(unitMaterialsElements[i]._remoteObject.description).toContain('active');
-            console.log('\n ' + i);
         }
     });
 

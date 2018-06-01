@@ -203,7 +203,8 @@ describe('Daily Lesson Page Test Suite => ', function () {
     it('Date Filter - Select', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         let today = utils.getCurrentDate();
-        console.log("Current Date: " + today);
+        console.log("\n============================>>>> Current Date: " + today);
+
         // Clicking on Date filter
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
         expect(await page.$eval(".ui.fluid.item.dropdown", (selector) => {
@@ -213,7 +214,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
             return selectors.map(selector => selector.value);
         });
         for (let date of dates_range) {
-            expect('0' + date).toBe(today);  // Default value => Should display Today's date
+            expect(date).toBe(today);  // Default value => Should display Today's date
         }
         // Checking all items in the dropDown menu
         let itemsList = await page.$$eval(".visible.menu.transition span", (selectors) => {

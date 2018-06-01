@@ -49,7 +49,7 @@ describe('Publications Page Test Suite => ', function () {
         // click on last pagination item
         await paginationItems[paginationItems.length - 1].click();
 
-        await utils.delay(2000);
+        await utils.sleep(2000);
         paginationItems = await page.$$(allPaginationSelector);
 
         expect(paginationItems['4']._remoteObject.description).toContain('disabled');

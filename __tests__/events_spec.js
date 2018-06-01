@@ -84,7 +84,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
         expect(await filters.length).toBe(1);
         expect(await filters[0].trim()).toEqual('Date');
 
-        await utils.delay(2000);
+        await utils.sleep(2000);
 
         // Results
         expect(await page.$eval('.pagination-results', (selector) => {
@@ -98,7 +98,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
         expect(await filters.length).toBe(1);
         expect(await filters[0].trim()).toEqual('Date');
 
-        await utils.delay(2000);
+        await utils.sleep(2000);
 
         // Results
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
