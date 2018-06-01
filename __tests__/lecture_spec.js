@@ -49,7 +49,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         // click on last pagination item
         await paginationItems[paginationItems.length - 1].click();
 
-        await utils.delay(2000);
+        await utils.sleep(2000);
         paginationItems = await page.$$(allPaginationSelector);
 
         expect(paginationItems['4']._remoteObject.description).toContain('disabled');
@@ -61,6 +61,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
 
         for (let i = 2; i <= 4; i++) {
+            utils.sleep(1000);
             await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')');
             expect(await page.$eval('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')',
                 (selector) => {
