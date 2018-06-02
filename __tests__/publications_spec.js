@@ -57,19 +57,18 @@ describe('Publications Page Test Suite => ', function () {
         expect(paginationItems['12']._remoteObject.description).toContain('disabled');
     });
 
-    it ('Filter - Clickable', async function () {
-        await page.goto(testconfig.resources.publicationsUrl,{waitUntil: 'networkidle2'});
+    it('Filter - Clickable', async function () {
+        await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
-        for (let i=2; i<=3; i++) {
+        for (let i = 2; i <= 3; i++) {
             await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')');
-            expect (await page.$eval('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')',
+            expect(await page.$eval('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(' + i + ')',
                 (selector) => {
                     return selector.className;
                 })).toBe('active item');
 
         }
     });
-
 
     it('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
@@ -93,9 +92,7 @@ describe('Publications Page Test Suite => ', function () {
 
     });
 
-//==== Publishers filter ====
-
-    it('Filter - Apply Button - Click', async function(){
+    it('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         //Click on 'Publishers' filter
@@ -125,9 +122,6 @@ describe('Publications Page Test Suite => ', function () {
                 return selector.innerText;
             })).toBe('algemeiner');
     });
-
-
-// === Date Filter ====
 
     it('Date Filter Displayed', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
@@ -190,21 +184,20 @@ describe('Publications Page Test Suite => ', function () {
     it('Date Filter - Select', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
         let today = utils.getCurrentDate();
-        console.log('Current Date: ' + today);
 
         // Clicking on Date filter
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)");
-        expect(await page.$eval('.ui.fluid.item.dropdown',
-            (selector) => {
-                return selector.innerText;
-            })).toBe('Today');  // Default value "Today"
+        expect(await page.$eval('.ui.fluid.item.dropdown', (selector) => {
+            return selector.innerText;
+        })).toBe('Today');  // Default value "Today"
 
         //expect value in field 'input date' is today date
         let dates_range = await page.$$eval('.ui.fluid.input input', (selectors) => {
             return selectors.map(selector => selector.value);
         });
+
         for (let date of dates_range) {
-            expect('0' + date).toBe(today);  // Default value => Should display Today's date
+            expect(date).toBe(today);  // Default value => Should display Today's date
         }
 
         // Checking all items in the dropDown menu
@@ -217,7 +210,6 @@ describe('Publications Page Test Suite => ', function () {
             expect(item).toEqual(expectedList[index])
         })
     });
-
 
     it('Date Filter - Dates Range', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
@@ -254,10 +246,6 @@ describe('Publications Page Test Suite => ', function () {
         })).toBeDefined();
     });
 
-
-
-
-    // check 'Results 1 - 10 of'
     it('Displayed Results 1 - 10 0f', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
@@ -266,10 +254,7 @@ describe('Publications Page Test Suite => ', function () {
         })).toContain('Results 1 - 10 of')
     });
 
-
-
 });
-
 
 afterAll(async function () {
     await browser.close();

@@ -90,6 +90,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
         let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)';
+        utils.sleep(1000);
         // Click on "Topic" filter
         await page.click(element);
         await page.waitForSelector(element, {'timeout': 60000});
@@ -203,7 +204,6 @@ describe('Daily Lesson Page Test Suite => ', function () {
     it('Date Filter - Select', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         let today = utils.getCurrentDate();
-        console.log("\n============================>>>> Current Date: " + today);
 
         // Clicking on Date filter
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
