@@ -73,6 +73,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
     it('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
 
+        utils.sleep(1000);
         await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)');
         await page.waitForSelector('.ui.primary.disabled.right.floated.button');
 
