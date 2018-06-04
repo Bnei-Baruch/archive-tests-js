@@ -93,6 +93,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
 
     it('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.lecturesUrl, {waitUntil: 'networkidle2'});
+
         let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)';
         // Click on Topic filter
         await page.click(element);
@@ -107,11 +108,6 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
 
         await page.click('.ui.primary.right.floated.button');
         await page.waitForSelector('.ui.blue.basic.button');
-
-        // await Promise.all([
-        //     page.click('.ui.primary.right.floated.button'),
-        //     page.waitForSelector('.ui.blue.basic.button'),
-        // ]);
 
         expect(await page.$eval('.ui.blue.basic.button', (selector) => {
             return selector.innerText;
