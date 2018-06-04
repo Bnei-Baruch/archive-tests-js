@@ -229,7 +229,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
 
     it('Date Filter - Dates Range', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-        // Clicking on Date filter
+
         // Click Apply and check if filter tag is created
         await Promise.all([
             await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)"),
@@ -247,14 +247,17 @@ describe('Daily Lesson Page Test Suite => ', function () {
         await page.focus("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(1) > div > input[type=\"text\"]");
         await page.type("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(1) > div > input[type=\"text\"]", "04/12/2010");
         await page.focus("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(2) > div > input[type=\"text\"]");
+
         for (let i = 0; i < 15; i++)
             await page.keyboard.press('Backspace');
         await page.type("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(2) > div > input[type=\"text\"]", "05/12/2010");
+
         // Click Apply and check if filter tag is created
         await Promise.all([
             page.click(".ui.primary.button"),
             page.waitForSelector(".ui.blue.basic.button"),
         ]);
+        
         expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
             return selector.className;
         })).toBeDefined();

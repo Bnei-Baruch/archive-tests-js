@@ -66,7 +66,6 @@ describe('Publications Page Test Suite => ', function () {
                 (selector) => {
                     return selector.className;
                 })).toBe('active item');
-
         }
     });
 
@@ -125,8 +124,10 @@ describe('Publications Page Test Suite => ', function () {
 
     it('Date Filter Displayed', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
+
         // Click on Date filter
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)");
+
         // Apply button enabled
         expect(await page.$eval(".ui.primary.button", (selector) => {
             return selector.disabled;
@@ -204,6 +205,7 @@ describe('Publications Page Test Suite => ', function () {
         let itemsList = await page.$$eval('.visible.menu.transition span', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
+
         let expectedList = ['Today', 'Yesterday', 'Last 7 Days', 'Last 30 Days', 'Last Month', 'This Month',
             'Custom Range'];
         itemsList.forEach(function (item, index) {
@@ -233,14 +235,17 @@ describe('Publications Page Test Suite => ', function () {
         await page.focus("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(1) > div > input[type=\"text\"]");
         await page.type("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(1) > div > input[type=\"text\"]", "04/12/2010");
         await page.focus("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(2) > div > input[type=\"text\"]");
-        for (let i = 0; i < 15; i++)
-            await page.keyboard.press('Backspace');
+
+        for (let i = 0; i < 15; i++) await page.keyboard.press('Backspace');
+
         await page.type("div.five.wide.column > div.ui.grid > div:nth-child(2) > div:nth-child(2) > div > input[type=\"text\"]", "05/12/2010");
+
         // Click Apply and check if filter tag is created
         await Promise.all([
             page.click(".ui.primary.button"),
             page.waitForSelector(".ui.blue.basic.button"),
         ]);
+
         expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
             return selector.className;
         })).toBeDefined();

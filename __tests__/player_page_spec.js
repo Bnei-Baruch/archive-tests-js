@@ -18,6 +18,8 @@ beforeAll((async function () {
 
 describe('Player Page Test Suite => ', function () {
 
+    let unitMaterialsTabs = '.ui.blue.pointing.secondary.menu a';
+
     it('Player Exists', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
         expect(await page.$('.mediaplayer')).toBeDefined();
@@ -54,11 +56,11 @@ describe('Player Page Test Suite => ', function () {
 
         expect(await page.$$eval('.media-downloads__file-download-btn', (selectors) => {
             return selectors.length
-        })).toEqual(3);
+        })).toBeCloseTo(3);
 
         expect(await page.$$eval('.media-downloads__file-copy-link-btn', (selectors) => {
             return selectors.length
-        })).toEqual(3);
+        })).toBeCloseTo(3);
     });
 
     it('Player Other Parts Section', async function () {
@@ -72,10 +74,11 @@ describe('Player Page Test Suite => ', function () {
     it('Player Unit Materials - Tabs-Menu - Displayed', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
-        let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
+        let unitMaterialsElementsText = await page.$$eval(unitMaterialsTabs, (selectors) => {
             return selectors.map(selector => selector.text)
         });
-        expect(unitMaterialsElementsText.length).toBe(4);
+
+        expect(unitMaterialsElementsText.length).toBeCloseTo(4);
         expect(unitMaterialsElementsText[0]).toEqual('Summary');
         expect(unitMaterialsElementsText[1]).toEqual('Transcription');
         expect(unitMaterialsElementsText[2]).toEqual('Sources');
@@ -85,24 +88,17 @@ describe('Player Page Test Suite => ', function () {
     it('Player Unit Materials - Tabs-Menu - Clickable', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
-        let element = '.ui.blue.pointing.secondary.menu a';
         // get first time all classes
-        let unitMaterialsElements = await page.$$(element);
+        let unitMaterialsElements = await page.$$(unitMaterialsTabs);
 
         for (let i = 0; i < unitMaterialsElements.length; i++) {
             await unitMaterialsElements[i].click();
             utils.sleep(1000);
             await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
-            //  fetch active and verify it's the one we clicked
 
             // get again class name
-            unitMaterialsElements = await page.$$(element);
-            console.log('\n ' + i + ' => ' + unitMaterialsElements[i]._remoteObject.description);
-
-            // let unitMaterialsElementsText = await page.$$eval('.ui.blue.pointing.secondary.menu a', (selectors) => {
-            //     return selectors.map(selector => selector.text)
-            // });
-
+            unitMaterialsElements = await page.$$(unitMaterialsTabs);
+            // console.log('\n ' + i + ' => ' + unitMaterialsElements[i]._remoteObject.description);
 
             await page.waitForSelector('.ui.blue.pointing.secondary.menu .active', {'timeout': 60000});
             utils.sleep(1000);
@@ -142,11 +138,13 @@ describe('Player Page Test Suite => ', function () {
 
     it('Player Unit Materials - Tabs-Menu - Sources', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
         // Click on Summary tab
         await Promise.all([
             page.click(".item.tab-sources"),
             page.waitForSelector("div .doc2html"),
         ]);
+
         expect(await page.$eval("div .doc2html", (selector) => {
             return selector.innerText
         })).toContain('World kabbalah Convention in Georgia - “All A One”')
@@ -154,14 +152,17 @@ describe('Player Page Test Suite => ', function () {
 
     it('Player Unit Materials - Tabs-Menu - Sketches', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
+
         // Click on Summary tab
         await Promise.all([
             page.click('.item.tab-sketches'),
             page.waitForSelector('.image-gallery-image'),
         ]);
+
         expect(await page.$$eval('.image-gallery-thumbnail', (selectors) => {
             return selectors.length
         })).toBe(20);
+
         expect(await page.$eval('.image-gallery-image img', (selector) => {
             return selector.src
         })).toBe('https://archive.kbb1.com/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg')
