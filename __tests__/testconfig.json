@@ -1,7 +1,7 @@
 {
   "browser": {
-    "headless": false,
-    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    "headless": false
+
   },
   "resources": {
     "dailyLessonUrl": "https://archive.kbb1.com/lessons",
@@ -9,11 +9,11 @@
     "unitMaterialsUrl": "https://archive.kbb1.com/en/events/c/iycyvtch?language=en",
     "summaryUrl": "https://archive.kbb1.com/he/lessons/cu/j3hs5Ebf?language=he",
     "programsUrl": "https://archive.kbb1.com/programs",
-    "lecturesUrl": "https://archive.kbb1.com/lectures/lectures",
+    "lecturesUrl": "https://archive.kbb1.com/lessons/lectures",
     "sourcesUrl": "https://archive.kbb1.com/sources",
     "eventsUrl": "https://archive.kbb1.com/events",
     "publicationsUrl": "https://archive.kbb1.com/publications",
-    "seriesUrl": "https://archive.kbb1.com/series",
+    "seriesUrl": "https://archive.kbb1.com/lessons/series",
     "mainUrl": "https://archive.kbb1.com/",
     "projectStatusUrl": "https://archive.kbb1.com/project-status/"
   }

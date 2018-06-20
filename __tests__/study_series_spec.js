@@ -25,7 +25,7 @@ describe('Selected Study Series Page Test Suite => ', function () {
         // header title
         expect(await page.$eval('.section-header__title', (selector) => {
             return selector.innerHTML
-        })).toBe('Selected Study Series');
+        })).toBe('Lectures &amp; Lessons');
 
         let filters = await page.$$eval('h2.ui.header', (selectors) => {
             return selectors.map(selector => selector.innerText)

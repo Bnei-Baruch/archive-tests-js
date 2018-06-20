@@ -43,7 +43,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(2);
-        expect(await filters[0].trim()).toEqual('Locations');
+        expect(await filters[0].trim()).toEqual('Locations All');
         expect(await filters[1].trim()).toEqual('Year');
         // Results
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
