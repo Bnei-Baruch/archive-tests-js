@@ -15,20 +15,25 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
+
+let verticalMenu = '.vertical.menu';
+let sectionHeader = '.section-header';
+let sectionHeaderTitle = '.section-header__title';
+let horizontalFilters = '.horizontally';
+
 describe('Daily Lesson Page Test Suite => ', function () {
 
-    it('Vertical Menu - Displayed', async function () {
-        let element = '.ui.blue.huge.borderless.fluid.vertical.menu a.item:nth-child(1)';
+    xit('Vertical Menu - Displayed', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
-        await page.waitForSelector(element);
+        await page.waitForSelector(verticalMenu);
         // choose Daily Lessons section from vertical menu
-        await page.click(element);
+        await page.click(verticalMenu);
         // vertical menu count
-        let filters = await page.$$eval('.ui.blue.huge.borderless.fluid.vertical.menu a.item', (selectors) => {
+        let filters = await page.$$eval(verticalMenu + ' a', (selectors) => {
             return selectors.map(selector => selector.text)
         });
-        expect(filters.length).toBe(9);
+        expect(filters.length).toBeCloseTo(9);
         expect(filters[0]).toEqual('Daily Kabbalah Lesson');
         expect(filters[1]).toEqual('Programs');
         expect(filters[2]).toEqual('Lectures & Lessons');
@@ -40,37 +45,103 @@ describe('Daily Lesson Page Test Suite => ', function () {
         expect(filters[8]).toEqual('Project Status');
     });
 
-    it('Filter and Headers - Displayed', async function () {
+    xit('Filter and Headers - Displayed', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+        await page.waitForSelector(verticalMenu);
+
         // header
-        expect(await page.$('.section-header')).toBeDefined();
+        expect(await page.$(sectionHeader)).toBeDefined();
         // header title
-        expect(await page.$eval('.section-header__title', (selector) => {
+        expect(await page.$eval(sectionHeaderTitle, (selector) => {
             return selector.innerHTML
         })).toBe('Daily Lessons');
+
         // filters
-        let filters = await page.$$eval('.ui.container.padded.horizontally a.item', (selectors) => {
+        let filters = await page.$$eval(horizontalFilters + ' a', (selectors) => {
             return selectors.map(selector => selector.text)
         });
-        expect(filters.length).toBe(3);
+        expect(filters.length).toBeCloseTo(3);
         expect(filters[0]).toEqual('Topics');
         expect(filters[1]).toEqual('Sources');
         expect(filters[2]).toEqual('Date');
     });
 
-    it('Filter - Clickable', async function () {
+    xit('Filter - Clickable', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-        for (let i = 2; i <= 4; i++) {
-            await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")");
-            expect(await page.$eval(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(" + i + ")",
-                (selector) => {
-                    // console.log("Found: " + selector);
-                    return selector.className;
-                })).toBe('active item');
-        }
+        await page.waitForSelector(verticalMenu);
+
+        // get all filters elements
+        const filters = await page.$('.horizontally');
+        utils.sleep(1);
+
+        const a = await filters.$$('a');
+        console.log('a', a.length);
+
+        // console.log('filters', filters);
+
+        let filtersb = await page.$$eval(horizontalFilters + ' a', (selectors) => {
+            return selectors.map(selector => selector.text)
+        });
+
+        // for (let i = 0; i < filters.length; i++)
+        expect(filtersb)
+            .toEqual(['Topics', 'Sources', 'Date']);
+
+        // console.log(await filters[0].$$eval('.item', nodes => nodes.map(n => n.innerText)));
+
+
+        // for (let i = 0; i < filters.length; i++) {
+
+
+        utils.sleep(1);
+        // }
+
+        // for (let i = 0; i < filters.length; i++) {
+        //
+        //     // horizontalSelectorClassName = await page.$eval(horizontalFilters + ' a', (selector) => {
+        //     //     return selector.className;
+        //     // });
+        //
+        //     // expect(horizontalSelectorClassName.toString).not.toContain('active');
+        //
+        //     // expect(await page.$eval(horizontalFilters + ' a', (selector) => {
+        //     //     return selector.className;
+        //     // })).not.toContain('active');
+        //
+        //
+        //     // todo - continue to do refactoring
+        //     const feedHandle = await page.$('.feed');
+        //     expect(await feedHandle.$$eval('.tweet', nodes => nodes.map(n => n.innerText)).toEqual(['Hello!', 'Hi!']);
+        //
+        //
+        //     console.log('before ===>>> ' + await filters[i].$$eval());
+        //
+        //     await filters[i].click();
+        //     utils.sleep(1000);
+        //
+        //     console.log('after ===>>> ' + await filters[i].className);
+        //
+        //     // console.log('\n ====>>> ' + await filters[i].className + ' count of i ==>> ' + i);
+        //
+        //     // expect(horizontalSelectorClassName).toContain('active');
+        //
+        //     // expect(await page.$eval(horizontalFilters + ' a', (selector) => {
+        //     //     return selector.className;
+        //     // })).toContain('active');
+        //
+        // }
+
+        // for (let i = 2; i <= 4; i++) {
+        //     await page.click(horizontalFilters + 'a:nth-child(' + i + ')');
+        //
+        //     expect(await page.$eval(horizontalFilters + 'a:nth-child(' + i + ')', (selector) => {
+        //         // console.log("Found: " + selector);
+        //         return selector.className;
+        //     })).toBe('active item');
+        // }
     });
 
-    it('Filter - Apply Button Enable/Disable', async function () {
+    xit('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         // Topics & Sources filters - Apply button expected to be disabled
         for (let i = 2; i <= 3; i++) {
@@ -86,7 +157,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toBeFalsy();
     });
 
-    it('Filter - Apply Button - Click', async function () {
+    xit('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
         let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)';
@@ -108,7 +179,6 @@ describe('Daily Lesson Page Test Suite => ', function () {
         expect(await page.$eval(".ui.blue.basic.button", (selector) => {
             return selector.innerText;
         })).toBe('Jewish culture');
-
     });
 
     it('Displayed Results 1 - 10 0f', async function () {
@@ -124,34 +194,12 @@ describe('Daily Lesson Page Test Suite => ', function () {
         expect(await page.$('.mediaplayer')).toBeDefined();
     });
 
-    it('Pagination Displayed', async function () {
-        await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-        expect(await page.$eval('.ui.blue.compact.pagination-menu.menu', (selector) => {
-            return selector.className
-        })).toBe('ui blue compact pagination-menu menu');
-    });
-
     it('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-
-        // get all div that expected to be disabled
-        let paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
-        for (let i = 0; i < paginationItems.length; i++) {
-            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
-        }
-
-        // click on last pagination item
-        let activeElements = await page.$$('.ui.blue.compact.pagination-menu.menu a');
-        await activeElements[activeElements.length - 1].click();
-
-        // get all div that expected to be disabled
-        paginationItems = await page.$$('.ui.blue.compact.pagination-menu.menu div');
-        for (let i = 0; i < paginationItems.length; i++) {
-            expect(paginationItems[i]._remoteObject.description).toBe('div.disabled.item');
-        }
+        await utils.pagination(page);
     });
 
-    it('Date Filter Displayed', async function () {
+    xit('Date Filter Displayed', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         // Click on Date filter
         await page.click(".ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(4)");
@@ -173,7 +221,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toBe("Select a date range");
     });
 
-    it('Date Filter - DropDown - Last 7 Days', async function () {
+    xit('Date Filter - DropDown - Last 7 Days', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
         // Clicking on Date filter
@@ -198,10 +246,9 @@ describe('Daily Lesson Page Test Suite => ', function () {
         expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
             return selector.className;
         })).toBeDefined();
-
     });
 
-    it('Date Filter - Select', async function () {
+    xit('Date Filter - Select', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         let today = utils.getCurrentDate();
 
@@ -227,7 +274,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })
     });
 
-    it('Date Filter - Dates Range', async function () {
+    xit('Date Filter - Dates Range', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
         // Click Apply and check if filter tag is created
@@ -257,7 +304,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
             page.click(".ui.primary.button"),
             page.waitForSelector(".ui.blue.basic.button"),
         ]);
-        
+
         expect(await page.$eval(".ui.blue.basic.button .calendar.icon", (selector) => {
             return selector.className;
         })).toBeDefined();

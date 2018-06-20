@@ -2,12 +2,12 @@
   "name": "archive_tests_jest",
   "version": "0.0.1",
   "dependencies": {
-    "jasmine-reporters": "latest",
+    "jasmine-reporters": "2.3.1",
     "jest": "latest",
-    "jest-codemods": "^0.13.9",
+    "jest-codemods": "0.13.9",
     "minimatch": "3.0.4",
-    "npm": "^6.0.1",
-    "puppeteer": "latest"
+    "npm": "6.0.1",
+    "puppeteer": "1.4.0"
   },
   "scripts": {
     "test": "jest"
@@ -16,9 +16,9 @@
     "testResultsProcessor": "jest-teamcity-reporter"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^22.4.3",
-    "babel-preset-env": "^1.7.0",
-    "jest-teamcity-reporter": "^0.9.0"
+    "babel-core": "6.26.3",
+    "babel-jest": "22.4.3",
+    "babel-preset-env": "1.7.0",
+    "jest-teamcity-reporter": "0.9.0"
   }
 }

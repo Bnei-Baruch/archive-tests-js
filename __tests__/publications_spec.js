@@ -18,7 +18,7 @@ beforeAll((async function () {
 
 describe('Publications Page Test Suite => ', function () {
 
-    it('Header and Filters - Displayed', async function () {
+    xit('Header and Filters - Displayed', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
@@ -35,29 +35,14 @@ describe('Publications Page Test Suite => ', function () {
         expect(filters[1].trim()).toEqual('Date');
     });
 
+
     it('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
-
-        let allPaginationSelector = '.ui.blue.compact.pagination-menu.menu *';
-        // get all div that expected to be disabled
-        let paginationItems = await page.$$(allPaginationSelector);
-        // verify index location of disabled elements
-        expect(paginationItems['0']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['2']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['8']._remoteObject.description).toContain('disabled');
-
-        // click on last pagination item
-        await paginationItems[paginationItems.length - 1].click();
-
-        await utils.sleep(2000);
-        paginationItems = await page.$$(allPaginationSelector);
-
-        expect(paginationItems['4']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['10']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['12']._remoteObject.description).toContain('disabled');
+        await utils.pagination(page);
     });
 
-    it('Filter - Clickable', async function () {
+
+    xit('Filter - Clickable', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         for (let i = 2; i <= 3; i++) {
@@ -69,7 +54,7 @@ describe('Publications Page Test Suite => ', function () {
         }
     });
 
-    it('Filter - Apply Button Enable/Disable', async function () {
+    xit('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         // Publishers filter - Apply button expected to be disabled
@@ -86,18 +71,13 @@ describe('Publications Page Test Suite => ', function () {
             (selector) => {
                 return selector.disabled;
             })).toBeFalsy();
-
-        //await Promise.all([ ])
-
     });
 
-    it('Filter - Apply Button - Click', async function () {
+    xit('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         //Click on 'Publishers' filter
         await page.click('.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(2)');
-
-        //??? check Count in Filter's Drop-Down - had to be 20 ???
 
         //Clicking on 1-st item in Filter's Drop-Down - ‘algemeiner’
         await page.click('.ui.blue.tiny.fluid.vertical.menu a:first-child');
@@ -122,7 +102,7 @@ describe('Publications Page Test Suite => ', function () {
             })).toBe('algemeiner');
     });
 
-    it('Date Filter Displayed', async function () {
+    xit('Date Filter Displayed', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         // Click on Date filter
@@ -149,7 +129,7 @@ describe('Publications Page Test Suite => ', function () {
         })).toBe("Select a date range");
     });
 
-    it('Date Filter - DropDown - Last 7 Days', async function () {
+    xit('Date Filter - DropDown - Last 7 Days', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         // Clicking on Date filter
@@ -179,10 +159,9 @@ describe('Publications Page Test Suite => ', function () {
             (selector) => {
                 return selector.className;
             })).toBeDefined();
-
     });
 
-    it('Date Filter - Select', async function () {
+    xit('Date Filter - Select', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
         let today = utils.getCurrentDate();
 
@@ -213,7 +192,7 @@ describe('Publications Page Test Suite => ', function () {
         })
     });
 
-    it('Date Filter - Dates Range', async function () {
+    xit('Date Filter - Dates Range', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         // Clicking on Date filter

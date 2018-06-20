@@ -18,7 +18,7 @@ beforeAll((async function () {
 
 describe('Programs Page Test Suite => ', function () {
 
-    it('Header and Filters - Displayed', async function () {
+    xit('Header and Filters - Displayed', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
@@ -37,31 +37,13 @@ describe('Programs Page Test Suite => ', function () {
         expect(filters[3]).toEqual('Date');
     });
 
-
     it('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
-
-        let allPaginationSelector = '.ui.blue.compact.pagination-menu.menu *';
-
-        // get all div that expected to be disabled
-        let paginationItems = await page.$$(allPaginationSelector);
-        // verify index location of disabled elements
-        expect(paginationItems['0']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['2']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['8']._remoteObject.description).toContain('disabled');
-
-        // click on last pagination item
-        await paginationItems[paginationItems.length - 1].click();
-
-        await utils.sleep(2000);
-        paginationItems = await page.$$(allPaginationSelector);
-
-        expect(paginationItems['4']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['10']._remoteObject.description).toContain('disabled');
-        expect(paginationItems['12']._remoteObject.description).toContain('disabled');
+        await utils.pagination(page);
     });
 
-    it('Filter - Clickable', async function () {
+
+    xit('Filter - Clickable', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
         for (let i = 2; i <= 4; i++) {
@@ -74,7 +56,7 @@ describe('Programs Page Test Suite => ', function () {
         }
     });
 
-    it('Filter - Apply Button Enable/Disable', async function () {
+    xit('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
         await Promise.all([
@@ -98,7 +80,7 @@ describe('Programs Page Test Suite => ', function () {
         })).toBeFalsy();
     });
 
-    it('Filter - Apply Button - Click', async function () {
+    xit('Filter - Apply Button - Click', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
         let element = '.ui.blue.large.pointing.secondary.index-filters.menu div a:nth-child(3)';

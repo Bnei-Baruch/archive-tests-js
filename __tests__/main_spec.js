@@ -67,7 +67,6 @@ describe('Main Page Test Suite => ', function () {
         expect(filters[0]).toContain('Kabbalah Media\n' +
             'Copyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved');
     });
-
 });
 
 afterAll(async function () {
