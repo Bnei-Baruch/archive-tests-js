@@ -43,8 +43,8 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(2);
-        expect(await filters[0].trim()).toEqual('Locations All');
-        expect(await filters[1].trim()).toEqual('Year');
+        expect(await filters[0].trim()).toEqual('Locations\nAll');
+        expect(await filters[1].trim()).toEqual('Year\nAll');
         // Results
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
             return selector.innerText;
@@ -55,8 +55,8 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(2);
-        expect(await filters[0].trim()).toEqual('Holidays');
-        expect(await filters[1].trim()).toEqual('Year');
+        expect(await filters[0].trim()).toEqual('Holidays\nAll');
+        expect(await filters[1].trim()).toEqual('Year\nAll');
         // Results
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
             return selector.innerText;
@@ -67,7 +67,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(1);
-        expect(await filters[0].trim()).toEqual('Year');
+        expect(await filters[0].trim()).toEqual('Year\nAll');
         // Results
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
             return selector.innerText;
@@ -82,7 +82,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText);
         });
         expect(await filters.length).toBe(1);
-        expect(await filters[0].trim()).toEqual('Date');
+        expect(await filters[0].trim()).toEqual('Date\nAll');
 
         await utils.sleep(2000);
 
@@ -96,7 +96,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selectors.map(selector => selector.innerText)
         });
         expect(await filters.length).toBe(1);
-        expect(await filters[0].trim()).toEqual('Date');
+        expect(await filters[0].trim()).toEqual('Date\nAll');
 
         await utils.sleep(2000);
 

@@ -165,7 +165,7 @@ describe('Player Page Test Suite => ', function () {
 
         expect(await page.$eval('.image-gallery-image img', (selector) => {
             return selector.src
-        })).toBe('https://archive.kbb1.com/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg')
+        })).toBe('https://kabbalahmedia.info/assets/unzip/HsoLO15s/heb_o_rav_2017-09-15_congress_lesson_georgia_n0_p1_pic01.jpg')
     });
 });
 

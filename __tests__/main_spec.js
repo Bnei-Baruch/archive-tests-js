@@ -28,7 +28,7 @@ describe('Main Page Test Suite => ', function () {
             return selector.innerHTML
         })).toBe('Explore the wisdom of Kabbalah');
 
-        expect(await page.$eval('.ui.button', (selector) => {
+        expect(await page.$eval('.search-omnibox button', (selector) => {
             return selector.innerHTML
         })).toBe('search');
 
@@ -44,16 +44,24 @@ describe('Main Page Test Suite => ', function () {
         expect(filters[0].trim()).toEqual('ARCHIVE SECTIONS');
         expect(filters[1].trim()).toEqual('LATEST UPDATES');
 
-        filters = await page.$$eval('a.small.header', (selectors) => {
+        filters = await page.$$eval('.sidebar-item', (selectors) => {
+        // filters = await page.$$eval('a.small.header', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
-        expect(filters.length).toBe(6);
-        expect(filters[0].trim()).toEqual('Daily Kabbalah Lesson');
+        expect(filters.length).toBe(8);
+        // expect(filters[0].trim()).toEqual('Daily Kabbalah Lesson');
+        expect(filters[0].trim()).toEqual('Lessons & Lectures');
         expect(filters[1].trim()).toEqual('Programs');
-        expect(filters[2].trim()).toEqual('Lectures & Lessons');
-        expect(filters[3].trim()).toEqual('Library');
-        expect(filters[4].trim()).toEqual('Conventions & Events');
+        // expect(filters[2].trim()).toEqual('Lectures & Lessons');
+        expect(filters[2].trim()).toEqual('Library');
+        // expect(filters[3].trim()).toEqual('Library');
+        expect(filters[3].trim()).toEqual('Conventions & Events');
+        // expect(filters[4].trim()).toEqual('Conventions & Events');
+        expect(filters[4].trim()).toEqual('Topics');
+        // expect(filters[5].trim()).toEqual('Publications');
         expect(filters[5].trim()).toEqual('Publications');
+        expect(filters[6].trim()).toEqual('Project Status');
+        expect(filters[7].trim()).toEqual('Old Site');
 
         filters = await page.$$eval('a.ui.card', (selectors) => {
             return selectors.map(selector => selector.innerText)
