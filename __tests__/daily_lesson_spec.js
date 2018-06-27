@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+¡const puppeteer = require('puppeteer');
 const utils = require('../utils.js');
 const testconfig = require('./testconfig');
 const width = 1490;
