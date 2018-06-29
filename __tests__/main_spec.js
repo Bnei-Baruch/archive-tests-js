@@ -32,20 +32,20 @@ describe('Main Page Test Suite => ', function () {
             .toBe(txt.searchButton);
 
         // check banners
-        expect(await page.$$eval('.thumbnail', selectors => selectors.length))
+        expect(await page.$$eval(sel.thumbnail, selectors => selectors.length))
             .toBe(2);
 
         // check horizontal titles
-        expect(await page.$$eval('.horizontal.divider',
+        expect(await page.$$eval(sel.horizonTitle,
             (selectors) => {
                 return selectors.map(selector => selector.innerText.trim())
-            })).toEqual(['ARCHIVE SECTIONS', 'LATEST UPDATES']);
+            })).toEqual(txt.horizonTitle);
 
         // check horizontal archive icons row
-        expect(await page.$$eval('.homepage__website-sections .header',
-            (selectors) => {
-                return selectors.map(selector => selector.innerText.trim())
-            })).toEqual(['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Publications']);
+        expect(await page.$$eval(sel.horizonIconRows, (selectors) => {
+            return selectors.map(selector => selector.innerText.trim())
+        })).toEqual(txt.horizonIconRows);
+        
         // check vertical menu list
         expect(await page.$$eval('.sidebar-item',
             (selectors) => {
