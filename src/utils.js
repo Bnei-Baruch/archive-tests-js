@@ -39,6 +39,5 @@ module.exports = {
         expect(paginationItems[11]._remoteObject.description).toContain('disabled');
         expect(paginationItems[13]._remoteObject.description).toContain('disabled');
     }
-}
-;
+};
 

@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const testconfig = require('./testconfig');
-const utils = require('../utils.js');
+const sel = require('../src/selectors').main;
+const txt = require('../src/texts').main;
 const width = 1920;
 const height = 1080;
 let browser;
@@ -20,22 +21,26 @@ describe('Main Page Test Suite => ', function () {
 
     it('Header - Displayed', async function () {
         await page.goto(testconfig.resources.mainUrl, {waitUntil: 'networkidle2'});
-        // is header defined
-        expect(await page.$('.homepage__title')).toBeDefined();
+
         // check header title
-        expect(await page.$eval('.homepage__title', selector => selector.innerText.trim()))
-            .toBe('Explore the wisdom of Kabbalah');
-        // check search button text
-        expect(await page.$eval('.search-omnibox button', selector => selector.innerText.trim()))
-            .toBe('search');
-        // check homepage__featured should be displayed 2 items
+        expect(await page.$(sel.title)).toBeDefined();
+        expect(await page.$eval(sel.title, s => s.innerText.trim()))
+            .toBe(txt.title);
+
+        // check search button
+        expect(await page.$eval(sel.searchButton, s => s.innerText.trim()))
+            .toBe(txt.searchButton);
+
+        // check banners
         expect(await page.$$eval('.thumbnail', selectors => selectors.length))
-            .toBeCloseTo(2);
+            .toBe(2);
+
         // check horizontal titles
         expect(await page.$$eval('.horizontal.divider',
             (selectors) => {
                 return selectors.map(selector => selector.innerText.trim())
             })).toEqual(['ARCHIVE SECTIONS', 'LATEST UPDATES']);
+
         // check horizontal archive icons row
         expect(await page.$$eval('.homepage__website-sections .header',
             (selectors) => {
