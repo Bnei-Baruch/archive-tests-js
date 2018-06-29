@@ -22,67 +22,36 @@ describe('Main Page Test Suite => ', function () {
         await page.goto(testconfig.resources.mainUrl, {waitUntil: 'networkidle2'});
         // is header defined
         expect(await page.$('.homepage__title')).toBeDefined();
-
         // check header title
-        expect(await page.$eval('.homepage__title', selector => selector.innerText))
+        expect(await page.$eval('.homepage__title', selector => selector.innerText.trim()))
             .toBe('Explore the wisdom of Kabbalah');
         // check search button text
-        expect(await page.$eval('.search-omnibox button', selector => selector.innerText))
+        expect(await page.$eval('.search-omnibox button', selector => selector.innerText.trim()))
             .toBe('search');
         // check homepage__featured should be displayed 2 items
         expect(await page.$$eval('.thumbnail', selectors => selectors.length))
             .toBeCloseTo(2);
-
-
-        // let filters = await page.$$eval('.horizontal.divider', (selectors) => {
-        //     return selectors.map(selector => selector.innerText)
-        // });
-        // expect(filters.length).toBe(2);
-        // expect(filters[0].trim()).toEqual('ARCHIVE SECTIONS');
-        // expect(filters[1].trim()).toEqual('LATEST UPDATES');
-
-        // .homepage__website-sections .homepage__iconsrow .row
-
-        expect(await page.$$eval('.horizontal.divider', selector => selector.length))
-            .toBeCloseTo(2);
-
+        // check horizontal titles
+        expect(await page.$$eval('.horizontal.divider',
+            (selectors) => {
+                return selectors.map(selector => selector.innerText.trim())
+            })).toEqual(['ARCHIVE SECTIONS', 'LATEST UPDATES']);
+        // check horizontal archive icons row
         expect(await page.$$eval('.homepage__website-sections .header',
             (selectors) => {
                 return selectors.map(selector => selector.innerText.trim())
             })).toEqual(['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Publications']);
-
-
-        // .toEqual(['ARCHIVE SECTIONS', 'LATEST UPDATES']);
-
-        // expect(filters.length).toBe(2);
-        // expect(filters[0].trim()).toEqual('ARCHIVE SECTIONS');
-        // expect(filters[1].trim()).toEqual('LATEST UPDATES');
-
-
-        let filters = await page.$$eval('.sidebar-item', (selectors) => {
-            return selectors.map(selector => selector.innerText)
-        });
-        expect(filters.length).toBe(8);
-        expect(filters[0].trim()).toEqual('Lessons & Lectures');
-        expect(filters[1].trim()).toEqual('Programs');
-        expect(filters[2].trim()).toEqual('Library');
-        expect(filters[3].trim()).toEqual('Conventions & Events');
-        expect(filters[4].trim()).toEqual('Topics');
-        expect(filters[5].trim()).toEqual('Publications');
-        expect(filters[6].trim()).toEqual('Project Status');
-        expect(filters[7].trim()).toEqual('Old Site');
-
-        filters = await page.$$eval('a.ui.card', (selectors) => {
-            return selectors.map(selector => selector.innerText)
-        });
-        expect(filters.length).toBe(4);
-
-        // footer
-        filters = await page.$$eval('.layout__footer div.column', (selectors) => {
-            return selectors.map(selector => selector.innerText)
-        });
-        expect(filters[0]).toContain('Kabbalah Media\n' +
-            'Copyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved');
+        // check vertical menu list
+        expect(await page.$$eval('.sidebar-item',
+            (selectors) => {
+                return selectors.map(selector => selector.innerText.trim())
+            })).toEqual(['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site']);
+        // check last updates should be displayed 4 items
+        expect(await page.$$eval('.homepage__thumbnails a', selectors => selectors.length))
+            .toBeCloseTo(4);
+        // check layout__footer text
+        expect(await page.$eval('.layout__footer', selector => selector.textContent.trim()))
+            .toBe('Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved');
     });
 });
 
