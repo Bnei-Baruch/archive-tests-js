@@ -28,7 +28,7 @@ module.exports = {
         // get all div that expected to be disabled
         let paginationItems = await page.$$(allPaginationSelector);
         // length of the elements in the pagination
-        expect(paginationItems.length).toBeCloseTo(15);
+        expect(paginationItems.length).toBe(15);
         // verify index location of disabled elements
         expect(paginationItems[0]._remoteObject.description).toContain('disabled');
         expect(paginationItems[2]._remoteObject.description).toContain('disabled');
@@ -38,6 +38,17 @@ module.exports = {
         paginationItems = await page.$$(allPaginationSelector);
         expect(paginationItems[11]._remoteObject.description).toContain('disabled');
         expect(paginationItems[13]._remoteObject.description).toContain('disabled');
+    },
+
+    fillAndClick: async function (page, field, text, selector) {
+        await page.focus(field);
+        await page.type(field, text);
+        await page.click(selector);
+    },
+
+    redirect: async function (page, txt) {
+        const expUrl = '/search?q=' + txt;
+        expect(await (page.url())).toContain(expUrl);
     }
 };
 

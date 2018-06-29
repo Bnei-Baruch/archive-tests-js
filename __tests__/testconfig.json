@@ -4,17 +4,17 @@
 
   },
   "resources": {
-    "dailyLessonUrl": "https://archive.kbb1.com/lessons",
-    "playerUrl": "https://archive.kbb1.com/en/lessons/cu/TGfvHRww?language=en",
-    "unitMaterialsUrl": "https://archive.kbb1.com/en/events/c/iycyvtch?language=en",
-    "summaryUrl": "https://archive.kbb1.com/he/lessons/cu/j3hs5Ebf?language=he",
-    "programsUrl": "https://archive.kbb1.com/programs",
-    "lecturesUrl": "https://archive.kbb1.com/lessons/lectures",
-    "sourcesUrl": "https://archive.kbb1.com/sources",
-    "eventsUrl": "https://archive.kbb1.com/events",
-    "publicationsUrl": "https://archive.kbb1.com/publications",
-    "seriesUrl": "https://archive.kbb1.com/lessons/series",
-    "mainUrl": "https://archive.kbb1.com/",
-    "projectStatusUrl": "https://archive.kbb1.com/project-status/"
+    "dailyLessonUrl": "https://kabbalahmedia.info/lessons",
+    "playerUrl": "https://kabbalahmedia.info/en/lessons/cu/TGfvHRww?language=en",
+    "unitMaterialsUrl": "https://kabbalahmedia.info/en/events/c/iycyvtch?language=en",
+    "summaryUrl": "https://kabbalahmedia.info/he/lessons/cu/j3hs5Ebf?language=he",
+    "programsUrl": "https://kabbalahmedia.info/programs",
+    "lecturesUrl": "https://kabbalahmedia.info/lessons/lectures",
+    "sourcesUrl": "https://kabbalahmedia.info/sources",
+    "eventsUrl": "https://kabbalahmedia.info/events",
+    "publicationsUrl": "https://kabbalahmedia.info/publications",
+    "seriesUrl": "https://kabbalahmedia.info/lessons/series",
+    "mainUrl": "https://kabbalahmedia.info/",
+    "projectStatusUrl": "https://kabbalahmedia.info/project-status/"
   }
 }
