@@ -1,10 +1,8 @@
 const selectors = {
 
     main: {
-        waitCondition: 'networkidle2',
         sideBar: '.sidebar-item',
         title: '.homepage__title',
-        header: '.section-header',
         logo: '.layout__header .logo',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
@@ -16,6 +14,10 @@ const selectors = {
         horizonIconRows: '.homepage__website-sections .header',
         lastUpdateThumbnails: '.homepage__thumbnails a',
         footer: '.layout__footer'
+    },
+    search: {
+        header: '.section-header',
+        filterPanel: '.filter-panel a.item'
     }
 };
 

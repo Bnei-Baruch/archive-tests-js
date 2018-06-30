@@ -1,10 +1,12 @@
 const puppeteer = require('puppeteer');
 const testconfig = require('./testconfig');
-const sel = require('../src/selectors').main;
-const txt = require('../src/texts').main;
+const selectors = require('../src/selectors');
+const texts = require('../src/texts');
 const utils = require('../src/utils');
+
 const width = 1920;
 const height = 1080;
+
 let browser;
 let page;
 let originalTimeout;
@@ -21,81 +23,87 @@ beforeAll((async function () {
 describe('Main Page Test Suite => ', function () {
 
     it('All Elements Exists', async function () {
-        await page.goto(testconfig.resources.mainUrl, {waitUntil: sel.waitCondition});
+        await page.goto(testconfig.resources.mainUrl, {waitUntil: 'networkidle2'});
 
         // check header title
-        expect(await page.$(sel.title)).toBeDefined();
-        expect(await page.$eval(sel.title, s => s.innerText.trim()))
-            .toBe(txt.title);
+        expect(await page.$(selectors.main.title)).toBeDefined();
+        expect(await page.$eval(selectors.main.title, s => s.innerText.trim()))
+            .toBe(texts.main.title);
 
         // check logo
-        expect(await page.$eval(sel.logo, s => s.innerText.trim()))
-            .toBe(txt.logo);
+        expect(await page.$eval(selectors.main.logo, s => s.innerText.trim()))
+            .toBe(texts.main.logo);
 
         // check donate button
-        expect(await page.$eval(sel.donateButton, s => s.innerText.trim()))
-            .toBe(txt.donateButton);
+        expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
+            .toBe(texts.main.donateButton);
 
         // check language drop down
-        expect(await page.$eval(sel.languageDropDown, s => s.innerText.trim()))
-            .toBe(txt.languageDropDown);
+        expect(await page.$eval(selectors.main.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.main.languageDropDown);
 
         // check search button
-        expect(await page.$eval(sel.searchButton, s => s.innerText.trim()))
-            .toBe(txt.searchButton);
+        expect(await page.$eval(selectors.main.searchButton, s => s.innerText.trim()))
+            .toBe(texts.main.searchButton);
 
         // check banners
-        expect(await page.$$eval(sel.thumbnail, s => s.length))
+        expect(await page.$$eval(selectors.main.thumbnail, s => s.length))
             .toBe(2);
 
         // check horizontal titles
-        expect(await page.$$eval(sel.horizonTitle, (ss) => {
+        expect(await page.$$eval(selectors.main.horizonTitle, (ss) => {
             return ss.map(s => s.innerText.trim())
-        })).toEqual(txt.horizonTitle);
+        })).toEqual(texts.main.horizonTitle);
 
         // check horizontal icons row
-        expect(await page.$$eval(sel.horizonIconRows, (ss) => {
+        expect(await page.$$eval(selectors.main.horizonIconRows, (ss) => {
             return ss.map(s => s.innerText.trim())
-        })).toEqual(txt.horizonIconRows);
+        })).toEqual(texts.main.horizonIconRows);
 
         // check vertical menu list
-        expect(await page.$$eval(sel.sideBar, (ss) => {
+        expect(await page.$$eval(selectors.main.sideBar, (ss) => {
             return ss.map(s => s.innerText.trim())
-        })).toEqual(txt.sideBar);
+        })).toEqual(texts.main.sideBar);
 
         // check last updates
-        expect(await page.$$eval(sel.lastUpdateThumbnails, s => s.length))
+        expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))
             .toBe(4);
 
         // check footer
-        expect(await page.$eval(sel.footer, s => s.textContent.trim()))
-            .toBe(txt.footer);
+        expect(await page.$eval(selectors.main.footer, s => s.textContent.trim()))
+            .toBe(texts.main.footer);
     });
 
     it('Search Functionality', async function () {
-        await page.goto(testconfig.resources.mainUrl, {waitUntil: sel.waitCondition});
+        await page.goto(testconfig.resources.mainUrl, {waitUntil: 'networkidle2'});
 
         // check search function
-        await utils.fillAndClick(page, sel.searchInput, txt.searchText, sel.searchButton);
+        await utils.fillAndClick(page, selectors.main.searchInput, texts.main.searchText, selectors.main.searchButton);
 
         // check redirected url
-        await utils.redirect(page, txt.searchText);
+        await utils.redirect(page, texts.main.searchText);
 
         // check search bar with expected text inside
-        expect(await page.$eval(sel.searchResult, s => s.baseURI))
-            .toContain(txt.searchText);
-
-        // utils.sleep(5000);
+        expect(await page.$eval(selectors.main.searchResult, s => s.baseURI))
+            .toContain(texts.main.searchText);
 
         // check title
-        expect(await page.$eval(sel.header, s => s.innerText.trim()))
-            .toBe(txt.header);
+        expect(await page.$eval(selectors.search.header, s => s.innerText))
+            .toContain(texts.search.header);
 
-        // check filter-panel
+        // todo - aron how to write this blog more sexual ?
+        const a = await page.$$eval(selectors.search.filterPanel, (ss) => {
+            return ss.map(s => s.innerText)
+        });
+
+        await utils.removeBackSlash(a);
+
+        // check filter panel
+        expect(a).toEqual(texts.search.filterPanel);
+
+
         // check searched text to contained in every response
     });
-    // todo - add new {it} actions sections
-    // todo - add test enter text in search and compare results
 
 });
 

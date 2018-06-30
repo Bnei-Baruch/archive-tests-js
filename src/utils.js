@@ -49,6 +49,13 @@ module.exports = {
     redirect: async function (page, txt) {
         const expUrl = '/search?q=' + txt;
         expect(await (page.url())).toContain(expUrl);
+    },
+
+    removeBackSlash: async function (textToCleanBackSlash) {
+        for (let i = 0; i < textToCleanBackSlash.length; i++) {
+            textToCleanBackSlash[i] = textToCleanBackSlash[i].replace(/\n/g, "");
+        }
+        return textToCleanBackSlash;
     }
 };
 
