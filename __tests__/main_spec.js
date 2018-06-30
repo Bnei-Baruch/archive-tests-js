@@ -91,18 +91,23 @@ describe('Main Page Test Suite => ', function () {
         expect(await page.$eval(selectors.search.header, s => s.innerText))
             .toContain(texts.search.header);
 
-        // todo - aron how to write this blog more sexual ?
-        const a = await page.$$eval(selectors.search.filterPanel, (ss) => {
+        // todo Edo - how to write this block more intelligent
+        // (utils.removeBackSlash inside this block do not recognized)
+        const resultsFromPage = await page.$$eval(selectors.search.filterPanel, (ss) => {
             return ss.map(s => s.innerText)
         });
 
-        await utils.removeBackSlash(a);
+        await utils.removeBackSlash(resultsFromPage);
 
         // check filter panel
-        expect(a).toEqual(texts.search.filterPanel);
-
-
+        expect(await resultsFromPage).toEqual(texts.search.filterPanel);
+        
         // check searched text to contained in every response
+        const searchRes = await page.$$eval(selectors.search.searchResultsTable, (ss) => {
+            return ss.map(s => s.innerText.trim().toLowerCase())
+        });
+
+        expect(await searchRes.includes(texts.main.searchText.toLowerCase()));
     });
 
 });

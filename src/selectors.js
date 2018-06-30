@@ -17,7 +17,8 @@ const selectors = {
     },
     search: {
         header: '.section-header',
-        filterPanel: '.filter-panel a.item'
+        filterPanel: '.filter-panel a.item',
+        searchResultsTable: '.search-results .search__link'
     }
 };
 
