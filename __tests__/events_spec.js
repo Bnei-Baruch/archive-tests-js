@@ -17,7 +17,7 @@ beforeAll((async function () {
 
 describe('Conventions & Events Page Test Suite => ', function () {
 
-    it('Header and Filters - Displayed', async function () {
+    xit('Header and Filters - Displayed', async function () {
         // jest.setTimeout(60000); // 60 second timeout
 
         await page.goto(testconfig.resources.eventsUrl, {waitUntil: 'networkidle2'});

@@ -36,7 +36,7 @@ describe('Lectures & Lessons Page Test Suite => ', function () {
         expect(filters[2]).toEqual('Date');
     });
 
-    it('Pagination Next/Previous/Last/First', async function () {
+    xit('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
         await utils.pagination(page);
     });

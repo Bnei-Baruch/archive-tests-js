@@ -18,7 +18,7 @@ beforeAll((async function () {
 
 describe('Project Status Page Test Suite => ', function () {
 
-    it('Header - Displayed', async function () {
+    xit('Header - Displayed', async function () {
         await page.goto(testconfig.resources.projectStatusUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.aligned.header')).toBeDefined();

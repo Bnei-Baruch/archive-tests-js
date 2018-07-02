@@ -19,7 +19,7 @@ beforeAll((async function () {
 
 describe('Player Test Suite => ', function () {
 
-    it('playerTimeCode', async function () {
+    xit('playerTimeCode', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         let timeCodes = await player_utils.getTimeCode(page);
@@ -28,7 +28,7 @@ describe('Player Test Suite => ', function () {
         expect(timeCodes[1]).not.toBe('00:00');
     });
 
-    it('timeCodeUpdateByPlay', async function () {
+    xit('timeCodeUpdateByPlay', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         await player_utils.waitPlayerToLoad(page);
@@ -38,7 +38,7 @@ describe('Player Test Suite => ', function () {
         expect(await player_utils.getPlayerCurrentTime(page)).toBeGreaterThan(0);
     });
 
-    it('timeCodeUpdateByScroll', async function () {
+    xit('timeCodeUpdateByScroll', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         await player_utils.waitPlayerToLoad(page);
@@ -65,11 +65,11 @@ describe('Player Test Suite => ', function () {
 
     });
 
-    it('timeCodeUpdateByLink', async function () {
+    xit('timeCodeUpdateByLink', async function () {
 
     });
 
-    it('videoSize', async function () {
+    xit('videoSize', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         // click on playback rate
@@ -84,7 +84,7 @@ describe('Player Test Suite => ', function () {
     });
 
 
-    it('speedSelector_1X', async function () {
+    xit('speedSelector_1X', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         // click on playback rate
@@ -100,7 +100,7 @@ describe('Player Test Suite => ', function () {
         expect(rateElements[4].trim()).toEqual('0.75x');
     });
 
-    it('speedSelector_1_5X', async function () {
+    xit('speedSelector_1_5X', async function () {
 
     });
 
@@ -128,7 +128,7 @@ describe('Player Test Suite => ', function () {
 
     });
 
-    it('countPlayerButtons', async function () {
+    xit('countPlayerButtons', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         // verify that displayed all buttons 10

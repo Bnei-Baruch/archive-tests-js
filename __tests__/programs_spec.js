@@ -37,7 +37,7 @@ describe('Programs Page Test Suite => ', function () {
         expect(filters[3]).toEqual('Date');
     });
 
-    it('Pagination Next/Previous/Last/First', async function () {
+    xit('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
         await utils.pagination(page);
     });
@@ -106,7 +106,7 @@ describe('Programs Page Test Suite => ', function () {
 
     });
 
-    it('Filter - Displayed Results 1 - 10 0f', async function () {
+    xit('Filter - Displayed Results 1 - 10 0f', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
 
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {

@@ -36,7 +36,7 @@ describe('Publications Page Test Suite => ', function () {
     });
 
 
-    it('Pagination Next/Previous/Last/First', async function () {
+    xit('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
         await utils.pagination(page);
     });
@@ -230,7 +230,7 @@ describe('Publications Page Test Suite => ', function () {
         })).toBeDefined();
     });
 
-    it('Displayed Results 1 - 10 0f', async function () {
+    xit('Displayed Results 1 - 10 0f', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {

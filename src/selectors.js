@@ -22,12 +22,14 @@ const selectors = {
     },
     lessons: {
         sideBar: '.sidebar-item',
+        title: '.section-header__title',
         header: '.section-header',
         logo: '.layout__header .logo',
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
         filterTabs: '.section-header__menu',
+        paginationResults: '.pagination-results',
         footer: '.layout__footer'
     },
     programs: {

@@ -34,6 +34,11 @@ describe('Main Page Test Suite => ', function () {
         expect(await page.$eval(selectors.main.logo, s => s.innerText.trim()))
             .toBe(texts.main.logo);
 
+        // check vertical menu list
+        expect(await page.$$eval(selectors.main.sideBar, (ss) => {
+            return ss.map(s => s.innerText.trim())
+        })).toEqual(texts.main.sideBar);
+
         // check donate button
         expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
             .toBe(texts.main.donateButton);
@@ -59,11 +64,6 @@ describe('Main Page Test Suite => ', function () {
         expect(await page.$$eval(selectors.main.horizonIconRows, (ss) => {
             return ss.map(s => s.innerText.trim())
         })).toEqual(texts.main.horizonIconRows);
-
-        // check vertical menu list
-        expect(await page.$$eval(selectors.main.sideBar, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.sideBar);
 
         // check last updates
         expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))

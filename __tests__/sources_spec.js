@@ -18,7 +18,7 @@ beforeAll((async function () {
 
 describe('Sources Page Test Suite => ', function () {
 
-    it('Header - Displayed', async function () {
+    xit('Header - Displayed', async function () {
         await page.goto(testconfig.resources.sourcesUrl, {waitUntil: 'networkidle2'});
         // header
         expect(await page.$('.section-header')).toBeDefined();
@@ -28,7 +28,7 @@ describe('Sources Page Test Suite => ', function () {
         })).toBe('Library');
     });
 
-    it('Table Content - Displayed', async function () {
+    xit('Table Content - Displayed', async function () {
         await page.goto(testconfig.resources.sourcesUrl, {waitUntil: 'networkidle2'});
         // check is defined the whole table
         expect(await page.$('.ui.very.basic.table.index-list.sources__authors')).toBeDefined();

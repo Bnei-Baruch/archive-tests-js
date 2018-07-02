@@ -19,11 +19,6 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-let verticalMenu = '.vertical.menu';
-let sectionHeader = '.section-header';
-let sectionHeaderTitle = '.section-header__title';
-let horizontalFilters = '.horizontally';
-
 describe('Daily Lesson Page Test Suite => ', function () {
 
     it('All Elements Exists', async function () {
@@ -32,53 +27,47 @@ describe('Daily Lesson Page Test Suite => ', function () {
         // check header title
         expect(await page.$(selectors.lessons.title)).toBeDefined();
         expect(await page.$eval(selectors.lessons.title, s => s.innerText.trim()))
-            .toBe(texts.main.title);
+            .toBe(texts.lessons.title);
 
         // check logo
-        expect(await page.$eval(selectors.main.logo, s => s.innerText.trim()))
-            .toBe(texts.main.logo);
-
-        // check donate button
-        expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
-            .toBe(texts.main.donateButton);
-
-        // check language drop down
-        expect(await page.$eval(selectors.main.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.main.languageDropDown);
-
-        // check search button
-        expect(await page.$eval(selectors.main.searchButton, s => s.innerText.trim()))
-            .toBe(texts.main.searchButton);
-
-        // check banners
-        expect(await page.$$eval(selectors.main.thumbnail, s => s.length))
-            .toBe(2);
-
-        // check horizontal titles
-        expect(await page.$$eval(selectors.main.horizonTitle, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.horizonTitle);
-
-        // check horizontal icons row
-        expect(await page.$$eval(selectors.main.horizonIconRows, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.horizonIconRows);
+        expect(await page.$eval(selectors.lessons.logo, s => s.innerText.trim()))
+            .toBe(texts.lessons.logo);
 
         // check vertical menu list
-        expect(await page.$$eval(selectors.main.sideBar, (ss) => {
+        expect(await page.$$eval(selectors.lessons.sideBar, (ss) => {
             return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.sideBar);
+        })).toEqual(texts.lessons.sideBar);
 
-        // check last updates
-        expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))
-            .toBe(4);
+        // check donate button
+        expect(await page.$eval(selectors.lessons.donateButton, s => s.innerText.trim()))
+            .toBe(texts.lessons.donateButton);
+
+        // check language drop down
+        expect(await page.$eval(selectors.lessons.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.lessons.languageDropDown);
+
+        // check filter tabs
+        expect(await page.$$eval(selectors.lessons.filterTabs, (ss) => {
+            return ss.map(s => s.innerText)
+        })).toEqual(texts.lessons.filterTabs);
+
+        expect(await page.$eval(selectors.lessons.paginationResults, (ss) => {
+            return ss.innerText;
+        })).toContain(texts.lessons.paginationResults);
+
+        // // check last updates
+        // expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))
+        //     .toBe(4);
+
+
+
+        await utils.pagination(page);
 
         // check footer
-        expect(await page.$eval(selectors.main.footer, s => s.textContent.trim()))
-            .toBe(texts.main.footer);
+        expect(await page.$eval(selectors.lessons.footer, s => s.textContent.trim()))
+            .toBe(texts.lessons.footer);
     });
 
-    
     xit('Filter - Apply Button Enable/Disable', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         // Topics & Sources filters - Apply button expected to be disabled
@@ -95,7 +84,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toBeFalsy();
     });
 
-    it('Pagination Next/Previous/Last/First', async function () {
+    xit('Pagination Next/Previous/Last/First', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
         await utils.pagination(page);
     });
@@ -211,7 +200,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toBeDefined();
     });
 
-    it('Displayed Results 1 - 10 0f', async function () {
+    xit('Displayed Results 1 - 10 0f', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
         expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
@@ -219,7 +208,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toContain('Results 1 - 10 of')
     });
 
-    it('Player Exist', async function () {
+    xit('Player Exist', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
         expect(await page.$('.mediaplayer')).toBeDefined();
     });

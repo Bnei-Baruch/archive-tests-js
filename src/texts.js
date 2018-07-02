@@ -17,13 +17,15 @@ const texts = {
         filterPanel: ['DateAll', 'TopicsAll', 'SourcesAll', 'SectionAll']
     },
     lessons: {
-        sideBar: '.sidebar-item',
-        header: 'Lectures & Lessons',
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
+        title: 'Lectures & Lessons',
+        header: 'Here you will find a rich variety of lessons that include: lectures, children\'s programs, women\'s programs, etc.',
         logo: 'Kabbalah Media',
         donateButton: 'DONATE NOW',
         languageDropDown: 'English',
-        filterTabs: '.section-header__menu',
-        footer: '.layout__footer'
+        filterTabs: ['Daily Lessons\nVirtual Lessons\nLectures\nWomen Lessons\nSelected Study Series\n'],
+        paginationResults: 'Results 1 - 10 of',
+        footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
     }
 
 };

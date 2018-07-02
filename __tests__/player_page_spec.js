@@ -20,12 +20,12 @@ describe('Player Page Test Suite => ', function () {
 
     let unitMaterialsTabs = '.ui.blue.pointing.secondary.menu a';
 
-    it('Player Exists', async function () {
+    xit('Player Exists', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
         expect(await page.$('.mediaplayer')).toBeDefined();
     });
 
-    it('Player Controls', async function () {
+    xit('Player Controls', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
         expect(await page.$('.step.backward')).toBeDefined();
         expect(await page.$('.step.forward')).toBeDefined();
@@ -44,7 +44,7 @@ describe('Player Page Test Suite => ', function () {
         expect(await page.$('.mediaplayer__onscreen-controls')).toBeDefined();
     });
 
-    it('Player Download Section', async function () {
+    xit('Player Download Section', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         let download_labels = await page.$$eval('.media-downloads__file-label', (selectors) => {
@@ -63,7 +63,7 @@ describe('Player Page Test Suite => ', function () {
         })).toBeCloseTo(3);
     });
 
-    it('Player Other Parts Section', async function () {
+    xit('Player Other Parts Section', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
 
         expect(await page.$$eval('a.item.recommended-same-collection__item', (selectors) => {
@@ -71,7 +71,7 @@ describe('Player Page Test Suite => ', function () {
         })).toBeGreaterThan(0);
     });
 
-    it('Player Unit Materials - Tabs-Menu - Displayed', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Displayed', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
         let unitMaterialsElementsText = await page.$$eval(unitMaterialsTabs, (selectors) => {
@@ -85,7 +85,7 @@ describe('Player Page Test Suite => ', function () {
         expect(unitMaterialsElementsText[3]).toEqual('Sketches');
     });
 
-    it('Player Unit Materials - Tabs-Menu - Clickable', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Clickable', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
         // get first time all classes
@@ -107,7 +107,7 @@ describe('Player Page Test Suite => ', function () {
         }
     });
 
-    it('Player Unit Materials - Tabs-Menu - Summary', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Summary', async function () {
         await page.goto(testconfig.resources.summaryUrl, {waitUntil: 'networkidle2'});
 
         let element = '.ui.basic.segment div';
@@ -121,7 +121,7 @@ describe('Player Page Test Suite => ', function () {
         })).toContain('האור המחזיר למוטב מביא לאדם את הרגשת המוות ובמקביל, את ההבנה מהם החיים.')
     });
 
-    it('Player Unit Materials - Tabs-Menu - Transcription', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Transcription', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
         let element = 'div .doc2html';
@@ -136,7 +136,7 @@ describe('Player Page Test Suite => ', function () {
         })).toContain('כולנו כאחד')
     });
 
-    it('Player Unit Materials - Tabs-Menu - Sources', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Sources', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
         // Click on Summary tab
@@ -150,7 +150,7 @@ describe('Player Page Test Suite => ', function () {
         })).toContain('World kabbalah Convention in Georgia - “All A One”')
     });
 
-    it('Player Unit Materials - Tabs-Menu - Sketches', async function () {
+    xit('Player Unit Materials - Tabs-Menu - Sketches', async function () {
         await page.goto(testconfig.resources.unitMaterialsUrl, {waitUntil: 'networkidle2'});
 
         // Click on Summary tab
