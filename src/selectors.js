@@ -19,7 +19,63 @@ const selectors = {
         header: '.section-header',
         filterPanel: '.filter-panel a.item',
         searchResultsTable: '.search-results .search__link'
+    },
+    lessons: {
+        sideBar: '.sidebar-item',
+        header: '.section-header',
+        logo: '.layout__header .logo',
+        searchInput: '.mobile-hidden .search-omnibox',
+        donateButton: '.layout__header .donate-button',
+        languageDropDown: '.layout__header .item.dropdown',
+        filterTabs: '.section-header__menu',
+        footer: '.layout__footer'
+    },
+    programs: {
+        sideBar: '.sidebar-item',
+        header: '.section-header',
+        logo: '.layout__header .logo',
+        searchInput: '.mobile-hidden .search-omnibox',
+        donateButton: '.layout__header .donate-button',
+        languageDropDown: '.layout__header .item.dropdown',
+        filterTabs: '.section-header__menu',
+        footer: '.layout__footer'
+    },
+    sources: {
+        sideBar: '.sidebar-item',
+        header: '.section-header',
+        logo: '.layout__header .logo',
+        searchInput: '.mobile-hidden .search-omnibox',
+        donateButton: '.layout__header .donate-button',
+        languageDropDown: '.layout__header .item.dropdown',
+        footer: '.layout__footer'
+    },
+    events: {
+        sideBar: '.sidebar-item',
+        header: '.section-header',
+        logo: '.layout__header .logo',
+        searchInput: '.mobile-hidden .search-omnibox',
+        donateButton: '.layout__header .donate-button',
+        languageDropDown: '.layout__header .item.dropdown',
+        filterTabs: '.section-header__menu',
+        footer: '.layout__footer'
+    },
+    topics: {
+        header: '.layout__content'
+    },
+    publications: {
+        sideBar: '.sidebar-item',
+        header: '.section-header',
+        logo: '.layout__header .logo',
+        searchInput: '.mobile-hidden .search-omnibox',
+        donateButton: '.layout__header .donate-button',
+        languageDropDown: '.layout__header .item.dropdown',
+        filterTabs: '.section-header__menu',
+        footer: '.layout__footer'
+    },
+    projectStatus: {
+        header: '.aligned'
     }
+
 };
 
 module.exports = selectors;

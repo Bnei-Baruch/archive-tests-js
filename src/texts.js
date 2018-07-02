@@ -15,7 +15,17 @@ const texts = {
     search: {
         header: 'Search Results',
         filterPanel: ['DateAll', 'TopicsAll', 'SourcesAll', 'SectionAll']
+    },
+    lessons: {
+        sideBar: '.sidebar-item',
+        header: 'Lectures & Lessons',
+        logo: 'Kabbalah Media',
+        donateButton: 'DONATE NOW',
+        languageDropDown: 'English',
+        filterTabs: '.section-header__menu',
+        footer: '.layout__footer'
     }
+
 };
 
 module.exports = texts;
