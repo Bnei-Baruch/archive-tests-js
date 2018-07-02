@@ -29,6 +29,7 @@ const selectors = {
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
         filterTabs: '.section-header__menu',
+        containerPageResults: '.container.padded .index__date',
         paginationResults: '.pagination-results',
         footer: '.layout__footer'
     },

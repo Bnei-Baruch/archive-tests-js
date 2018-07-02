@@ -35,9 +35,8 @@ describe('Main Page Test Suite => ', function () {
             .toBe(texts.main.logo);
 
         // check vertical menu list
-        expect(await page.$$eval(selectors.main.sideBar, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.sideBar);
+        expect(await page.$$eval(selectors.main.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.main.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
@@ -56,14 +55,12 @@ describe('Main Page Test Suite => ', function () {
             .toBe(2);
 
         // check horizontal titles
-        expect(await page.$$eval(selectors.main.horizonTitle, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.horizonTitle);
+        expect(await page.$$eval(selectors.main.horizonTitle, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.main.horizonTitle);
 
         // check horizontal icons row
-        expect(await page.$$eval(selectors.main.horizonIconRows, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.main.horizonIconRows);
+        expect(await page.$$eval(selectors.main.horizonIconRows, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.main.horizonIconRows);
 
         // check last updates
         expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))
@@ -91,23 +88,15 @@ describe('Main Page Test Suite => ', function () {
         expect(await page.$eval(selectors.search.header, s => s.innerText))
             .toContain(texts.search.header);
 
-        // todo Edo - how to write this block more intelligent
-        // (utils.removeBackSlash inside this block do not recognized)
-        const resultsFromPage = await page.$$eval(selectors.search.filterPanel, (ss) => {
-            return ss.map(s => s.innerText)
-        });
-
+        // check search results
+        const resultsFromPage = await page.$$eval(selectors.search.filterPanel, ss => ss.map(s => s.innerText));
         await utils.removeBackSlash(resultsFromPage);
-
-        // check filter panel
         expect(await resultsFromPage).toEqual(texts.search.filterPanel);
-        
-        // check searched text to contained in every response
-        const searchRes = await page.$$eval(selectors.search.searchResultsTable, (ss) => {
-            return ss.map(s => s.innerText.trim().toLowerCase())
-        });
 
+        // check searched text to contained in every response
+        const searchRes = await page.$$eval(selectors.search.searchResultsTable, ss => ss.map(s => s.innerText.trim().toLowerCase()));
         expect(await searchRes.includes(texts.main.searchText.toLowerCase()));
+
     });
 
 });

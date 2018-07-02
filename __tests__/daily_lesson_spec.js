@@ -34,9 +34,8 @@ describe('Daily Lesson Page Test Suite => ', function () {
             .toBe(texts.lessons.logo);
 
         // check vertical menu list
-        expect(await page.$$eval(selectors.lessons.sideBar, (ss) => {
-            return ss.map(s => s.innerText.trim())
-        })).toEqual(texts.lessons.sideBar);
+        expect(await page.$$eval(selectors.lessons.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.lessons.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.lessons.donateButton, s => s.innerText.trim()))
@@ -47,25 +46,30 @@ describe('Daily Lesson Page Test Suite => ', function () {
             .toBe(texts.lessons.languageDropDown);
 
         // check filter tabs
-        expect(await page.$$eval(selectors.lessons.filterTabs, (ss) => {
-            return ss.map(s => s.innerText)
-        })).toEqual(texts.lessons.filterTabs);
+        expect(await page.$$eval(selectors.lessons.filterTabs, ss => ss.map(s => s.innerText)))
+            .toEqual(texts.lessons.filterTabs);
 
-        expect(await page.$eval(selectors.lessons.paginationResults, (ss) => {
-            return ss.innerText;
-        })).toContain(texts.lessons.paginationResults);
+        expect(await page.$eval(selectors.lessons.paginationResults, ss => ss.innerText))
+            .toContain(texts.lessons.paginationResults);
 
-        // // check last updates
-        // expect(await page.$$eval(selectors.main.lastUpdateThumbnails, s => s.length))
-        //     .toBe(4);
-
-
+        // check container page results
+        expect(await page.$$eval(selectors.lessons.containerPageResults, s => s.length))
+            .toBe(10);
 
         await utils.pagination(page);
 
         // check footer
         expect(await page.$eval(selectors.lessons.footer, s => s.textContent.trim()))
             .toBe(texts.lessons.footer);
+    });
+
+    it('Click on tabular filters and check horizontal', async function () {
+        await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
+
+        // click on every tab filter
+        // check active class name exist
+        // check horizontally
+
     });
 
     xit('Filter - Apply Button Enable/Disable', async function () {
@@ -82,11 +86,6 @@ describe('Daily Lesson Page Test Suite => ', function () {
         expect(await page.$eval(".ui.primary.button", (selector) => {
             return selector.disabled;
         })).toBeFalsy();
-    });
-
-    xit('Pagination Next/Previous/Last/First', async function () {
-        await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-        await utils.pagination(page);
     });
 
     xit('Date Filter Displayed', async function () {
@@ -200,92 +199,9 @@ describe('Daily Lesson Page Test Suite => ', function () {
         })).toBeDefined();
     });
 
-    xit('Displayed Results 1 - 10 0f', async function () {
-        await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-
-        expect(await page.$eval('h2.ui.header.pagination-results', (selector) => {
-            return selector.innerText;
-        })).toContain('Results 1 - 10 of')
-    });
-
     xit('Player Exist', async function () {
         await page.goto(testconfig.resources.playerUrl, {waitUntil: 'networkidle2'});
         expect(await page.$('.mediaplayer')).toBeDefined();
-    });
-
-    xit('Filter - Clickable', async function () {
-        await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
-        await page.waitForSelector(verticalMenu);
-
-        // get all filters elements
-        const filters = await page.$('.horizontally');
-        utils.sleep(1);
-
-        const a = await filters.$$('a');
-        console.log('a', a.length);
-
-        // console.log('filters', filters);
-
-        let filtersb = await page.$$eval(horizontalFilters + ' a', (selectors) => {
-            return selectors.map(selector => selector.text)
-        });
-
-        // for (let i = 0; i < filters.length; i++)
-        expect(filtersb)
-            .toEqual(['Topics', 'Sources', 'Date']);
-
-        // console.log(await filters[0].$$eval('.item', nodes => nodes.map(n => n.innerText)));
-
-
-        // for (let i = 0; i < filters.length; i++) {
-
-
-        utils.sleep(1);
-        // }
-
-        // for (let i = 0; i < filters.length; i++) {
-        //
-        //     // horizontalSelectorClassName = await page.$eval(horizontalFilters + ' a', (selector) => {
-        //     //     return selector.className;
-        //     // });
-        //
-        //     // expect(horizontalSelectorClassName.toString).not.toContain('active');
-        //
-        //     // expect(await page.$eval(horizontalFilters + ' a', (selector) => {
-        //     //     return selector.className;
-        //     // })).not.toContain('active');
-        //
-        //
-        //     // todo - continue to do refactoring
-        //     const feedHandle = await page.$('.feed');
-        //     expect(await feedHandle.$$eval('.tweet', nodes => nodes.map(n => n.innerText)).toEqual(['Hello!', 'Hi!']);
-        //
-        //
-        //     console.log('before ===>>> ' + await filters[i].$$eval());
-        //
-        //     await filters[i].click();
-        //     utils.sleep(1000);
-        //
-        //     console.log('after ===>>> ' + await filters[i].className);
-        //
-        //     // console.log('\n ====>>> ' + await filters[i].className + ' count of i ==>> ' + i);
-        //
-        //     // expect(horizontalSelectorClassName).toContain('active');
-        //
-        //     // expect(await page.$eval(horizontalFilters + ' a', (selector) => {
-        //     //     return selector.className;
-        //     // })).toContain('active');
-        //
-        // }
-
-        // for (let i = 2; i <= 4; i++) {
-        //     await page.click(horizontalFilters + 'a:nth-child(' + i + ')');
-        //
-        //     expect(await page.$eval(horizontalFilters + 'a:nth-child(' + i + ')', (selector) => {
-        //         // console.log("Found: " + selector);
-        //         return selector.className;
-        //     })).toBe('active item');
-        // }
     });
 
     xit('Filter - Apply Button - Click', async function () {
