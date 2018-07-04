@@ -35,8 +35,7 @@ describe('Main Page Test Suite => ', function () {
             .toBe(texts.main.logo);
 
         // check vertical menu list
-        expect(await page.$$eval(selectors.main.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.main.sideBar);
+        await utils.sideBarMenu(page, texts.main.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
@@ -96,6 +95,7 @@ describe('Main Page Test Suite => ', function () {
         const searchRes = await page.$$eval(selectors.search.searchResultsTable, ss => ss.map(s => s.innerText.trim().toLowerCase()));
         expect(await searchRes.includes(texts.main.searchText.toLowerCase()));
 
+        await utils.pagination(page);
     });
 
 });

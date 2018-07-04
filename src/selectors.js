@@ -18,7 +18,8 @@ const selectors = {
     search: {
         header: '.section-header',
         filterPanel: '.filters__menu .filter',
-        searchResultsTable: '.search-results .search__link'
+        searchResultsTable: '.search-results .search__link',
+        pagination: '.pagination-menu *'
     },
     lessons: {
         sideBar: '.sidebar-item',
@@ -77,7 +78,7 @@ const selectors = {
     },
     projectStatus: {
         header: '.aligned'
-    }
+    },
 
 };
 

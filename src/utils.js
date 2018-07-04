@@ -1,3 +1,5 @@
+const selectors = require('../src/selectors');
+
 module.exports = {
 
     getCurrentDate: function () {
@@ -16,19 +18,29 @@ module.exports = {
         }
     },
 
+    sideBarMenu: async function (page, text) {
+        expect(await page.$$eval(selectors.main.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(text);
+    },
+
     pagination: async function (page) {
-        let allPaginationSelector = '.pagination-menu *';
-        // get all div that expected to be disabled
-        let paginationItems = await page.$$(allPaginationSelector);
-        // length of the elements in the pagination
-        expect(paginationItems.length).toBe(15);
+        // TODO - Edo need to find intelligent solution
+        module.exports.sleep(2000);
+
+        let paginationItems = await page.$$(selectors.search.pagination);
+
+        expect(await page.$$eval(selectors.search.pagination, s => s.length))
+            .toBe(15);
+
         // verify index location of disabled elements
         expect(paginationItems[0]._remoteObject.description).toContain('disabled');
         expect(paginationItems[2]._remoteObject.description).toContain('disabled');
         // click on last pagination item
         await paginationItems[paginationItems.length - 1].click();
+
         module.exports.sleep(2000);
-        paginationItems = await page.$$(allPaginationSelector);
+
+        paginationItems = await page.$$(selectors.search.pagination);
         expect(paginationItems[11]._remoteObject.description).toContain('disabled');
         expect(paginationItems[13]._remoteObject.description).toContain('disabled');
     },
