@@ -26,7 +26,30 @@ const texts = {
         filterTabs: ['Daily Lessons\nVirtual Lessons\nLectures\nWomen Lessons\nSelected Study Series\n'],
         paginationResults: 'Results 1 - 10 of',
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
+    },
+    programs: {
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
+        title: 'Programs',
+        header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
+        logo: 'Kabbalah Media',
+        donateButton: 'DONATE NOW',
+        languageDropDown: 'English',
+        filters: ['Genre/Program\nAllTopics\nAllSources\nAllDate\nAll'],
+        paginationResults: 'Results 1 - 10 of',
+        footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
+    },
+    programs: {
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
+        title: 'Programs',
+        header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
+        logo: 'Kabbalah Media',
+        donateButton: 'DONATE NOW',
+        languageDropDown: 'English',
+        filters: ['Genre/Program\nAllTopics\nAllSources\nAllDate\nAll'],
+        paginationResults: 'Results 1 - 10 of',
+        footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
     }
+
 
 };
 

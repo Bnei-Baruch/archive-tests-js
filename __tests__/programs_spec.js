@@ -1,8 +1,12 @@
 const puppeteer = require('puppeteer');
 const testconfig = require('./testconfig');
+const selectors = require('../src/selectors');
+const texts = require('../src/texts');
 const utils = require('../src/utils.js');
+
 const width = 1920;
 const height = 1080;
+
 let browser;
 let page;
 let originalTimeout;
@@ -17,6 +21,55 @@ beforeAll((async function () {
 }));
 
 describe('Programs Page Test Suite => ', function () {
+
+    it('All Elements Exists', async function () {
+        await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});
+
+        // check header title
+        expect(await page.$(selectors.programs.title)).toBeDefined();
+        expect(await page.$eval(selectors.programs.title, s => s.innerText.trim()))
+            .toBe(texts.programs.title);
+
+        // check logo
+        expect(await page.$eval(selectors.programs.logo, s => s.innerText.trim()))
+            .toBe(texts.programs.logo);
+
+        // check vertical menu list
+        expect(await page.$$eval(selectors.programs.sideBar, (ss) => {
+            return ss.map(s => s.innerText.trim())
+        })).toEqual(texts.programs.sideBar);
+
+        // check donate button
+        expect(await page.$eval(selectors.programs.donateButton, s => s.innerText.trim()))
+            .toBe(texts.programs.donateButton);
+
+        // check language drop down
+        expect(await page.$eval(selectors.programs.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.programs.languageDropDown);
+
+
+        // check filter tabs
+        /*expect(await page.$$eval(selectors.programs.filterTabs, (ss) => {
+            return ss.map(s => s.innerText)
+        })).toEqual(texts.programs.filterTabs);*/
+
+
+        expect(await page.$eval(selectors.programs.paginationResults, (ss) => {
+            return ss.innerText;
+        })).toContain(texts.programs.paginationResults);
+
+        // check container page results
+       /* expect(await page.$$eval(selectors.programs.containerPageResults, s => s.length))
+            .toBe(10);*/
+
+
+
+        await utils.pagination(page);
+
+        // check footer
+        expect(await page.$eval(selectors.programs.footer, s => s.textContent.trim()))
+            .toBe(texts.programs.footer);
+    });
 
     xit('Header and Filters - Displayed', async function () {
         await page.goto(testconfig.resources.programsUrl, {waitUntil: 'networkidle2'});

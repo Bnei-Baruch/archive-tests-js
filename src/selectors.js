@@ -35,12 +35,15 @@ const selectors = {
     },
     programs: {
         sideBar: '.sidebar-item',
+        title: '.section-header__title',
         header: '.section-header',
         logo: '.layout__header .logo',
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.section-header__menu',
+        filterTabs: 'filter-panel .item.header',
+       // containerPageResults: '.container.padded .index__date',
+        paginationResults: '.pagination-results',
         footer: '.layout__footer'
     },
     sources: {
