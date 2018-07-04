@@ -17,7 +17,7 @@ const selectors = {
     },
     search: {
         header: '.section-header',
-        filterPanel: '.filter-panel a.item',
+        filterPanel: '.filters__menu .filter',
         searchResultsTable: '.search-results .search__link'
     },
     lessons: {
