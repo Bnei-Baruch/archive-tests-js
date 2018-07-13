@@ -84,13 +84,8 @@ const selectors = {
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTbl: '.filters__menu .filter small',
+        filterTbl: '.filters__menu a.item.filter small',
         footer: '.layout__footer'
-
-
-
-        //filterTabs: '.filters .filters__menu a.item.filter small',
-        //filterTabs: '.filters__menu .filter small',
 
     },
     projectStatus: {
