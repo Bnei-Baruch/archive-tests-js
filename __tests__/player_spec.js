@@ -104,27 +104,27 @@ describe('Player Test Suite => ', function () {
 
     });
 
-    it('speedSelector_2X', async function () {
+    xit('speedSelector_2X', async function () {
 
     });
 
-    it('volumeBar', async function () {
+    xit('volumeBar', async function () {
 
     });
 
-    it('audioVideoToggle', async function () {
+    xit('audioVideoToggle', async function () {
 
     });
 
-    it('languageSelector', async function () {
+    xit('languageSelector', async function () {
 
     });
 
-    it('fullScreenToggle', async function () {
+    xit('fullScreenToggle', async function () {
 
     });
 
-    it('sharingModeOn', async function () {
+    xit('sharingModeOn', async function () {
 
     });
 
@@ -138,17 +138,17 @@ describe('Player Test Suite => ', function () {
         expect(playerButtons.length).toBeCloseTo(10);
     });
 
-    it('playerSkipTimeShortKeys', async function () {
+    xit('playerSkipTimeShortKeys', async function () {
         // hold Shift and left right narrow jump by 10 seconds
 
         // hold Option and left right narrow jump by 5 seconds
     });
 
-    it('sharingModeOff', async function () {
+    xit('sharingModeOff', async function () {
 
     });
 
-    it('sharingModeActions', async function () {
+    xit('sharingModeActions', async function () {
 
     });
 });
