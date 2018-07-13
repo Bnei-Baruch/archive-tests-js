@@ -35,7 +35,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
 
         // check vertical menu list
         expect(await page.$$eval(selectors.lessons.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.lessons.sideBar);
+            .toEqual(texts.main.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.lessons.donateButton, s => s.innerText.trim()))

@@ -27,7 +27,7 @@ describe('Programs Page Test Suite => ', function () {
             .toBe(texts.programs.logo);
 
         // check vertical menu list
-        await utils.sideBarMenu(page, texts.programs.sideBar);
+        await utils.sideBarMenu(page, texts.main.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.programs.donateButton, s => s.innerText.trim()))
