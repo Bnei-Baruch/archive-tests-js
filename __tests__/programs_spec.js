@@ -62,7 +62,7 @@ describe('Programs Page Test Suite => ', function () {
 
         // filters
         // check filter tabs
-        expect(await page.$$eval(selectors.programs.filterTabs, elems => elems.map(e => e.innerText)))
+        expect(await page.$$eval(selectors.programs.filterTabsNames, elems => elems.map(e => e.innerText)))
             .toEqual(texts.programs.filterTabs);
 
     });
