@@ -17,7 +17,6 @@ const texts = {
         filterPanel: ['DateAll', 'TopicsAll', 'SourcesAll', 'SectionAll']
     },
     lessons: {
-        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
         title: 'Lectures & Lessons',
         header: 'Here you will find a rich variety of lessons that include: lectures, children\'s programs, women\'s programs, etc.',
         logo: 'Kabbalah Media',
@@ -31,10 +30,26 @@ const texts = {
         logo: 'Kabbalah Media',
         donateButton: 'DONATE NOW',
         languageDropDown: 'English',
+<<<<<<< Updated upstream
         sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
         title: 'Programs',
         header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
+=======
+        footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
+        title: 'Programs',
+        header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
+        filterTabs: ['Genre/Program','Topics','Sources','Date'],
+    },
+    publications:{
+        logo: 'Kabbalah Media',
+        donateButton: 'DONATE NOW',
+        languageDropDown: 'English',
+        footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
+        title: 'Publications',
+        header: 'Articles on current events, culture, popular science, relationships and more, presented from the unique perspective of the wisdom of Kabbalah',
+        filterTbl: ['Publishers','Date'],
+>>>>>>> Stashed changes
         filterTabs: ['Genre/Program', 'Topics', 'Sources', 'Date'],
     }
 
