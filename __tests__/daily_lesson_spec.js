@@ -35,7 +35,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
 
         // check vertical menu list
         expect(await page.$$eval(selectors.lessons.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.lessons.sideBar);
+            .toEqual(texts.main.sideBar);
 
         // check donate button
         expect(await page.$eval(selectors.lessons.donateButton, s => s.innerText.trim()))
@@ -46,7 +46,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
             .toBe(texts.lessons.languageDropDown);
 
         // check filter tabs
-        expect(await page.$$eval(selectors.lessons.filterTabs, ss => ss.map(s => s.innerText)))
+        expect(await page.$$eval(selectors.lessons.filterTabsNames, ss => ss.map(s => s.innerText)))
             .toEqual(texts.lessons.filterTabs);
 
         expect(await page.$eval(selectors.lessons.paginationResults, ss => ss.innerText))
