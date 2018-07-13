@@ -88,7 +88,7 @@ describe('Main Page Test Suite => ', function () {
             .toContain(texts.search.header);
 
         // check search results
-        const resultsFromPage = await page.$$eval(selectors.search.filterPanel, ss => ss.map(s => s.innerText));
+        const resultsFromPage = await page.$$eval(selectors.search.filterOptions, ss => ss.map(s => s.innerText));
         expect(await utils.removeBackSlash(resultsFromPage)).toEqual(texts.search.filterPanel);
 
         // check searched text to contained in every response

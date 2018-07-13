@@ -8,7 +8,7 @@ const texts = {
         searchButton: 'search',
         horizonTitle: ['ARCHIVE SECTIONS', 'LATEST UPDATES'],
         horizonIconRows: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Publications'],
-        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Old Site'],
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Twitter', 'Old Site'],
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
         searchText: 'arvut'
     },
@@ -35,7 +35,7 @@ const texts = {
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
         title: 'Programs',
         header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
-        filterTabs: ['Genre/Program','Topics','Sources','Date'],
+        filterTabs: ['Genre/Program', 'Topics', 'Sources', 'Date'],
     }
 
 };
