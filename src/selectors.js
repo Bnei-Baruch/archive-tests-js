@@ -50,6 +50,9 @@ const selectors = {
         filterTabsNames: '.filters .filters__menu a.item.filter small',
         footer: '.layout__footer'
     },
+
+
+
     sources: {
         sideBar: '.sidebar-item',
         header: '.section-header',
@@ -75,12 +78,15 @@ const selectors = {
     publications: {
         sideBar: '.sidebar-item',
         header: '.section-header',
+        title: '.section-header__title',
+        subtitle: '.section-header__subtitle',
         logo: '.layout__header .logo',
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.section-header__menu',
+        filterTbl: '.filters__menu a.item.filter small',
         footer: '.layout__footer'
+
     },
     projectStatus: {
         header: '.aligned'
