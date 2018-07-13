@@ -17,7 +17,7 @@ const selectors = {
     },
     search: {
         header: '.section-header',
-        filterPanel: '.filters__menu .filter',
+        filterOptions: '.filters__menu .filter',
         searchResultsTable: '.search-results .search__link',
         pagination: '.pagination-menu *'
     },
@@ -29,7 +29,11 @@ const selectors = {
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.section-header__menu',
+        upper: '.section-header__menu .item',
+        filterTabsNames: '.section-header__menu .item',
+        filterOptions: '.filters__menu .filter',
+        popup: '.content.filter-popup.ltr',
+        selectedStudyH2: 'h2.ui.header',
         containerPageResults: '.container.padded .index__date',
         paginationResults: '.pagination-results',
         footer: '.layout__footer'
@@ -43,7 +47,7 @@ const selectors = {
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.filters .filters__menu a.item.filter small',
+        filterTabsNames: '.filters .filters__menu a.item.filter small',
         footer: '.layout__footer'
     },
     sources: {
@@ -62,7 +66,7 @@ const selectors = {
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.section-header__menu',
+        filterTabsNames: '.section-header__menu',
         footer: '.layout__footer'
     },
     topics: {
