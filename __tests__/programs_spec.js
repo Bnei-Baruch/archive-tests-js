@@ -32,17 +32,7 @@ describe('Programs Page => ', function () {
             .toBe(texts.programs.subtitle);
 
         // standard block
-        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
-            .toBe(texts.common.logo);
-        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.common.sideBar);
-        expect(await page.$eval(selectors.common.donateButton, s => s.innerText.trim()))
-            .toBe(texts.common.donateButton);
-        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.common.languageDropDown);
-        expect(await page.$eval(selectors.common.footer, s => s.textContent.trim()))
-            .toBe(texts.common.footer);
-        expect(await page.$(selectors.common.searchInput)).toBeDefined();
+        await utils.commonBlock(page);
 
         // filters
         expect(await page.$$eval(selectors.common.filterTabsNames, ss => ss.map(s => s.innerText)))
