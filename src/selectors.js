@@ -19,8 +19,13 @@ const selectors = {
         languageDropDown: '.layout__header .item.dropdown',
         title: '.section-header__title',
         subtitle: '.section-header__subtitle',
+
+        filterOptionsHighLevel: '.section-header__menu.menu a.item',
+        filterOptionsLowLevel: '.filters .filters__menu a.item.filter small',
+
         filterOptions: '.filters__menu .filter',
         filterTabsNames: '.filters .filters__menu a.item.filter small',
+
         popup: '.content.filter-popup.ltr',
         pagination: '.pagination-menu *',
         footer: '.layout__footer'

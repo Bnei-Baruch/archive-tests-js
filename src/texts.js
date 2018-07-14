@@ -17,23 +17,27 @@ const texts = {
     },
     search: {
         header: 'Search Results',
-        filterPanel: ['Date', 'Topics', 'Sources', 'Section']
+        filterTabNames: ['Date', 'Topics', 'Sources', 'Section']
     },
     lessons: {
         title: 'Lectures & Lessons',
-        header: 'Here you will find a rich variety of lessons that include: lectures, children\'s programs, women\'s programs, etc.',
-        filterTabs: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        subtitle: 'Here you will find a rich variety of lessons that include: lectures, children\'s programs, women\'s programs, etc.',
+        filterOptionNamesHighLevel: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
     },
     programs: {
         title: 'Programs',
-        header: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
-        filterTabs: ['Genre/Program', 'Topics', 'Sources', 'Date'],
+        subtitle: 'Here you will find a rich variety of programs that include: fascinating conversations about the meaning of life, current events, programs for the whole family and more.',
+        filterTabNames: ['Genre/Program', 'Topics', 'Sources', 'Date'],
     },
     publications: {
         title: 'Publications',
-        header: 'Articles on current events, culture, popular science, relationships and more, presented from the unique perspective of the wisdom of Kabbalah',
+        subtitle: 'Articles on current events, culture, popular science, relationships and more, presented from the unique perspective of the wisdom of Kabbalah',
         filterTbl: ['Publishers', 'Date'],
-        filterTabs: ['Genre/Program', 'Topics', 'Sources', 'Date'],
+        filterTabNames: ['Genre/Program', 'Topics', 'Sources', 'Date'],
+    },
+    sources: {
+        title: 'Library',
+        subtitle: 'A collection of all the most important original texts for the study of Kabbalah, written by the greatest Kabbalists.',
     }
 
 };

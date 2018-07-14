@@ -19,48 +19,38 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Daily Lesson Page Test Suite => ', function () {
+describe('Daily Lesson => ', function () {
 
     it('All Elements Exists', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
-        // check header title
-        expect(await page.$(selectors.lessons.title)).toBeDefined();
-        expect(await page.$eval(selectors.lessons.title, s => s.innerText.trim()))
+        // title and subtitle
+        expect(await page.$eval(selectors.common.title, s => s.innerText.trim()))
             .toBe(texts.lessons.title);
+        expect(await page.$eval(selectors.common.subtitle, s => s.innerText.trim()))
+            .toBe(texts.lessons.subtitle);
 
-        // check logo
-        expect(await page.$eval(selectors.lessons.logo, s => s.innerText.trim()))
-            .toBe(texts.lessons.logo);
+        // standard block
+        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
+            .toBe(texts.common.logo);
+        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.common.sideBar);
+        expect(await page.$eval(selectors.common.donateButton, s => s.innerText.trim()))
+            .toBe(texts.common.donateButton);
+        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.common.languageDropDown);
+        expect(await page.$eval(selectors.common.footer, s => s.textContent.trim()))
+            .toBe(texts.common.footer);
+        expect(await page.$(selectors.common.searchInput)).toBeDefined();
 
-        // check vertical menu list
-        expect(await page.$$eval(selectors.lessons.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.main.sideBar);
+        // filters
+        expect(await page.$$eval(selectors.common.filterOptionsHighLevel, ss => ss.map(s => s.innerText)))
+            .toEqual(texts.lessons.filterOptionNamesHighLevel);
 
-        // check donate button
-        expect(await page.$eval(selectors.lessons.donateButton, s => s.innerText.trim()))
-            .toBe(texts.lessons.donateButton);
-
-        // check language drop down
-        expect(await page.$eval(selectors.lessons.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.lessons.languageDropDown);
-
-        // check filter tabs
-        expect(await page.$$eval(selectors.lessons.filterTabsNames, ss => ss.map(s => s.innerText)))
-            .toEqual(texts.lessons.filterTabs);
-
-        expect(await page.$eval(selectors.lessons.paginationResults, ss => ss.innerText))
-            .toContain(texts.lessons.paginationResults);
-
-        // check container page results
         expect(await page.$$eval(selectors.lessons.containerPageResults, s => s.length))
             .toBe(10);
 
-        await utils.pagination(page);
-
-        // check footer
-        expect(await page.$eval(selectors.lessons.footer, s => s.textContent.trim()))
-            .toBe(texts.lessons.footer);
+        // await utils.pagination(page);
     });
 
     it('Click on tabular filters and check horizontal', async function () {

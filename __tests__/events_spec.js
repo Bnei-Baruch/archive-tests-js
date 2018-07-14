@@ -1,8 +1,12 @@
 const puppeteer = require('puppeteer');
-const utils = require('../src/utils.js');
 const testconfig = require('./testconfig');
+const selectors = require('../src/selectors');
+const texts = require('../src/texts');
+const utils = require('../src/utils');
+
 const width = 1920;
 const height = 1080;
+
 let browser;
 let page;
 let originalTimeout;
@@ -105,6 +109,7 @@ describe('Conventions & Events Page Test Suite => ', function () {
             return selector.innerText;
         })).toContain('Results 1 - ');
     });
+
 });
 
 afterAll(async function () {

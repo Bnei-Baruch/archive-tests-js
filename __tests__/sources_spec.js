@@ -1,8 +1,12 @@
 const puppeteer = require('puppeteer');
 const testconfig = require('./testconfig');
+const selectors = require('../src/selectors');
+const texts = require('../src/texts');
 const utils = require('../src/utils.js');
+
 const width = 1920;
 const height = 1080;
+
 let browser;
 let page;
 let originalTimeout;
@@ -16,7 +20,31 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Sources Page Test Suite => ', function () {
+describe('Sources Page => ', function () {
+
+    it('All Elements Exists', async function () {
+        await page.goto(testconfig.resources.sourcesUrl, {waitUntil: 'networkidle2'});
+
+        // title and subtitle
+        expect(await page.$eval(selectors.common.title, s => s.innerText.trim()))
+            .toBe(texts.sources.title);
+        expect(await page.$eval(selectors.common.subtitle, s => s.innerText.trim()))
+            .toBe(texts.sources.subtitle);
+
+        // standard block
+        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
+            .toBe(texts.common.logo);
+        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.common.sideBar);
+        expect(await page.$eval(selectors.common.donateButton, s => s.innerText.trim()))
+            .toBe(texts.common.donateButton);
+        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.common.languageDropDown);
+        expect(await page.$eval(selectors.common.footer, s => s.textContent.trim()))
+            .toBe(texts.common.footer);
+        expect(await page.$(selectors.common.searchInput)).toBeDefined();
+    });
+
 
     xit('Header - Displayed', async function () {
         await page.goto(testconfig.resources.sourcesUrl, {waitUntil: 'networkidle2'});

@@ -22,11 +22,6 @@ module.exports = {
         return s => s.innerText.trim()
     },
 
-    sideBarMenu: async function (page, text) {
-        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(text);
-    },
-
     pagination: async function (page) {
         // TODO - Edo need to find intelligent solution
         module.exports.sleep(2000);
@@ -37,28 +32,20 @@ module.exports = {
             .toBe(15);
 
         // verify index location of disabled elements
-        expect(paginationItems[0]._remoteObject.description).toContain('disabled');
-        expect(paginationItems[2]._remoteObject.description).toContain('disabled');
+        await expect(paginationItems[0]._remoteObject.description).toContain('disabled');
+        await expect(paginationItems[2]._remoteObject.description).toContain('disabled');
         // click on last pagination item
         await paginationItems[paginationItems.length - 1].click();
 
         module.exports.sleep(2000);
 
         paginationItems = await page.$$(selectors.search.pagination);
-        expect(paginationItems[11]._remoteObject.description).toContain('disabled');
-        expect(paginationItems[13]._remoteObject.description).toContain('disabled');
-    },
-
-    fillAndClick: async function (page, inputField, value, button) {
-        await page.focus(inputField);
-        await page.type(inputField, value);
-        await page.click(button);
+        await expect(paginationItems[11]._remoteObject.description).toContain('disabled');
+        await expect(paginationItems[13]._remoteObject.description).toContain('disabled');
     },
 
     redirect: async function (page, txt) {
-        module.exports.sleep(2000);
-        const expUrl = '/search?q=' + txt;
-        expect(await (page.url())).toContain(expUrl);
+        return '/search?q=' + txt;
     },
 
     removeBackSlash: async function (textToCleanBackSlash) {
