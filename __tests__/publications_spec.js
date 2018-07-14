@@ -19,53 +19,25 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Publications Page Test Suite => ', function () {
+describe('Publications Page => ', function () {
 
-    xit('All Elements Exists', async function () {
+    it('All Elements Exists', async function () {
         await page.goto(testconfig.resources.publicationsUrl, {waitUntil: 'networkidle2'});
 
-        // check logo
-        expect(await page.$eval(selectors.publications.logo, s => s.innerText.trim()))
-            .toBe(texts.publications.logo);
-
-        // check vertical menu list
-        await utils.sideBarMenu(page, texts.publications.sideBar);
-
-        // check donate button
-        expect(await page.$eval(selectors.publications.donateButton, s => s.innerText.trim()))
-            .toBe(texts.publications.donateButton);
-
-        // check language drop down
-        expect(await page.$eval(selectors.publications.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.publications.languageDropDown);
-
-        // check search input
-        expect(await page.$(selectors.publications.searchInput)).toBeDefined();
-
-        // check pagination
-        await utils.pagination(page);
-
-        // check footer
-        expect(await page.$eval(selectors.publications.footer, s => s.textContent.trim()))
-            .toBe(texts.publications.footer);
-
-        //-----------------------------------------------------
-        // header
-        expect(await page.$(selectors.publications.header))
-            .toBeDefined();
-
-        // header title
-        expect(await page.$eval(selectors.publications.title, elem => elem.innerHTML))
+        expect(await page.$eval(selectors.common.title, s => s.innerText))
             .toBe(texts.publications.title);
+        expect(await page.$eval(selectors.common.subtitle, s => s.innerText.trim()))
+            .toBe(texts.publications.subtitle);
 
-        // header subtitle
-        expect(await page.$eval('.section-header__subtitle', elem => elem.innerHTML))
-            .toBe(texts.publications.header);
 
-        // filters
-        // check filter tabs
-        expect(await page.$$eval(selectors.publications.filterTbl, elems => elems.map(e => e.innerText)))
-            .toEqual(texts.publications.filterTbl);
+        // standard block
+        await utils.commonBlock(page);
+
+
+        // // filters
+        // // check filter tabs
+        // expect(await page.$$eval(selectors.publications.filterTbl, elems => elems.map(e => e.innerText)))
+        //     .toEqual(texts.publications.filterTbl);
     });
 
 });

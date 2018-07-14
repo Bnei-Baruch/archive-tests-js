@@ -28,16 +28,8 @@ describe('Main Page => ', function () {
         expect(await page.$eval(selectors.main.title, s => s.innerText.trim()))
             .toBe(texts.main.title);
 
-        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
-            .toBe(texts.common.logo);
-        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
-            .toEqual(texts.common.sideBar);
-        expect(await page.$eval(selectors.common.donateButton, s => s.innerText))
-            .toBe(texts.common.donateButton);
-        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.common.languageDropDown);
-        expect(await page.$eval(selectors.common.footer, s => s.textContent))
-            .toBe(texts.common.footer);
+        // standard block
+        await utils.commonBlock(page);
 
         expect(await page.$eval(selectors.main.searchButton, s => s.innerText))
             .toBe(texts.main.searchButton);
@@ -74,7 +66,7 @@ describe('Main Page => ', function () {
                     .toLowerCase()));
         expect(await searchRes.includes(texts.main.searchText.toLowerCase()));
 
-        // await utils.pagination(page);
+        await utils.pagination(page);
     });
 
 });

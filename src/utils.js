@@ -1,4 +1,5 @@
 const selectors = require('../src/selectors');
+const texts = require('../src/texts');
 
 module.exports = {
 
@@ -61,6 +62,20 @@ module.exports = {
 
     redirect: async function (page, txt) {
         return '/search?q=' + txt;
+    },
+
+    commonBlock: async function (page){
+        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
+            .toBe(texts.common.logo);
+        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
+            .toEqual(texts.common.sideBar);
+        expect(await page.$eval(selectors.common.donateButton, s => s.innerText.trim()))
+            .toBe(texts.common.donateButton);
+        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.common.languageDropDown);
+        expect(await page.$eval(selectors.common.footer, s => s.textContent.trim()))
+            .toBe(texts.common.footer);
+        expect(await page.$(selectors.common.searchInput)).toBeDefined();
     }
 };
 
