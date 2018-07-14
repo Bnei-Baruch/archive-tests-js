@@ -20,33 +20,35 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Main Page Test Suite => ', function () {
+describe('Main Page => ', function () {
 
     it('All Elements Exists', async function () {
         await page.goto(testconfig.resources.mainUrl, {waitUntil: 'networkidle2'});
 
         // check header title
         expect(await page.$(selectors.main.title)).toBeDefined();
+        // expect(await page.$eval(selectors.main.title, s => s.innerText))
+
         expect(await page.$eval(selectors.main.title, s => s.innerText.trim()))
             .toBe(texts.main.title);
 
         // check logo
-        expect(await page.$eval(selectors.main.logo, s => s.innerText.trim()))
-            .toBe(texts.main.logo);
+        expect(await page.$eval(selectors.common.logo, s => s.innerText.trim()))
+            .toBe(texts.common.logo);
 
         // check vertical menu list
-        await utils.sideBarMenu(page, texts.main.sideBar);
+        await utils.sideBarMenu(page, texts.common.sideBar);
 
         // check donate button
-        expect(await page.$eval(selectors.main.donateButton, s => s.innerText.trim()))
-            .toBe(texts.main.donateButton);
+        expect(await page.$eval(selectors.common.donateButton, s => s.innerText))
+            .toBe(texts.common.donateButton);
 
         // check language drop down
-        expect(await page.$eval(selectors.main.languageDropDown, s => s.innerText.trim()))
-            .toBe(texts.main.languageDropDown);
+        expect(await page.$eval(selectors.common.languageDropDown, s => s.innerText.trim()))
+            .toBe(texts.common.languageDropDown);
 
         // check search button
-        expect(await page.$eval(selectors.main.searchButton, s => s.innerText.trim()))
+        expect(await page.$eval(selectors.main.searchButton, s => s.innerText))
             .toBe(texts.main.searchButton);
 
         // check banners
@@ -54,7 +56,7 @@ describe('Main Page Test Suite => ', function () {
             .toBe(2);
 
         // check horizontal titles
-        expect(await page.$$eval(selectors.main.horizonTitle, ss => ss.map(s => s.innerText.trim())))
+        expect(await page.$$eval(selectors.main.horizonTitle, ss => ss.map(s => s.innerText)))
             .toEqual(texts.main.horizonTitle);
 
         // check horizontal icons row
@@ -66,8 +68,8 @@ describe('Main Page Test Suite => ', function () {
             .toBe(4);
 
         // check footer
-        expect(await page.$eval(selectors.main.footer, s => s.textContent.trim()))
-            .toBe(texts.main.footer);
+        expect(await page.$eval(selectors.common.footer, s => s.textContent))
+            .toBe(texts.common.footer);
     });
 
     it('Search Functionality', async function () {
@@ -84,18 +86,17 @@ describe('Main Page Test Suite => ', function () {
             .toContain(texts.main.searchText);
 
         // check title
-        expect(await page.$eval(selectors.search.header, s => s.innerText))
+        expect(await page.$eval(selectors.common.header, s => s.innerText))
             .toContain(texts.search.header);
 
-        // check search results
-        const resultsFromPage = await page.$$eval(selectors.search.filterOptions, ss => ss.map(s => s.innerText));
-        expect(await utils.removeBackSlash(resultsFromPage)).toEqual(texts.search.filterPanel);
+        expect(await page.$$eval(selectors.common.filterTabsNames, ss => ss.map(s => s.innerText)))
+            .toEqual(texts.search.filterPanel);
 
         // check searched text to contained in every response
         const searchRes = await page.$$eval(selectors.search.searchResultsTable, ss => ss.map(s => s.innerText.trim().toLowerCase()));
         expect(await searchRes.includes(texts.main.searchText.toLowerCase()));
 
-        await utils.pagination(page);
+        // await utils.pagination(page);
     });
 
 });

@@ -18,8 +18,12 @@ module.exports = {
         }
     },
 
+    innerTxt: async function () {
+        return s => s.innerText.trim()
+    },
+
     sideBarMenu: async function (page, text) {
-        expect(await page.$$eval(selectors.main.sideBar, ss => ss.map(s => s.innerText.trim())))
+        expect(await page.$$eval(selectors.common.sideBar, ss => ss.map(s => s.innerText.trim())))
             .toEqual(text);
     },
 
@@ -27,9 +31,9 @@ module.exports = {
         // TODO - Edo need to find intelligent solution
         module.exports.sleep(2000);
 
-        let paginationItems = await page.$$(selectors.search.pagination);
+        let paginationItems = await page.$$(selectors.common.pagination);
 
-        expect(await page.$$eval(selectors.search.pagination, s => s.length))
+        expect(await page.$$eval(selectors.common.pagination, s => s.length))
             .toBe(15);
 
         // verify index location of disabled elements
@@ -45,13 +49,14 @@ module.exports = {
         expect(paginationItems[13]._remoteObject.description).toContain('disabled');
     },
 
-    fillAndClick: async function (page, field, text, selector) {
-        await page.focus(field);
-        await page.type(field, text);
-        await page.click(selector);
+    fillAndClick: async function (page, inputField, value, button) {
+        await page.focus(inputField);
+        await page.type(inputField, value);
+        await page.click(button);
     },
 
     redirect: async function (page, txt) {
+        module.exports.sleep(2000);
         const expUrl = '/search?q=' + txt;
         expect(await (page.url())).toContain(expUrl);
     },
