@@ -19,9 +19,10 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Conventions & Events Page Test Suite => ', function () {
-    it('General ', async function () {
-        await page.goto(testconfig.resources.eventsUrl, {waitUntil: 'networkidle2'});
+describe('Events => ', function () {
+
+    it('=> Meals ', async function () {
+        await page.goto(testconfig.resources.eventMealsUrl, {waitUntil: 'networkidle2'});
 
         // standard block
         await utils.commonBlock(page);
