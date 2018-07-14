@@ -13,7 +13,7 @@ let originalTimeout;
 
 beforeAll((async function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     browser = await puppeteer.launch(testconfig.browser);
     page = await browser.newPage();
     await page.setViewport({width, height});
@@ -45,21 +45,34 @@ describe('Daily Lesson => ', function () {
 
         // filters
         expect(await page.$$eval(selectors.common.filterOptionsHighLevel, ss => ss.map(s => s.innerText)))
-            .toEqual(texts.lessons.filterOptionNamesHighLevel);
+            .toEqual(texts.lessons.filterTabNames);
 
         expect(await page.$$eval(selectors.lessons.containerPageResults, s => s.length))
             .toBe(10);
 
-        // await utils.pagination(page);
+        await utils.pagination(page);
     });
 
     it('Click on tabular filters and check horizontal', async function () {
         await page.goto(testconfig.resources.dailyLessonUrl, {waitUntil: 'networkidle2'});
 
-        // click on every tab filter
-        // check active class name exist
-        // check horizontally
+        await utils.click(page, selectors.common.filterOptionsHighLevel, 0);
+        await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
 
+        await utils.click(page, selectors.common.filterOptionsHighLevel, 1);
+        await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
+
+        await utils.click(page, selectors.common.filterOptionsHighLevel, 2);
+        await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
+
+        await utils.click(page, selectors.common.filterOptionsHighLevel, 3);
+        await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
+
+        await utils.click(page, selectors.common.filterOptionsHighLevel, 4);
+
+        utils.sleep(1000);
+        expect(await page.$$eval(selectors.lessons.selectedStudyH2, ss => ss.map(s => s.innerText)))
+            .toEqual(texts.lessons.studySeriesH2);
     });
 
     xit('Filter - Apply Button Enable/Disable', async function () {

@@ -18,12 +18,25 @@ module.exports = {
         }
     },
 
-    innerTxt: async function () {
-        return s => s.innerText.trim()
+    isFilterPopUpOpened: async function (page, selector) {
+        let items = await page.$$(selector);
+        for (let i = 0; i < items.length; ++i) {
+            module.exports.sleep(1000);
+            await items[i].click();
+            await page.waitForSelector(selectors.common.popup, {'timeout': 30000});
+            module.exports.sleep(1000);
+            await items[i].click();
+        }
+    },
+
+    click: async function (page, selector, index){
+        let filters = await page.$$(selector);
+        module.exports.sleep(1000);
+        await filters[index].click();
     },
 
     pagination: async function (page) {
-        // TODO - Edo need to find intelligent solution
+
         module.exports.sleep(2000);
 
         let paginationItems = await page.$$(selectors.common.pagination);
@@ -34,26 +47,20 @@ module.exports = {
         // verify index location of disabled elements
         await expect(paginationItems[0]._remoteObject.description).toContain('disabled');
         await expect(paginationItems[2]._remoteObject.description).toContain('disabled');
+
         // click on last pagination item
         await paginationItems[paginationItems.length - 1].click();
 
         module.exports.sleep(2000);
 
-        paginationItems = await page.$$(selectors.search.pagination);
+        paginationItems = await page.$$(selectors.common.pagination);
+
         await expect(paginationItems[11]._remoteObject.description).toContain('disabled');
         await expect(paginationItems[13]._remoteObject.description).toContain('disabled');
     },
 
     redirect: async function (page, txt) {
         return '/search?q=' + txt;
-    },
-
-    removeBackSlash: async function (textToCleanBackSlash) {
-        for (let i = 0; i < textToCleanBackSlash.length; i++) {
-            textToCleanBackSlash[i] = textToCleanBackSlash[i].replace(/\n/g, "");
-        }
-        return textToCleanBackSlash;
     }
-
 };
 

@@ -21,9 +21,6 @@ const selectors = {
         subtitle: '.section-header__subtitle',
 
         filterOptionsHighLevel: '.section-header__menu.menu a.item',
-        filterOptionsLowLevel: '.filters .filters__menu a.item.filter small',
-
-        filterOptions: '.filters__menu .filter',
         filterTabsNames: '.filters .filters__menu a.item.filter small',
 
         popup: '.content.filter-popup.ltr',

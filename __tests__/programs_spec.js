@@ -45,11 +45,11 @@ describe('Programs Page => ', function () {
         expect(await page.$(selectors.common.searchInput)).toBeDefined();
 
         // filters
-        expect(await page.$$eval(selectors.common.filterOptionsLowLevel, ss => ss.map(s => s.innerText)))
+        expect(await page.$$eval(selectors.common.filterTabsNames, ss => ss.map(s => s.innerText)))
             .toEqual(texts.programs.filterTabNames);
 
 
-        // await utils.pagination(page);
+        await utils.pagination(page);
 
     });
 });

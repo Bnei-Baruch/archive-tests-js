@@ -22,7 +22,8 @@ const texts = {
     lessons: {
         title: 'Lectures & Lessons',
         subtitle: 'Here you will find a rich variety of lessons that include: lectures, children\'s programs, women\'s programs, etc.',
-        filterOptionNamesHighLevel: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        filterTabNames: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        studySeriesH2: ['Baal HaSulam', 'Rabash', 'Rashbi', 'Michael Laitman']
     },
     programs: {
         title: 'Programs',
