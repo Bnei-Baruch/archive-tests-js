@@ -19,20 +19,15 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Daily Lesson => Women ', function () {
+describe('Events => ', function () {
 
-    it('=> General ', async function () {
-        await page.goto(testconfig.resources.dailyLessonsLecturesUrl, {waitUntil: 'networkidle2'});
+    it('=> Holidays ', async function () {
+        await page.goto(testconfig.resources.eventHolidaysUrl, {waitUntil: 'networkidle2'});
 
         // standard block
         await utils.commonBlock(page);
 
-        await utils.click(page, selectors.common.filterOptionsHighLevel, 3);
-        await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
-
     });
-
-
 });
 
 afterAll(async function () {

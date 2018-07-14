@@ -19,9 +19,9 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Daily Lesson => Lectures => ', function () {
+describe('Daily Lesson => Lectures ', function () {
 
-    it('General ', async function () {
+    it('=> General ', async function () {
         await page.goto(testconfig.resources.dailyLessonsLecturesUrl, {waitUntil: 'networkidle2'});
 
         // standard block
@@ -30,22 +30,6 @@ describe('Daily Lesson => Lectures => ', function () {
         await utils.click(page, selectors.common.filterOptionsHighLevel, 2);
         await utils.isFilterPopUpOpened(page, selectors.common.filterTabsNames);
 
-
-
-        // expect(await page.$('.section-header')).toBeDefined();
-        // // header title
-        // expect(await page.$eval('.section-header__title', (selector) => {
-        //     return selector.innerHTML
-        // })).toBe('Lectures &amp; Lessons');
-        //
-        // let filters = await page.$$eval('.index-filters a.item', (selectors) => {
-        //     return selectors.map(selector => selector.text)
-        // });
-        // await utils.sleep(1000);
-        // expect(filters.length).toBe(3);
-        // expect(filters[0]).toEqual('Topics');
-        // expect(filters[1]).toEqual('Sources');
-        // expect(filters[2]).toEqual('Date');
     });
 
 

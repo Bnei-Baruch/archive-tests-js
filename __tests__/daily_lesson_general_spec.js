@@ -19,9 +19,9 @@ beforeAll((async function () {
     await page.setViewport({width, height});
 }));
 
-describe('Daily Lesson => General => ', function () {
+describe('Daily Lesson => Main ', function () {
 
-    it('All Elements Exists', async function () {
+    it('=> All Elements Exists', async function () {
         await page.goto(testconfig.resources.dailyLessonMainUrl, {waitUntil: 'networkidle2'});
 
         // title and subtitle
@@ -43,7 +43,7 @@ describe('Daily Lesson => General => ', function () {
         await utils.pagination(page);
     });
 
-    it('Click on tabular filters and check horizontal', async function () {
+    it('=> Click on tabular filters and check horizontal', async function () {
         await page.goto(testconfig.resources.dailyLessonMainUrl, {waitUntil: 'networkidle2'});
 
         await utils.click(page, selectors.common.filterOptionsHighLevel, 0);
