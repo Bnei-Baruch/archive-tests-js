@@ -47,25 +47,23 @@ describe('Publications Page Test Suite => ', function () {
 
         // check footer
         expect(await page.$eval(selectors.publications.footer, s => s.textContent.trim()))
-            .toBe(texts.publications.footer);
+            .toBe(texts.main.footer);
 
-        //-----------------------------------------------------
         // header
         expect(await page.$(selectors.publications.header))
             .toBeDefined();
 
+
         // header title
-        expect(await page.$eval(selectors.publications.title, elem => elem.innerHTML))
+        expect(await page.$eval(selectors.publications.title, elem => elem.innerText))
             .toBe(texts.publications.title);
 
-        // header subtitle
-        expect(await page.$eval('.section-header__subtitle', elem => elem.innerHTML))
-            .toBe(texts.publications.header);
+        // subtitle
 
         // filters
         // check filter tabs
-        expect(await page.$$eval(selectors.publications.filterTbl, elems => elems.map(e => e.innerText)))
-            .toEqual(texts.publications.filterTbl);
+        expect(await page.$$eval(selectors.common.filterTabsNames, s => s.map(e => e.innerText)))
+            .toEqual(texts.publications.filterTabsNames);
 
     });
 

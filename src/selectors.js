@@ -15,6 +15,9 @@ const selectors = {
         lastUpdateThumbnails: '.homepage__thumbnails a',
         footer: '.layout__footer'
     },
+    common: {
+        filterTabsNames: '.filters .filters__menu a.item.filter small',
+    },
     search: {
         header: '.section-header',
         filterOptions: '.filters__menu .filter',
@@ -74,12 +77,12 @@ const selectors = {
     },
     publications: {
         sideBar: '.sidebar-item',
-        header: '.section-header',
+        title: '.section-header__title',
+        header: '.section-header__subtitle',
         logo: '.layout__header .logo',
         searchInput: '.mobile-hidden .search-omnibox',
         donateButton: '.layout__header .donate-button',
         languageDropDown: '.layout__header .item.dropdown',
-        filterTabs: '.section-header__menu',
         footer: '.layout__footer'
     },
     projectStatus: {

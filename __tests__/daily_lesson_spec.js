@@ -46,7 +46,7 @@ describe('Daily Lesson Page Test Suite => ', function () {
             .toBe(texts.lessons.languageDropDown);
 
         // check filter tabs
-        expect(await page.$$eval(selectors.lessons.filterTabs, ss => ss.map(s => s.innerText)))
+        expect(await page.$$eval(selectors.lessons.filterTabsNames, ss => ss.map(s => s.innerText)))
             .toEqual(texts.lessons.filterTabs);
 
         expect(await page.$eval(selectors.lessons.paginationResults, ss => ss.innerText))
