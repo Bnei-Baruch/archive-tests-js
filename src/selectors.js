@@ -32,8 +32,8 @@ const selectors = {
         searchResultsTable: '.search-results .search__link',
     },
     lessons: {
-        searchInput: '.mobile-hidden .search-omnibox',
-        upper: '.section-header__menu .item',
+        searchInput: '.mobile-hidden .search-omnibox', //todo remove dup - existing in common
+        upper: '.section-header__menu .item', // todo - may this also remove
         selectedStudyH2: 'h2.ui.header',
         containerPageResults: '.container.padded .index__date',
     },

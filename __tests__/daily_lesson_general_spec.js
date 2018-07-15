@@ -24,14 +24,18 @@ describe('Daily Lesson => Main ', function () {
     it('=> All Elements Exists', async function () {
         await page.goto(testconfig.resources.dailyLessonMainUrl, {waitUntil: 'networkidle2'});
 
-        // title and subtitle
         expect(await page.$eval(selectors.common.title, s => s.innerText.trim()))
             .toBe(texts.lessons.title);
         expect(await page.$eval(selectors.common.subtitle, s => s.innerText.trim()))
             .toBe(texts.lessons.subtitle);
 
+        // todo - move to utils title and sub title
+
+
         // standard block
         await utils.commonBlock(page);
+
+        // todo - move to utils filterTabNames for filterOptionsHighLevel
 
         // filters
         expect(await page.$$eval(selectors.common.filterOptionsHighLevel, ss => ss.map(s => s.innerText)))
