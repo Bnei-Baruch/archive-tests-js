@@ -1,0 +1,8 @@
+{
+    "headless": true,
+    "args": [
+        "--no-sandbox",
+        "--headless"
+    ],
+    "executablePath": "/usr/bin/google-chrome"
+}
