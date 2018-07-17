@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 ### See https://crbug.com/795759
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-RUN apt-get update && apt-get install -y apt-utils
+RUN apt-get update && apt-get install -y apt-utils jq
 RUN apt-get install -yq libgconf-2-4 wget curl
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
