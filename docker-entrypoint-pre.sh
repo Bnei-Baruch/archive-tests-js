@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# Perfom all the needed preprocessing here...
-cat spec/daily_lesson_spec.js
-sed -i "s#https://archive.kbb1.com#$TEST_ADDR#g" spec/testconfig.json
-sed -i "s#\"headless\": false#$BROWSER_FLAGS#g" spec/testconfig.json
+# change browser flags
+cat __tests__/testconfig.json | \
+jq ".browser = `cat docker_browser_flags.json`" > \
+tmp.json && mv tmp.json __tests__/testconfig.json
+
+# change host to perform tests against
+sed -i "s#https://kabbalahmedia.info#$TEST_ADDR#g" __tests__/testconfig.json
 
 # Invoke the original entrypoint passing the command and arguments
 exec  $@ 
