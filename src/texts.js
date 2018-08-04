@@ -11,7 +11,7 @@ const texts = {
         donateButton: 'DONATE NOW',
         logo: 'Kabbalah Media',
         languageDropDown: 'English',
-        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Twitter', 'Old Site'],
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Help', 'Old Site'],
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
         paginationResults: 'Results 1 - 10 of',
     },
