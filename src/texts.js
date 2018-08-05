@@ -11,7 +11,7 @@ const texts = {
         donateButton: 'DONATE NOW',
         logo: 'Kabbalah Media',
         languageDropDown: 'English',
-        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Twitter', 'Old Site'],
+        sideBar: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Topics', 'Publications', 'Project Status', 'Help', 'Old Site'],
         footer: 'Kabbalah MediaCopyright © 2003-2018 Bnei Baruch – Kabbalah L’Am Association, All rights reserved',
         paginationResults: 'Results 1 - 10 of',
     },
@@ -22,7 +22,8 @@ const texts = {
     lessons: {
         title: 'Lectures & Lessons',
         subtitle: 'Lessons and lectures by Dr. Michael Laitman. Virtual lessons, lectures for women, unique recordings by Rabbi Baruch Ashlag (RABASH) and more.',
-        filterTabNames: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        headerTabNames: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        filterTabNames: ['Topics', 'Sources', 'Date'],
         studySeriesH2: ['Baal HaSulam', 'Rabash', 'Rashbi', 'Michael Laitman']
     },
     programs: {
