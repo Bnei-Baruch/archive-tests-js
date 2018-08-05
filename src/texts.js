@@ -22,7 +22,8 @@ const texts = {
     lessons: {
         title: 'Lectures & Lessons',
         subtitle: 'Lessons and lectures by Dr. Michael Laitman. Virtual lessons, lectures for women, unique recordings by Rabbi Baruch Ashlag (RABASH) and more.',
-        filterTabNames: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        headerTabNames: ['Daily Lessons', 'Virtual Lessons', 'Lectures', 'Women Lessons', 'Selected Study Series'],
+        filterTabNames: ['Topics', 'Sources', 'Date'],
         studySeriesH2: ['Baal HaSulam', 'Rabash', 'Rashbi', 'Michael Laitman']
     },
     programs: {

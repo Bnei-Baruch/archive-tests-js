@@ -21,29 +21,39 @@ fixture `Lectures & Lessons`
 
 
     test('Sanity test', async t => {
-        // Find sidebar 
+        // select sidebar tabs
         const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
 
-        // check sidebar tabs with what expected to be
+        // test sidebar tabs are equal to expected
         await t.expect(sidebarTabs).eql(texts.common.sideBar);
 
+        // test title 
+        await t.expect(Selector(selectors.common.title).innerText).eql(texts.lessons.title);
 
-        // Find title
+        // test subtitle
+        await t.expect(Selector(selectors.common.subtitle).innerText).eql(texts.lessons.subtitle);
 
-        // Find subtitle
-
-        // Find Header
+        // test Header pagination
+        await t.expect(Selector(selectors.common.headerPagination).innerText).contains(texts.common.paginationResults);
 
         // Find tabs and check their names
+        const headerTabs = await tcUtils.multipleSelect(selectors.lessons.headerTabs);
+        await t.expect(headerTabs).eql(texts.lessons.headerTabNames);
 
         // test filters
-        // const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
-
-        // // check filter tabs names array with what expected to be
-        // await t.expect(filterTabs).eql(texts.search.filterTabNames);
+        const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
+        await t.expect(filterTabs).eql(texts.lessons.filterTabNames);
 
 
-        // Find footer
+        // test pagination bar
+        const paginationBar = await Selector(selectors.common.pagination).exists;
+        await t.expect(paginationBar).ok();
+
+        // TEST FOOTER
+        const footerTxt = await Selector(selectors.common.footer).innerText;
+        // replace newlines and carriage returns
+        const footer = footerTxt.replace(/\n|\r/g, "");
+        await t.expect(footer).eql(texts.common.footer);
     });
 
   

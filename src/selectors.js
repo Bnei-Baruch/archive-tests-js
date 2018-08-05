@@ -19,7 +19,7 @@ const selectors = {
         languageDropDown: '.layout__header .item.dropdown',
         title: '.section-header__title',
         subtitle: '.section-header__subtitle',
-
+        headerPagination: '.header.pagination-results',
         filterOptionsHighLevel: '.section-header__menu.menu a.item',
         filterTabsNames: '.filters .filters__menu a.item.filter small',
 
@@ -32,8 +32,7 @@ const selectors = {
         searchResultsTable: '.search-results .search__link',
     },
     lessons: {
-        searchInput: '.mobile-hidden .search-omnibox', //todo remove dup - existing in common
-        upper: '.section-header__menu .item', // todo - may this also remove
+        headerTabs: '.section-header__menu.menu a.item',
         selectedStudyH2: 'h2.ui.header',
         containerPageResults: '.container.padded .index__date',
     },
