@@ -10,7 +10,7 @@
     "puppeteer": "1.4.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "testcafe chrome lecture-lessons.sanity.js"
   },
   "jest": {
     "testResultsProcessor": "jest-teamcity-reporter"
