@@ -54,6 +54,16 @@ const selectors = {
     projectStatus: {
         header: '.aligned'
     },
+    player: {
+        controls: {
+            timecode: '.mediaplayer__timecode time',
+            seekbarKnob: '.seekbar__knob',
+            videoSize: '.mediaplayer__video-size',
+            videoSizesList: '.mediaplayer__video-size span',
+            playbackRate: '.mediaplayer__playback-rate',
+
+        }
+    }
 
 };
 
