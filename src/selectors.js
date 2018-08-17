@@ -39,8 +39,12 @@ const selectors = {
     programs: {
     },
     sources: {
+        authorsList: '.sources__list .ui.small.header',
+        sourcesListByAuthor: '.sources__list .list',
     },
     events: {
+        header: '.section-header',
+        headerTabs: '.section-header__menu.menu a.item',
     },
     topics: {
         header: '.layout__content'
