@@ -40,7 +40,25 @@ const texts = {
     sources: {
         title: 'Library',
         subtitle: 'A collection of all the most important original texts for the study of Kabbalah, written by the greatest Kabbalists.',
-    }
+        authors: ['Yehuda Leib Ha-Levi Ashlag (Baal HaSulam)', 'Baruch Shalom Ha-Levi Ashlag (Rabash)', 'Michael Laitman, PhD, Rav (Michael Laitman)',
+        'משה רבנו (Moses)', 'Rabbi Shimon bar Yochai (Rashbi)', 'Rabbi Isaac Luria Ashkenazi (Ari)'],
+        sourcesList: {
+            sourcesListBS: ['Prefaces', 'Letters', 'Articles', 'TES - Study of the Ten Sefirot', 'Shamati', 'Passover Haggadah',
+                'The Gatehouse of Intentions', 'Even Sapir', 'Ha-Ilan (The Tree)', 'The Bright Light'],
+            sourcesListRABASH: ['Prefaces', 'Letters', 'Articles', 'Records', 'Concealment and Revelation', 'Biur Pticha', 'Selected Excerpts'],
+            sourcesListLaitman: ['Articles'],
+            sourcesListMoses: ['Torah'],
+            sourcesListRASHBI: ['Zohar for All'],
+            sourcesListARI: ['Gatehouse of Intentions', 'Tree of Life'],
+        },
+    },
+    events: {
+        title: 'Conventions & Events',
+        subtitle: 'Today, the wisdom of Kabbalah is already everywhere in the world. In this section you will be able to see events, conventions and special meetings of the "Kabbalah L’Am" association in Israel and abroad.',
+        headerTabNames: ['Conventions', 'Holidays', 'Unity Days', 'Friends Gatherings', 'Meals'],
+        filterTabNames: ['Locations', 'Year'],
+        paginationResults: 'Results 1 - 132 of',
+    },
 
 };
 
