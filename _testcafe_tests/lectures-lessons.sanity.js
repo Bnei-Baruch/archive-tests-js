@@ -14,37 +14,28 @@ const texts = require('../src/texts');
 const selectors = require('../src/selectors');
 const tcUtils = require('../src/tc_utils');
 
-import { Selector } from 'testcafe';  
+import {Selector} from 'testcafe';
 
-fixture `Lectures & Lessons`
+fixture`Lectures & Lessons`
     .page('https://kabbalahmedia.info/lessons');
 
 
-    test('Sanity test', async t => {
-        // select tabs
-        const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
-        const headerTabs = await tcUtils.multipleSelect(selectors.lessons.headerTabs);
-        const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
-        const footerTxt = await Selector(selectors.common.footer).innerText;
-        
-        // run test 
-        await t
-            .expect(sidebarTabs)
-            .eql(texts.common.sideBar)
-            .expect(Selector(selectors.common.title).innerText)
-            .eql(texts.lessons.title)
-            .expect(Selector(selectors.common.subtitle).innerText)
-            .eql(texts.lessons.subtitle)
-            .expect(Selector(selectors.common.headerPagination).innerText)
-            .contains(texts.common.paginationResults)
-            .expect(headerTabs)
-            .eql(texts.lessons.headerTabNames)
-            .expect(filterTabs)
-            .eql(texts.lessons.filterTabNames)
-            .expect(Selector(selectors.common.pagination).exists)
-            .ok()
-            .expect(footerTxt.replace(/\n|\r/g, ''))
-            .eql(texts.common.footer);
-    });
+test('Sanity test', async t => {
+    // select tabs
+    const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
+    const headerTabs = await tcUtils.multipleSelect(selectors.lessons.headerTabs);
+    const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
+    const footerTxt = await Selector(selectors.common.footer).innerText;
 
-  
+    // run test
+    await t
+        .expect(sidebarTabs).eql(texts.common.sideBar)
+        .expect(Selector(selectors.common.title).innerText).eql(texts.lessons.title)
+        .expect(Selector(selectors.common.subtitle).innerText).eql(texts.lessons.subtitle)
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(texts.common.paginationResults)
+        .expect(headerTabs).eql(texts.lessons.headerTabNames)
+        .expect(filterTabs).eql(texts.lessons.filterTabNames)
+        .expect(Selector(selectors.common.pagination).exists).ok()
+        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
+});
+
