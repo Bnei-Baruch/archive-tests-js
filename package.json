@@ -11,7 +11,7 @@
     "testcafe": "latest"
   },
   "scripts": {
-    "test": "jest"
+    "test": "testcafe chrome lecture-lessons.sanity.js"
   },
   "jest": {
     "testResultsProcessor": "jest-teamcity-reporter"
