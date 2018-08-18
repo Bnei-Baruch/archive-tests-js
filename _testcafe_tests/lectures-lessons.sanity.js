@@ -16,11 +16,11 @@ const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
 
-fixture`Lectures & Lessons`
+fixture `Lectures & Lessons`
     .page('https://kabbalahmedia.info/lessons');
 
 
-test('Sanity test', async t => {
+test('Lessons & Lectures Sanity test', async t => {
     // select tabs
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const headerTabs = await tcUtils.multipleSelect(selectors.lessons.headerTabs);
