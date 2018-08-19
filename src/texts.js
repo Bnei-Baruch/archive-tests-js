@@ -59,6 +59,11 @@ const texts = {
         filterTabNames: ['Locations', 'Year'],
         paginationResults: 'Results 1 - 132 of',
     },
+    projectStatus: {
+        title: 'What\'s new?',
+        uiStatus:['What we\'ve been working on lately:', 'Ready soon:'],
+    },
+
 
 };
 

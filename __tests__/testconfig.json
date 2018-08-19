@@ -26,6 +26,8 @@
     "eventFriendsGatheringsUrl": "https://kabbalahmedia.info/en/events/friends-gatherings",
     "eventMealsUrl": "https://kabbalahmedia.info/en/events/meals",
 
-    "publicationsUrl": "https://kabbalahmedia.info/publications"
+    "publicationsUrl": "https://kabbalahmedia.info/publications",
+
+    "projectStatusUrl": "https://kabbalahmedia.info/project-status"
   }
 }
