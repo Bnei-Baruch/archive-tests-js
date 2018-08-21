@@ -2,16 +2,16 @@
   "name": "archive_tests_jest",
   "version": "0.0.1",
   "dependencies": {
-    "jasmine-reporters": "2.3.1",
-    "jest": "latest",
-    "jest-codemods": "0.13.9",
+    "@types/node": "^10.5.7",
     "minimatch": "3.0.4",
-    "npm": "^6.2.0",
-    "puppeteer": "1.4.0",
+    "npm": "^6.4.0",
+    "testcafe": "0.21.1",
     "testcafe-browser-provider-browserstack": "^1.5.0"
   },
   "scripts": {
-    "test": "testcafe chrome lecture-lessons.sanity.js"
+    "test": "testcafe chrome lecture-lessons.sanity.js",
+    "testcafe-live": "testcafe-live chrome _testcafe_tests/",
+    "testcafe": "testcafe"
   },
   "jest": {
     "testResultsProcessor": "jest-teamcity-reporter"

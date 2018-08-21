@@ -1,25 +1,34 @@
+import {ClientFunction} from "testcafe";
+const selectors = require('../src/selectors');
 
 const PLAYER_PLAY_BUTTON = "i.play.icon";
 const PLAYER_PAUSE_BUTTON = "i.pause.icon";
 
+const getReadyState = ClientFunction(() => {
+    return document.querySelector(selectors.player.playerTag).readyState;
+});
+
+const getPlayerCurrentTime = ClientFunction(() => {
+    return document.querySelector(selectors.player.playerTag).currentTime;
+});
+
 module.exports = {
 
-    getTimeCode: async function(page){
+    getTimeCode: async function (page) {
         let readyState = 0;
         await page.waitForSelector("video");
         do {
-                readyState = await page.$eval("video", (selector) => {
-                    return selector.readyState;
-                });
-                // console.debug("ReadyState ===> " + readyState)
-            } while (readyState === 0);
+            readyState = await page.$eval("video", (selector) => {
+                return selector.readyState;
+            });
+            // console.debug("ReadyState ===> " + readyState)
+        } while (readyState === 0);
         return await page.$$eval('.mediaplayer__timecode time', (selectors) => {
             return selectors.map(selector => selector.innerText)
         });
     },
 
-    secondsToTime: function(secs)
-    {
+    secondsToTime: function (secs) {
         secs = Math.round(secs);
         let hours = Math.floor(secs / (60 * 60));
 
@@ -36,21 +45,16 @@ module.exports = {
         };
     },
 
-    waitPlayerToLoad: async function (page) {
+    waitPlayerToLoad: async function () {
         let readyState = 0;
-        await page.waitForSelector("video");
         do {
-            readyState = await page.$eval("video", (selector) => {
-                return selector.readyState;
-            });
-            // console.debug("ReadyState ===> " + readyState)
+            readyState = await getReadyState();
+            console.debug("ReadyState ===> " + readyState)
         } while (readyState < 2);
     },
 
-    getPlayerCurrentTime: async function (page) {
-        return await page.$eval("video", (selector) => {
-            return selector.currentTime;
-        });
+    getPlayerCurrentTime:  async function () {
+        return getPlayerCurrentTime()
     },
 
     getPlayerDuration: async function (page) {

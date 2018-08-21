@@ -43,7 +43,7 @@ const texts = {
         authors: ['Yehuda Leib Ha-Levi Ashlag (Baal HaSulam)', 'Baruch Shalom Ha-Levi Ashlag (Rabash)', 'Michael Laitman, PhD, Rav (Michael Laitman)',
         'משה רבנו (Moses)', 'Rabbi Shimon bar Yochai (Rashbi)', 'Rabbi Isaac Luria Ashkenazi (Ari)'],
         sourcesList: {
-            sourcesListBS: ['Prefaces', 'Letters', 'Articles', 'TES - Study of the Ten Sefirot', 'Shamati', 'Passover Haggadah',
+            sourcesListBS: ['Prefaces', 'Letters', 'Articles', 'Study of the Ten Sefirot', 'Shamati', 'Passover Haggadah',
                 'The Gatehouse of Intentions', 'Even Sapir', 'Ha-Ilan (The Tree)', 'The Bright Light'],
             sourcesListRABASH: ['Prefaces', 'Letters', 'Articles', 'Records', 'Concealment and Revelation', 'Biur Pticha', 'Selected Excerpts'],
             sourcesListLaitman: ['Articles'],
