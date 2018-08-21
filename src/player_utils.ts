@@ -1,7 +1,16 @@
 import {ClientFunction} from "testcafe";
+const selectors = require('../src/selectors');
 
 const PLAYER_PLAY_BUTTON = "i.play.icon";
 const PLAYER_PAUSE_BUTTON = "i.pause.icon";
+
+const getReadyState = ClientFunction(() => {
+    return document.querySelector(selectors.player.playerTag).readyState;
+});
+
+const getPlayerCurrentTime = ClientFunction(() => {
+    return document.querySelector(selectors.player.playerTag).currentTime;
+});
 
 module.exports = {
 
@@ -36,22 +45,16 @@ module.exports = {
         };
     },
 
-    waitPlayerToLoad: async function (page) {
+    waitPlayerToLoad: async function () {
         let readyState = 0;
-        await page.waitForSelector("video");
         do {
-            readyState = await page.$eval("video", (selector) => {
-                return selector.readyState;
-            });
-            // console.debug("ReadyState ===> " + readyState)
+            readyState = await getReadyState();
+            console.debug("ReadyState ===> " + readyState)
         } while (readyState < 2);
     },
 
-    getPlayerCurrentTime:  async function (selector) {
-        let getCurrentTime = ClientFunction((selector) => {
-            return document.querySelector("video").currentTime;
-        });
-        return getCurrentTime(selector);
+    getPlayerCurrentTime:  async function () {
+        return getPlayerCurrentTime()
     },
 
     getPlayerDuration: async function (page) {

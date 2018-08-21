@@ -55,6 +55,7 @@ const selectors = {
         header: '.aligned'
     },
     player: {
+        playerTag: "video",
         controls: {
             timecode: '.mediaplayer__timecode time',
             seekbarKnob: '.seekbar__knob',

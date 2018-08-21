@@ -20,12 +20,13 @@ fixture `Video Player Test Suite`
 
     test('playerTimeCode', async t => {
 
-        // let timeCodes = await player_utils.getTimeCode(t);
-        let timeCodes = await tc_utils.multipleSelect(selectors.player.controls.timecode);
-
+        const timeCodes = await tc_utils.multipleSelect(selectors.player.controls.timecode);
         console.log(`Timecodes: ${timeCodes[0]}:${timeCodes[1]}`);
-        await t.expect(timeCodes[0]).eql('00:00');
-        await t.expect(timeCodes[1]).notEql('00:00');
+
+        await player_utils.waitPlayerToLoad();
+        await t
+            .expect(timeCodes[0]).eql('00:00')
+            .expect(timeCodes[1]).notEql('00:00');
     });
 
     test('timeCodeUpdateByPlay', async t => {

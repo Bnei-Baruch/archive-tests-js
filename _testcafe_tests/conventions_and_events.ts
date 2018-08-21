@@ -21,39 +21,23 @@ fixture`Conventions & Events`
 
 
 test('Sanity tests - Conventions & Events', async t => {
-    // select sidebar tabs
+    // select tabs
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
-
-    // test sidebar tabs are equal to expected
-    await t.expect(sidebarTabs).eql(texts.common.sideBar);
-
-    // test title
-    await t.expect(Selector(selectors.common.title).innerText).eql(texts.events.title);
-
-    // test subtitle
-    await t.expect(Selector(selectors.common.subtitle).innerText).eql(texts.events.subtitle);
-
-    // test Header pagination
-    await t.expect(Selector(selectors.common.headerPagination).innerText).contains(texts.events.paginationResults);
-
-    // Find tabs and check their names
     const headerTabs = await tcUtils.multipleSelect(selectors.events.headerTabs);
-    await t.expect(headerTabs).eql(texts.events.headerTabNames);
-
-    // test filters
     const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
-    await t.expect(filterTabs).eql(texts.events.filterTabNames);
-
-
-    // test pagination bar (Shouldn't exist on "Events" page"
     const paginationBar = await Selector(selectors.common.pagination).exists;
-    await t.expect(paginationBar).notOk();
-
-    // TEST FOOTER
     const footerTxt = await Selector(selectors.common.footer).innerText;
-    // replace newlines and carriage returns
-    const footer = footerTxt.replace(/\n|\r/g, "");
-    await t.expect(footer).eql(texts.common.footer);
+
+    //run test
+    await t
+        .expect(sidebarTabs).eql(texts.common.sideBar)
+        .expect(Selector(selectors.common.title).innerText).eql(texts.events.title)
+        .expect(Selector(selectors.common.subtitle).innerText).eql(texts.events.subtitle)
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(texts.events.paginationResults)
+        .expect(headerTabs).eql(texts.events.headerTabNames)
+        .expect(filterTabs).eql(texts.events.filterTabNames)
+        .expect(paginationBar).notOk()
+        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
 });
 
 
