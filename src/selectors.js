@@ -52,7 +52,8 @@ const selectors = {
     publications: {
     },
     projectStatus: {
-        header: '.aligned'
+        title: '.aligned',
+        uiStatus:'h3.ui.header'
     },
     player: {
         playerTag: "video",
