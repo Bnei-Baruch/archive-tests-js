@@ -51,6 +51,8 @@ const selectors = {
         header: '.layout__content'
     },
     publications: {
+        headerTabs: '.section-header__menu.menu a.item',
+        paginationItem: '.blog-posts .post',
     },
     projectStatus: {
         title: '.aligned',
