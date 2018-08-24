@@ -1,4 +1,4 @@
-const texts = {
+export const texts = {
 
     main: {
         title: 'Explore the wisdom of Kabbalah',
@@ -34,8 +34,9 @@ const texts = {
     publications: {
         title: 'Publications',
         subtitle: 'Articles on current events, culture, popular science, relationships and more, presented from the unique perspective of the wisdom of Kabbalah',
+        headerTabNames: ['Blog', 'Twitter', 'Articles'],
         filterTbl: ['Publishers', 'Date'],
-        filterTabNames: ['Genre/Program', 'Topics', 'Sources', 'Date'],
+        filterTabNames: ['Date'],
     },
     sources: {
         title: 'Library',

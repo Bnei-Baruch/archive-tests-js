@@ -16,7 +16,7 @@ const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
 
-fixture`Lectures & Lessons`
+fixture `Lectures & Lessons`
     .page('https://kabbalahmedia.info/lessons');
 
 
