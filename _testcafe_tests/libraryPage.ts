@@ -33,6 +33,7 @@ test('Sanity tests - Library', async t => {
 
     // test run
     await t
+        .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
         .expect(Selector(selectors.common.title).innerText).eql(texts.sources.title)
         .expect(Selector(selectors.common.subtitle).innerText).eql(texts.sources.subtitle)
