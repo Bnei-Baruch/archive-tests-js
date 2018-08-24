@@ -37,6 +37,7 @@ const selectors = {
         containerPageResults: '.container.padded .index__date',
     },
     programs: {
+        paginationItem: 'table tr a.index__title',
     },
     sources: {
         authorsList: '.sources__list .ui.small.header',
