@@ -19,7 +19,6 @@ const tcUtils = require('../src/tc_utils');
 fixture`Conventions & Events`
     .page('https://kabbalahmedia.info/en/events');
 
-
 test('Sanity tests - Conventions & Events', async t => {
     // select tabs
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
