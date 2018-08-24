@@ -26,6 +26,7 @@ test('Sanity test - Project Status', async t => {
 
     // run test
     await t
+        .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
         .expect(title).eql(texts.projectStatus.title)
         .expect(uiStatus).eql(texts.projectStatus.uiStatus)

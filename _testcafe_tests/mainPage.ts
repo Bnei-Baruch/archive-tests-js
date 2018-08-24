@@ -40,6 +40,7 @@ test('Main page sanity test', async t => {
 
     // run test
     await t
+        .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
         .expect(tcUtils.replaceSpaces(logo)).eql(texts.common.logo)
         .expect(homepageTitle).eql(texts.main.title)

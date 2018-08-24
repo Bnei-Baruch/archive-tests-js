@@ -29,6 +29,7 @@ test('Lessons & Lectures Sanity test', async t => {
 
     // run test
     await t
+        .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
         .expect(Selector(selectors.common.title).innerText).eql(texts.lessons.title)
         .expect(Selector(selectors.common.subtitle).innerText).eql(texts.lessons.subtitle)
