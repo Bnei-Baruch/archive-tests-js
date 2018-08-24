@@ -44,5 +44,10 @@ module.exports = {
             }
         }
         return sourcesListsFromPage;
+    },
+
+    replaceSpaces: (txt) => {
+        return txt.replace(/\n|\r/g, '');
     }
+
 };
