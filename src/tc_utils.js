@@ -21,7 +21,6 @@ module.exports = {
 
     },
 
-
     fetchAllSourcesFromTest: async function() {
         // Fetching all all sources from page to one array and compare
         const sourcesListsFormTest = [];

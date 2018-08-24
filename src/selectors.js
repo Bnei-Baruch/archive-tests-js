@@ -8,7 +8,7 @@ const selectors = {
         thumbnail: '.thumbnail',
         horizonTitle: '.horizontal.divider',
         horizonIconRows: '.homepage__website-sections .header',
-        lastUpdateThumbnails: '.homepage__thumbnails a',
+        lastUpdateThumbnails: '.homepage__thumbnails a.card',
     },
     common: {
         sideBar: '.sidebar-item',
