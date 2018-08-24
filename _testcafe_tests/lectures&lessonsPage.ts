@@ -16,7 +16,7 @@ const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
 
-fixture `Lectures & Lessons`
+fixture`Lectures & Lessons`
     .page('https://kabbalahmedia.info/lessons');
 
 
@@ -37,6 +37,6 @@ test('Lessons & Lectures Sanity test', async t => {
         .expect(headerTabs).eql(texts.lessons.headerTabNames)
         .expect(filterTabs).eql(texts.lessons.filterTabNames)
         .expect(Selector(selectors.common.pagination).exists).ok()
-        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
+        .expect(tcUtils.replaceSpaces(footerTxt)).eql(texts.common.footer);
 });
 

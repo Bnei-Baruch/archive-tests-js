@@ -38,7 +38,7 @@ test('Sanity tests - Conventions & Events', async t => {
         .expect(headerTabs).eql(texts.events.headerTabNames)
         .expect(filterTabs).eql(texts.events.filterTabNames)
         .expect(paginationBar).notOk()
-        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
+        .expect(tcUtils.replaceSpaces(footerTxt)).eql(texts.common.footer);
 });
 
 

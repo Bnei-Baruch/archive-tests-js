@@ -23,7 +23,6 @@ import {Selector} from 'testcafe';
 fixture`Main page`
     .page('https://kabbalahmedia.info/');
 
-
 test('Main page sanity test', async t => {
 
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);

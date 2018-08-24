@@ -31,7 +31,6 @@ test('Sanity test - Project Status', async t => {
         .expect(title).eql(texts.projectStatus.title)
         .expect(uiStatus).eql(texts.projectStatus.uiStatus)
         .expect(Selector(selectors.common.pagination).exists).notOk()
-        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
-
+        .expect(tcUtils.replaceSpaces(footerTxt)).eql(texts.common.footer);
 });
 

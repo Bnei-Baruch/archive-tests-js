@@ -19,7 +19,6 @@ const tcUtils = require('../src/tc_utils');
 fixture`Library`
     .page('https://kabbalahmedia.info/en/sources');
 
-
 test('Sanity tests - Library', async t => {
     // selectors
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
@@ -40,7 +39,7 @@ test('Sanity tests - Library', async t => {
         .expect(authorsList).eql(texts.sources.authors)
         .expect(sourcesListFromPage).eql(sourcesListFromTest)
         .expect(paginationBar).notOk()
-        .expect(footerTxt.replace(/\n|\r/g, '')).eql(texts.common.footer);
+        .expect(tcUtils.replaceSpaces(footerTxt)).eql(texts.common.footer);
 });
 
 
