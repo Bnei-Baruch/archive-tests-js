@@ -1,14 +1,15 @@
 const selectors = {
 
     main: {
-        title: '.homepage__title',
+        homepageTitle: '.homepage__title',
         searchButton: '.search-omnibox button',
-        searchInput: '.ui.action.input',
+        searchInput: 'input[type=search]',
         searchResult: '.layout__header .search-omnibox',
         thumbnail: '.thumbnail',
         horizonTitle: '.horizontal.divider',
         horizonIconRows: '.homepage__website-sections .header',
         lastUpdateThumbnails: '.homepage__thumbnails a.card',
+        archiveThumbnails: '.homepage__website-sections.homepage__section a.header',
     },
     common: {
         sideBar: '.sidebar-item',
@@ -26,7 +27,6 @@ const selectors = {
         popup: '.content.filter-popup.ltr',
         pagination: '.pagination-menu *',
         footer: '.layout__footer'
-
     },
     search: {
         searchResultsTable: '.search-results .search__link',
