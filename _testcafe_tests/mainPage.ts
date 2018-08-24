@@ -1,15 +1,16 @@
 /*
     Main Page Sanity Test - Check the follow elements are on the page
-    ---------------------------------------------
-    - Test Common block
-    -   Sidebar
-    -   Title 
-    -   Logo
-    -   Donation button
-    -   Search box
-    -   Footer
-    -   Archive section
-    -   Latest updates (thumbnails)
+        sidebar
+        logo
+        homepageTitle
+        donation button
+        language dropdown
+        search input
+        search button
+        archive thumbnails (length = 5)
+        thumbnails (lenght = 2)
+        update thumbnails (lenght = 4)
+        footer
 */
 
 // BB Archive predefined constants
@@ -19,7 +20,7 @@ const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
 
-fixture `Main page`
+fixture`Main page`
     .page('https://kabbalahmedia.info/');
 
 
@@ -36,19 +37,6 @@ test('Main page sanity test', async t => {
     const thumbnails = await tcUtils.multipleSelect(selectors.main.thumbnail);
     const lastUpdateThumbnails = await tcUtils.multipleSelect(selectors.main.lastUpdateThumbnails);
     const archiveThumbnails = await tcUtils.multipleSelect(selectors.main.archiveThumbnails);
-
-    // STANDART BLOCK
-        // sidebar  
-        // logo  
-        // homepageTitle  
-        // donation button
-        // language dropdown  
-        // search input 
-        // search button 
-        // archive thumbnails (length = 5)
-        // thumbnails (lenght = 2)  
-        // update thumbnails (lenght = 4)  
-        // footer  
 
     // run test
     await t

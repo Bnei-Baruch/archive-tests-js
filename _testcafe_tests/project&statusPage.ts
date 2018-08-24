@@ -17,14 +17,12 @@ import {Selector} from 'testcafe';
 fixture`Project Status`
     .page('https://kabbalahmedia.info/en/project-status');
 
-
 test('Sanity test - Project Status', async t => {
     // select tabs
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const title = await Selector(selectors.projectStatus.title).innerText;
     const uiStatus = await tcUtils.multipleSelect(selectors.projectStatus.uiStatus);
     const footerTxt = await Selector(selectors.common.footer).innerText;
-
 
     // run test
     await t
