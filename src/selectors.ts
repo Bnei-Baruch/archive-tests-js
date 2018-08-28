@@ -67,6 +67,8 @@ const selectors = {
     player: {
         playerTag: "video",
         controls: {
+            play: 'i.play.icon',
+            pause: 'i.pause.icon',
             timecode: '.mediaplayer__timecode time',
             seekbarKnob: '.seekbar__knob',
             videoSize: '.mediaplayer__video-size',
@@ -76,6 +78,4 @@ const selectors = {
         }
     }
 };
-export default selectors
-
-
+export default selectors;
