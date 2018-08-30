@@ -9,18 +9,20 @@
     6. Footers
 */
 
-// BB Archive predefined constants
-import {Selector} from 'testcafe';
 
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
+import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
+
 const tcUtils = require('../src/tc_utils');
 
-fixture`Library`
-    .page('https://kabbalahmedia.info/en/sources');
+const link = `${config.basePath}/${config.lang}/sources`;
 
-test('Sanity tests - Library', async t => {
-    // selectors
+fixture`Library`.page(link);
+
+test('Smoke Test - Library', async t => {
+
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const authorsList = await tcUtils.multipleSelect(selectors.sources.authorsList);
     const paginationBar = await Selector(selectors.common.pagination).exists;
@@ -30,7 +32,6 @@ test('Sanity tests - Library', async t => {
     const sourcesListFromTest = await tcUtils.fetchAllSourcesFromTest();
     const sourcesListFromPage = await tcUtils.fetchAllSourcesFromPage();
 
-    // test run
     await t
         .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)

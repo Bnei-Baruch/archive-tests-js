@@ -11,18 +11,19 @@
     - Footer text
 */
 
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
+import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
+
 const tcUtils = require('../src/tc_utils');
 
-import {Selector} from 'testcafe';
+const link = `${config.basePath}/${config.lang}/publications`;
 
-fixture`Publications`
-    .page('https://kabbalahmedia.info/publications');
+fixture`Publications`.page(link);
 
+test('Smoke Test - Publications', async t => {
 
-test('Publications Page Sanity test', async t => {
-    // select tabs
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const title = await Selector(selectors.common.title).innerText;
     const subtitle = await Selector(selectors.common.subtitle).innerText;
@@ -33,7 +34,6 @@ test('Publications Page Sanity test', async t => {
     const pagination = await Selector(selectors.common.pagination);
     const footerTxt = await Selector(selectors.common.footer).innerText;
 
-    // // run test
     await t
         .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)

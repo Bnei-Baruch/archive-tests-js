@@ -9,24 +9,24 @@
     6. Footer
 */
 
-// BB Archive predefined constants
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
+import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
+
 const tcUtils = require('../src/tc_utils');
 
-import {Selector} from 'testcafe';
+const link = `${config.basePath}/${config.lang}/lessons`;
 
-fixture`Lectures & Lessons`
-    .page('https://kabbalahmedia.info/lessons');
+fixture`Lectures & Lessons`.page(link);
 
-test('Lessons & Lectures Sanity test', async t => {
-    // select tabs
+test('Smoke Test - Lectures & Lessons', async t => {
+
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const headerTabs = await tcUtils.multipleSelect(selectors.lessons.headerTabs);
     const filterTabs = await tcUtils.multipleSelect(selectors.common.filterTabsNames);
     const footerTxt = await Selector(selectors.common.footer).innerText;
 
-    // run test
     await t
         .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)

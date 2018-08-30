@@ -1,5 +1,4 @@
 const selectors = {
-
     main: {
         homepageTitle: '.homepage__title',
         searchButton: '.search-omnibox button',
@@ -69,7 +68,7 @@ const selectors = {
 
         }
     }
-
 };
+export default selectors
 
-module.exports = selectors;
+

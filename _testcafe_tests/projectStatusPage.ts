@@ -7,24 +7,24 @@
     4. Footer
 */
 
-// BB Archive predefined constants
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
+import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
+
 const tcUtils = require('../src/tc_utils');
 
-import {Selector} from 'testcafe';
+const link = `${config.basePath}/${config.lang}/project-status`;
 
-fixture`Project Status`
-    .page('https://kabbalahmedia.info/en/project-status');
+fixture`Project Status`.page(link);
 
-test('Sanity test - Project Status', async t => {
-    // select tabs
+test('Smoke Test - Project Status', async t => {
+
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const title = await Selector(selectors.projectStatus.title).innerText;
     const uiStatus = await tcUtils.multipleSelect(selectors.projectStatus.uiStatus);
     const footerTxt = await Selector(selectors.common.footer).innerText;
 
-    // run test
     await t
         .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
