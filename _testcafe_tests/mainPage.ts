@@ -13,17 +13,19 @@
         footer
 */
 
-// BB Archive predefined constants
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
-const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
 
-fixture`Main page`
-    .page('https://kabbalahmedia.info/');
+const tcUtils = require('../src/tc_utils');
 
-test('Main page sanity test', async t => {
+const link = `${config.basePath}/${config.lang}`;
+
+fixture`Main Page`.page(link);
+
+test('Smoke Test - Main Page', async t => {
 
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
     const logo = await Selector(selectors.common.logo).innerText;
@@ -37,7 +39,6 @@ test('Main page sanity test', async t => {
     const lastUpdateThumbnails = await tcUtils.multipleSelect(selectors.main.lastUpdateThumbnails);
     const archiveThumbnails = await tcUtils.multipleSelect(selectors.main.archiveThumbnails);
 
-    // run test
     await t
         .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)

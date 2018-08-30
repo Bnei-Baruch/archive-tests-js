@@ -2,18 +2,16 @@
     Player Page test suite - 2018 (c)
  */
 
-// BB Archive predefined constants
+import {Selector,ClientFunction} from 'testcafe';
+import selectors from '../src/selectors.js'
+
 const testconfig = require('./testconfig');
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
 const tcUtils = require('../src/tc_utils');
 const player_utils = require('../src/player_utils');
 const utils = require('../src/utils');
 const tc_utils = require('../src/tc_utils');
 const width = 1400;
 const height = 1080;
-
-import {ClientFunction, Selector} from 'testcafe';
 
 fixture`Video Player Test Suite`
     .page(testconfig.resources.playerUrl);

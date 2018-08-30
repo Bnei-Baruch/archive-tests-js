@@ -9,19 +9,20 @@
     - Footer
 */
 
-// BB Archive predefined constants
-const texts = require('../src/texts');
-const selectors = require('../src/selectors');
-const tcUtils = require('../src/tc_utils');
 
 import {Selector} from 'testcafe';
+import selectors from '../src/selectors.js'
+import texts from '../src/texts.js'
+import config from '../src/config.js'
 
-fixture`Programs`
-    .page('https://kabbalahmedia.info/programs');
+const tcUtils = require('../src/tc_utils');
 
+const link = `${config.basePath}/${config.lang}/programs`;
 
-test('Programs Sanity test', async t => {
-    // select tabs
+fixture`Programs`.page(link);
+
+test('Smoke Test - Programs', async t => {
+
     const title = await Selector(selectors.common.title).innerText;
     const subtitle = await Selector(selectors.common.subtitle).innerText;
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);

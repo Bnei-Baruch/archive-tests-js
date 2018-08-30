@@ -1,5 +1,6 @@
-export const texts = {
+import selectors from "./selectors";
 
+export const texts = {
     main: {
         title: 'Explore the wisdom of Kabbalah',
         searchButton: 'search',
@@ -42,7 +43,7 @@ export const texts = {
         title: 'Library',
         subtitle: 'A collection of all the most important original texts for the study of Kabbalah, written by the greatest Kabbalists.',
         authors: ['Yehuda Leib Ha-Levi Ashlag (Baal HaSulam)', 'Baruch Shalom Ha-Levi Ashlag (Rabash)', 'Michael Laitman, PhD, Rav (Michael Laitman)',
-        'משה רבנו (Moses)', 'Rabbi Shimon bar Yochai (Rashbi)', 'Rabbi Isaac Luria Ashkenazi (Ari)'],
+            'משה רבנו (Moses)', 'Rabbi Shimon bar Yochai (Rashbi)', 'Rabbi Isaac Luria Ashkenazi (Ari)'],
         sourcesList: {
             sourcesListBS: ['Prefaces', 'Letters', 'Articles', 'Study of the Ten Sefirot', 'Shamati', 'Passover Haggadah',
                 'The Gatehouse of Intentions', 'Even Sapir', 'Ha-Ilan (The Tree)', 'The Bright Light'],
@@ -62,10 +63,9 @@ export const texts = {
     },
     projectStatus: {
         title: 'What\'s new?',
-        uiStatus:['What we\'ve been working on lately:', 'Ready soon:'],
+        uiStatus: ['What we\'ve been working on lately:', 'Ready soon:'],
     },
 
 
 };
-
-module.exports = texts;
+export default selectors
