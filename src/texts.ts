@@ -1,5 +1,3 @@
-import selectors from "./selectors";
-
 export const texts = {
     main: {
         title: 'Explore the wisdom of Kabbalah',
@@ -65,7 +63,5 @@ export const texts = {
         title: 'What\'s new?',
         uiStatus: ['What we\'ve been working on lately:', 'Ready soon:'],
     },
-
-
 };
-export default selectors
+export default texts

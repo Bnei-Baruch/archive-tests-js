@@ -1,5 +1,5 @@
 import {ClientFunction} from "testcafe";
-const selectors = require('../src/selectors');
+const selectors = require('./selectors');
 
 const PLAYER_PLAY_BUTTON = "i.play.icon";
 const PLAYER_PAUSE_BUTTON = "i.pause.icon";
