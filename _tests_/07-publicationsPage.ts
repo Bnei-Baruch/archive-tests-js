@@ -12,9 +12,9 @@
 */
 
 import {Selector} from 'testcafe';
-import selectors from '../src/selectors.js'
-import texts from '../src/texts.js'
-import config from '../src/config.js'
+import selectors from '../src/selectors'
+import texts from '../src/texts'
+import config from '../src/config'
 
 const tcUtils = require('../src/tc_utils');
 

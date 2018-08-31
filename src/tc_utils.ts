@@ -1,12 +1,12 @@
-const selectors = require('../src/selectors');
-const texts = require('../src/texts');
+import selectors from '../src/selectors'
+import texts from '../src/texts'
 
-import { Selector } from 'testcafe';  
+import {Selector} from 'testcafe';
 
-module.exports = { 
+module.exports = {
 
     // selects multiple elements, returns array
-    multipleSelect: async function(_query) {
+    multipleSelect: async function (_query) {
         const resultArray = [];
         const selectedElements = await Selector(_query);
         const count = await selectedElements.count;
@@ -21,7 +21,7 @@ module.exports = {
 
     },
 
-    fetchAllSourcesFromTest: async function() {
+    fetchAllSourcesFromTest: async function () {
         // Fetching all all sources from page to one array and compare
         const sourcesListsFormTest = [];
         for (let sourceKey in texts.sources.sourcesList) {
@@ -35,7 +35,7 @@ module.exports = {
     },
 
 
-    fetchAllSourcesFromPage: async function() {
+    fetchAllSourcesFromPage: async function () {
         const sourcesListsFromPage = [];
         const sourcesListByAuthor = await Selector(selectors.sources.sourcesListByAuthor);
         for (let i = 0; i < await sourcesListByAuthor.count; i++) {
