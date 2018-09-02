@@ -14,12 +14,10 @@ import {Selector} from 'testcafe';
 import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
+import tcUtils from '../src/tc_utils'
 
-const tcUtils = require('../src/tc_utils');
-
-const link = `${config.basePath}/${config.lang}/sources`;
-
-fixture`Library`.page(link);
+const link = `${config.basePath}/${config.lang}`;
+fixture`Library`.page(`${link}/sources`);
 
 test('Smoke Test - Library', async t => {
 

@@ -17,11 +17,9 @@ import {Selector} from 'testcafe';
 import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
-
-const tcUtils = require('../src/tc_utils');
+import tcUtils from '../src/tc_utils'
 
 const link = `${config.basePath}/${config.lang}`;
-
 fixture`Main Page`.page(link);
 
 test('Smoke Test - Main Page', async t => {

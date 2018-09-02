@@ -3,7 +3,7 @@ import texts from '../src/texts'
 
 import {Selector} from 'testcafe';
 
-module.exports = {
+const tcUtils = {
 
     // selects multiple elements, returns array
     multipleSelect: async function (_query) {
@@ -18,7 +18,6 @@ module.exports = {
         }
 
         return resultArray;
-
     },
 
     fetchAllSourcesFromTest: async function () {
@@ -51,3 +50,4 @@ module.exports = {
     }
 
 };
+export default tcUtils
