@@ -9,17 +9,14 @@
     - Footer
 */
 
-
 import {Selector} from 'testcafe';
 import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
+import tcUtils from '../src/tc_utils'
 
-const tcUtils = require('../src/tc_utils');
-
-const link = `${config.basePath}/${config.lang}/programs`;
-
-fixture`Programs`.page(link);
+const link = `${config.basePath}/${config.lang}`;
+fixture`Programs`.page(`${link}/programs`);
 
 test('Smoke Test - Programs', async t => {
 

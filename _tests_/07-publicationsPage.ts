@@ -15,12 +15,10 @@ import {Selector} from 'testcafe';
 import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
+import tcUtils from '../src/tc_utils'
 
-const tcUtils = require('../src/tc_utils');
-
-const link = `${config.basePath}/${config.lang}/publications`;
-
-fixture`Publications`.page(link);
+const link = `${config.basePath}/${config.lang}`;
+fixture`Publications`.page(`${link}/publications`);
 
 test('Smoke Test - Publications', async t => {
 
