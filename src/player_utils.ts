@@ -2,15 +2,15 @@ import {ClientFunction} from "testcafe";
 const selectors = require('./selectors');
 
 const getReadyState = ClientFunction((selectors) => {
-    return document.querySelector(selectors.player.playerTag).readyState;
+    return document.querySelector(selectors.default.player.playerTag).readyState;
 });
 
 const getCurrentTime = ClientFunction((selectors) => {
-    return document.querySelector(selectors.player.playerTag).currentTime;
+    return document.querySelector(selectors.default.player.playerTag).currentTime;
 });
 
 const getDuration = ClientFunction((selectors) => {
-    return document.querySelector(selectors.player.playerTag).duration;
+    return document.querySelector(selectors.default.player.playerTag).duration;
 });
 
 let self = module.exports = {
@@ -46,7 +46,7 @@ let self = module.exports = {
     },
 
     getPlayerCurrentTime:  async function () {
-        return getCurrentTime()
+        return getCurrentTime(selectors)
     },
 
     getPlayerDuration: async function () {
@@ -54,10 +54,10 @@ let self = module.exports = {
     },
 
     playByClick: async function (t: TestController){
-        await t.click(selectors.player.controls.play)
+        await t.click(selectors.default.player.controls.play)
     },
 
     stopByClick: async function (t: TestController){
-        await t.click(selectors.player.controls.pause)
+        await t.click(selectors.default.player.controls.pause)
     },
 };

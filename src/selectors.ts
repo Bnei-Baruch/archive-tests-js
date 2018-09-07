@@ -68,6 +68,7 @@ const selectors = {
         playerTag: "video",
         controls: {
             play: 'i.play.icon',
+            onscreen_play: '.mediaplayer__onscreen-play',
             pause: 'i.pause.icon',
             timecode: '.mediaplayer__timecode time',
             seekbarKnob: '.seekbar__knob',

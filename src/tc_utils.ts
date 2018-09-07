@@ -48,6 +48,10 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
+    sleep: async function(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
     applyFilter: async function (tabName, filterName, filterInput) {
         await t
             .click(Selector(selectors.query.tabName).withText(tabName))

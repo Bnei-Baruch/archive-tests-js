@@ -9,10 +9,23 @@ const testconfig = require('./testconfig');
 const texts = require('../src/texts');
 const tcUtils = require('../src/tc_utils');
 const player_utils = require('../src/player_utils');
-const utils = require('../src/utils');
 const tc_utils = require('../src/tc_utils');
 const width = 1400;
 const height = 1080;
+
+
+const setHeight = ClientFunction((selector) => {
+    const el = document.querySelector(selector);
+
+    el.style.width = '1px';
+    el.style.height = '1px';
+});
+
+const focus = ClientFunction((selector) => {
+    document.querySelector(selector).focus();
+});
+
+
 
 fixture`Video Player Test Suite`
     .page(testconfig.resources.playerUrl);
@@ -31,33 +44,20 @@ test('playerTimeCode', async t => {
 test('timeCodeUpdateByPlay', async t => {
 
     await player_utils.waitForPlayerToLoad();
-    await player_utils.playByClick(t);
-    await utils.sleep(5000);
-
-    await t.debug();
-    await t.expect(await player_utils.getPlayerCurrentTime()).gt(0);
+    await t.click('i.play.icon');
+    await t.wait(5000);
+    await t
+           .expect(await player_utils.getPlayerCurrentTime()).gt(0);
 });
 
-test('timeCodeUpdateByScroll', async t => {
+test('timeCodeUpdateByDrag', async t => {
 
-    const getSeekbarRect = ClientFunction((selector) => {
-        const {top, left, bottom, right} = document.querySelector(selector).getBoundingClientRect();
-        return {top, left, bottom, right};
-    });
-
-    let rect = await getSeekbarRect(selectors.player.controls.seekbarKnob);
-
-    console.debug("Rect >> top: " + rect.top + " left: " + rect.left + " bottom: " + rect.bottom +
-        " right: " + rect.right);
-
-    let current_mouse_x = rect.left + ((rect.right - rect.left) / 2);
-    let current_mouse_y = rect.top + ((rect.top - rect.bottom) / 2);
-
+    await player_utils.waitForPlayerToLoad();
+    await setHeight(selectors.player.controls.seekbarKnob);
     console.debug("Before Drag: " + await player_utils.getPlayerCurrentTime());
-    const seekbarSelector = await Selector(selectors.player.controls.seekbarKnob);
-    await t.drag(seekbarSelector, current_mouse_x + 100, parseInt(current_mouse_y));
-
+    await t.drag(selectors.player.controls.seekbarKnob, 200, 0);
     console.debug("After Drag: " + await player_utils.getPlayerCurrentTime());
+    await t.expect(await player_utils.getPlayerCurrentTime()).gt(0)
 
 });
 
