@@ -1,9 +1,9 @@
 import selectors from '../src/selectors'
 import texts from '../src/texts'
-
+import config from '../src/config'
 import {Selector} from 'testcafe';
 
-const tcUtils = {
+export const tcUtils = {
 
     // selects multiple elements, returns array
     multipleSelect: async function (_query) {
@@ -47,7 +47,11 @@ const tcUtils = {
 
     replaceSpaces: (txt) => {
         return txt.replace(/\n|\r/g, '');
+    },
+
+    applyFilter: async (t, urlPageName, tab, filter, filterInput) => {
     }
 
 };
-export default tcUtils
+
+// export default tcUtils;
