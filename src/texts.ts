@@ -34,8 +34,8 @@ export const texts = {
         title: 'Publications',
         subtitle: 'Articles on current events, culture, popular science, relationships and more, presented from the unique perspective of the wisdom of Kabbalah',
         headerTabNames: ['Blog', 'Twitter', 'Articles'],
-        filterTbl: ['Publishers', 'Date'],
-        filterTabNames: ['Date'],
+        // filterTbl: ['Publishers', 'Date'],
+        filterTabNames: ['Publishers', 'Date']
     },
     sources: {
         title: 'Library',

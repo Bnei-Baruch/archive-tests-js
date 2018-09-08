@@ -47,7 +47,11 @@ const tcUtils = {
 
     replaceSpaces: (txt) => {
         return txt.replace(/\n|\r/g, '');
-    }
+    },
+
+    filter: async function (sectionHeaderMenu, filtersMenu, input){
+
+    },
 
 };
 export default tcUtils
