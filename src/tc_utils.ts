@@ -1,7 +1,7 @@
 import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
-import {Selector} from 'testcafe';
+import {Selector, t} from 'testcafe';
 
 export const tcUtils = {
 
@@ -33,7 +33,6 @@ export const tcUtils = {
         return sourcesListsFormTest;
     },
 
-
     fetchAllSourcesFromPage: async function () {
         const sourcesListsFromPage = [];
         const sourcesListByAuthor = await Selector(selectors.sources.sourcesListByAuthor);
@@ -49,44 +48,12 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
-    runFilterTest: async (urlPageName, tabName, filterName, filterInput) => {
-
-        // select page (last part of page URL)
-        // select tab if exist
-        // apply filter
-        // select filterInput
-        // push Apply button
-        // check inner text of filter field ewuqls filter input
-
-        const baseUrl = `${config.basePath}/${config.lang}`;
-        const pageUrlPart = `${baseUrl}/${urlPageName}`;
-    
-        // check tab existing here
-        const tabUrlPart = tabName ? `/${tabName}` : '';
-        const fullUrl = `${pageUrlPart}${tabUrlPart}`;    
-    
-        // define selectors
-        const filterSelector = Selector('.filters__menu.menu div.filter__wrapper small')
-                                .withText(filterName);
-    
-        const elemSelector = Selector('.filter-popup__wrapper a.item')
-                                .withAttribute('data-level')
-                                .withText(filterInput);
-    
-        const applyButtonSelector = Selector('.filter-popup__header button')
-                                .withText('Apply');
-    
-        fixture `Filter Test`.page(`${fullUrl}`);
-    
-        test('Starting filter test', async t => {
-            await t
-             .maximizeWindow()
-             .click(filterSelector)
-             .click(elemSelector)
-             .click(applyButtonSelector)
-             .expect(Selector('.filter__wrapper .filter__text .filter__breadcrumb').innerText)
-             .eql(filterInput);
-        });
+    applyFilter: async function (urlPageName, tabName, filterName, filterInput) {
+        await t
+            .click(Selector(selectors.query.filterBy).withText(filterName))
+            .click(Selector(selectors.query.openedBox).withAttribute('data-level').withText(filterInput))
+            .click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton))
+            .expect(Selector(selectors.query.expectedString).innerText).eql(filterInput)
     }
 };
 
