@@ -49,9 +49,47 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
-    applyFilter: async (t, urlPageName, tab, filter, filterInput) => {
-    }
+    runFilterTest: async (urlPageName, tabName, filterName, filterInput) => {
 
+        // select page (last part of page URL)
+        // select tab if exist
+        // apply filter
+        // select filterInput
+        // push Apply button
+
+        const baseUrl = `${config.basePath}/${config.lang}`;
+        const pageUrlPart = `${baseUrl}/${urlPageName}`;
+    
+        // check tab existing here
+        const tabUrlPart = tabName ? `/${tabName}` : '';
+        const fullUrl = `${pageUrlPart}${tabUrlPart}`;    
+    
+        // define selectors
+        const filterSelector = Selector('.filters__menu.menu div.filter__wrapper small')
+                                .withText(filterName);
+    
+        const elemSelector = Selector('.filter-popup__wrapper a.item')
+                                .withAttribute('data-level')
+                                .withText(filterInput);
+    
+        const applyButtonSelector = Selector('.filter-popup__header button')
+                                .withText('Apply');
+    
+        fixture `Filter Test`.page(`${fullUrl}`);
+    
+        test('Starting filter test', async t => {
+            await t
+             .maximizeWindow()
+             .click(filterSelector)
+             .click(elemSelector)
+             .click(applyButtonSelector)
+             .expect(Selector('h2.pagination-results').innerText).contains('Results');
+
+             // TODO. check result -> filterInput should appear inside filter field
+        });    
+
+
+    }
 };
 
-// export default tcUtils;
+export default tcUtils;

@@ -1,57 +1,49 @@
-import {tcUtils} from '../src/tc_utils' 
+import {Selector} from 'testcafe';
 import config from '../src/config'
-import { Selector } from 'testcafe';
+import tcUtils from '../src/tc_utils'
 
 (async () => {
-    // tcUtils.applyFilter('lessons', 'lectures', 'Sources', 'Rabash');    
 
-    // select page (last part of page URL)
-    // select tab if exist
-    // select filter
-    // select filterInput
-    // push Apply button
-
-    // exmaple of call
-    // applyFilter('lessons', 'lectures', 'Sources', 'Rabash')
+    // example of use
+    // tcUtils.runFilterTest('lessons', 'lectures', 'Sources', 'Rabash');    
 
     const urlPageName = 'lessons';
-    const tab = 'lectures';
+    const tabName = 'lectures';
     const filterName = 'Sources';
-    const inputName = 'Rabash';
+    const filterInput = 'Rabash';
 
-    const baseUrl = `${config.basePath}/${config.lang}`;
-    const pageUrl = `${baseUrl}/${urlPageName}`;
+    tcUtils.runFilterTest(urlPageName, tabName, filterName, filterInput);    
 
-    // TODO. check tab existing here. For now let's say the tab exists
-    const tabName = tab ? `/${tab}` : '';
-    const fullUrl = `${pageUrl}${tabName}`;    
+    // const baseUrl = `${config.basePath}/${config.lang}`;
+    // const pageUrlPart = `${baseUrl}/${urlPageName}`;
 
-    console.log('Full URL: ', fullUrl);
+    // // check tab existing here
+    // const tabUrlPart = tabName ? `/${tabName}` : '';
+    // const fullUrl = `${pageUrlPart}${tabUrlPart}`;    
 
+    // // define selectors
+    // const filterSelector = Selector('.filters__menu.menu div.filter__wrapper small')
+    //                         .withText(filterName);
 
-    /// selectors
-    const filterSelector = Selector('.filters__menu.menu div.filter__wrapper small')
-                            .withText(filterName);
+    // const elemSelector = Selector('.filter-popup__wrapper a.item')
+    //                         .withAttribute('data-level')
+    //                         .withText(filterInput);
 
-    const elemSelector = Selector('.filter-popup__wrapper a.item')
-                            .withAttribute('data-level')
-                            .withText(inputName);
+    // const applyButtonSelector = Selector('.filter-popup__header button')
+    //                         .withText('Apply');
 
-    const buttonSelector = Selector('.filter-popup__header button').withText('Apply');
+    // fixture `Filter Test`.page(`${fullUrl}`);
 
-    fixture `Filter Test`.page(`${fullUrl}`);
+    // test('Starting filter test', async t => {
+    //     await t
+    //      .maximizeWindow()
+    //      .click(filterSelector)
+    //      .click(elemSelector)
+    //      .click(applyButtonSelector)
+    //      // .debug()
+    //      .expect(Selector('h2.pagination-results').innerText).contains('Results');
+    // });    
 
-    test('common filter test', async t => {
-        await t
-         .maximizeWindow()
-         .click(filterSelector)
-         .click(elemSelector)
-         .click(buttonSelector)
-         .expect(Selector('h2.pagination-results').innerText).contains('Results');
-    });
-
-
-
-
+    
 })();
 
