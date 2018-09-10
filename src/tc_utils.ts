@@ -56,6 +56,7 @@ export const tcUtils = {
         // apply filter
         // select filterInput
         // push Apply button
+        // check inner text of filter field ewuqls filter input
 
         const baseUrl = `${config.basePath}/${config.lang}`;
         const pageUrlPart = `${baseUrl}/${urlPageName}`;
@@ -83,12 +84,9 @@ export const tcUtils = {
              .click(filterSelector)
              .click(elemSelector)
              .click(applyButtonSelector)
-             .expect(Selector('h2.pagination-results').innerText).contains('Results');
-
-             // TODO. check result -> filterInput should appear inside filter field
-        });    
-
-
+             .expect(Selector('.filter__wrapper .filter__text .filter__breadcrumb').innerText)
+             .eql(filterInput);
+        });
     }
 };
 
