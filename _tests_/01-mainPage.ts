@@ -37,7 +37,7 @@ test('Smoke Test - Main Page', async t => {
     const archiveThumbnails = await tcUtils.multipleSelect(selectors.main.archiveThumbnails);
 
     await t
-        .maximizeWindow()
+       // .maximizeWindow()
         .expect(sidebarTabs).eql(texts.common.sideBar)
         .expect(tcUtils.replaceSpaces(logo)).eql(texts.common.logo)
         .expect(homepageTitle).eql(texts.main.title)
