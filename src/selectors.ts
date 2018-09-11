@@ -10,6 +10,12 @@ const selectors = {
         lastUpdateThumbnails: '.homepage__thumbnails a.card',
         archiveThumbnails: '.homepage__website-sections.homepage__section a.header',
     },
+    query: {
+        filterBy: '.filters__menu.menu div.filter__wrapper small',
+        openedBox: '.filter-popup__wrapper a.item',
+        openedBoxButtons: '.filter-popup__header button',
+        expectedString: '.filter__wrapper .filter__text .filter__breadcrumb',
+    },
     common: {
         sideBar: '.sidebar-item',
         logo: '.layout__header .logo',
@@ -55,7 +61,7 @@ const selectors = {
     },
     projectStatus: {
         title: '.aligned',
-        uiStatus:'h3.ui.header'
+        uiStatus: 'h3.ui.header'
     },
     player: {
         playerTag: "video",

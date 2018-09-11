@@ -6,6 +6,9 @@ export const texts = {
         horizonIconRows: ['Lessons & Lectures', 'Programs', 'Library', 'Conventions & Events', 'Publications'],
         searchText: 'arvut'
     },
+    query: {
+        applyButton: 'Apply',
+    },
     common: {
         donateButton: 'DONATE NOW',
         logo: 'Kabbalah Media',
