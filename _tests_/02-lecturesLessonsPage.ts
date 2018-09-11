@@ -14,11 +14,10 @@ import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
 import tcUtils from '../src/tc_utils'
-import {debug} from "util";
 
-const link = `${config.basePath}/${config.lang}`;
-fixture`Lectures & Lessons`.page(`${link}/lessons`);
+const link = `${config.basePath}/${config.lang}/lessons`;
 
+fixture`Lectures & Lessons`.page(`${link}`);
 test('Smoke Test - Lectures & Lessons', async t => {
 
     const sidebarTabs = await tcUtils.multipleSelect(selectors.common.sideBar);
@@ -38,20 +37,18 @@ test('Smoke Test - Lectures & Lessons', async t => {
         .expect(tcUtils.replaceSpaces(footerTxt)).eql(texts.common.footer);
 });
 
-fixture`Lectures & Lessons`.page(`${link}/lessons/rabash`);
 
+fixture`Lectures & Lessons`.page(`${link}`);
 test('Apply Daily Filter', async t => {
 
     await t
         .maximizeWindow();
 
-    const urlPage = `${link}/lessons/rabash`;
-    const tab = 'Rabash Lessons';
+    const tab = 'Lectures';
     const filterName = 'Sources';
-    const input = 'Rabash';
+    const input = 'Ramchal';
 
-    await tcUtils.applyFilter(urlPage, tab, filterName, input);
-
+    await tcUtils.applyFilter(tab, filterName, input);
 });
 
 // npm run testcafe chrome _tests_/02-lecturesLessonsPage.ts

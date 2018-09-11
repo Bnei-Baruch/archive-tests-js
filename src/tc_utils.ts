@@ -48,8 +48,9 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
-    applyFilter: async function (urlPageName, tabName, filterName, filterInput) {
+    applyFilter: async function (tabName, filterName, filterInput) {
         await t
+            .click(Selector(selectors.query.tabName).withText(tabName))
             .click(Selector(selectors.query.filterBy).withText(filterName))
             .click(Selector(selectors.query.openedBox).withAttribute('data-level').withText(filterInput))
             .click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton))

@@ -11,6 +11,7 @@ const selectors = {
         archiveThumbnails: '.homepage__website-sections.homepage__section a.header',
     },
     query: {
+        tabName: '.section-header__menu.menu a.item',
         filterBy: '.filters__menu.menu div.filter__wrapper small',
         openedBox: '.filter-popup__wrapper a.item',
         openedBoxButtons: '.filter-popup__header button',
