@@ -11,5 +11,5 @@ RUN apk --no-cache add ca-certificates wget nodejs nodejs-npm git && \
     apk add glibc-bin-2.28-r0.apk
 
 
-RUN npm install testcafe testcafe-browser-provider-browserstack
+RUN npm install testcafe testcafe-browser-provider-browserstack testcafe-reporter-teamcity
 RUN git clone https://github.com/Bnei-Baruch/archive-tests-js.git
