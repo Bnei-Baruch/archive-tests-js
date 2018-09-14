@@ -4,15 +4,13 @@
 
 import {Selector,ClientFunction} from 'testcafe';
 import selectors from '../src/selectors.js'
-
+import {tcUtils} from '../src/tc_utils'
 const testconfig = require('./testconfig');
 const texts = require('../src/texts');
-const tcUtils = require('../src/tc_utils');
 const player_utils = require('../src/player_utils');
-const tc_utils = require('../src/tc_utils');
+
 const width = 1400;
 const height = 1080;
-
 
 const setHeight = ClientFunction((selector) => {
     const el = document.querySelector(selector);
@@ -21,11 +19,6 @@ const setHeight = ClientFunction((selector) => {
     el.style.height = '1px';
 });
 
-const focus = ClientFunction((selector) => {
-    document.querySelector(selector).focus();
-});
-
-
 
 fixture`Video Player Test Suite`
     .page(testconfig.resources.playerUrl);
@@ -33,7 +26,7 @@ fixture`Video Player Test Suite`
 test('playerTimeCode', async t => {
 
     await player_utils.waitForPlayerToLoad();
-    const timeCodes = await tc_utils.multipleSelect(selectors.player.controls.timecode);
+    const timeCodes = await tcUtils.multipleSelect(selectors.player.controls.timecode);
     console.log(`Timecodes: ${timeCodes[0]}:${timeCodes[1]}`);
 
     await t
@@ -68,39 +61,25 @@ test('timeCodeUpdateByLink', async t => {
 test('videoSize', async t => {
 
     // click on playback rate
-    await t.click('.mediaplayer__video-size');
-    let videoSizeElements = await tc_utils.multipleSelect('.mediaplayer__video-size span');
-    // let videoSizeElements = await t.eval('.mediaplayer__video-size span', (selectors) => {
-    //     return selectors.map(selector => selector.innerText);
-    // });
-    //
+    await t.click(selectors.player.controls.videoResolution);
+    let videoSizeElements = await tcUtils.multipleSelect(selectors.player.controls.videoResolutionDropBox);
     await t.expect(videoSizeElements.length).eql(2);
     await t.expect(videoSizeElements[0].trim()).eql('720p');
     await t.expect(videoSizeElements[1].trim()).eql('360p');
 });
 
 
-test('speedSelector_1X', async t => {
+test('videoSpeed', async t => {
 
     // click on playback rate
-    await t.click('.mediaplayer__playback-rate');
-    // let rateElements = await t.$$eval('.visible.menu.transition div span', (selectors) => {
-    //     return selectors.map(selector => selector.innerText);
-    // });
-    // t.expect(rateElements.length).eql(5);
-    // t.expect(rateElements[0].trim()).eql('2x');
-    // t.expect(rateElements[1].trim()).eql('1.5x');
-    // t.expect(rateElements[2].trim()).eql('1.25x');
-    // t.expect(rateElements[3].trim()).eql('1x');
-    // t.expect(rateElements[4].trim()).eql('0.75x');
-});
-
-test('speedSelector_1_5X', async t => {
-
-});
-
-test('speedSelector_2X', async t => {
-
+    await t.click(selectors.player.controls.playbackRate);
+    let rateElements = await tcUtils.multipleSelect(selectors.player.controls.playbackRateDropBox);
+    await t.expect(rateElements.length).eql(5);
+    await t.expect(rateElements[0].trim()).eql('2x');
+    await t.expect(rateElements[1].trim()).eql('1.5x');
+    await t.expect(rateElements[2].trim()).eql('1.25x');
+    await t.expect(rateElements[3].trim()).eql('1x');
+    await t.expect(rateElements[4].trim()).eql('0.75x');
 });
 
 test('volumeBar', async t => {
@@ -115,12 +94,14 @@ test('languageSelector', async t => {
 
 });
 
-test('fullScreenToggle', async t => {
-    t.expect(await player_utils.isFullScreen(t)).notOk();
+test.skip('fullScreenToggle', async t => {
+    // await setHeight(selectors.player.controls.fullScreen);
+    await player_utils.waitForPlayerToLoad();
+    await t.expect(await player_utils.isFullScreen()).notOk();
     await player_utils.playerFullScreenToggle(t);
-    t.expect(await player_utils.isFullScreen(t)).ok();
+    await t.expect(await player_utils.isFullScreen()).ok();
     await player_utils.playerFullScreenToggle(t);
-    t.expect(await player_utils.isFullScreen(t)).notOk();
+    await t.expect(await player_utils.isFullScreen()).notOk();
 });
 
 test('sharingModeOn', async t => {
@@ -129,11 +110,8 @@ test('sharingModeOn', async t => {
 
 test('countPlayerButtons', async t => {
 
-    // verify that displayed all buttons 10
-    // let playerButtons = await t.$$eval('.mediaplayer__controls button', (selectors) => {
-    //     return selectors.map(selector => selector.innerHTML)
-    // });
-    // t.expect(playerButtons.length).eql(10);
+    let playerButtons = await tcUtils.multipleSelect(selectors.player.controls.allButtons);
+    await t.expect(playerButtons.length).eql(10);
 });
 
 test('playerSkipTimeShortKeys', async t => {

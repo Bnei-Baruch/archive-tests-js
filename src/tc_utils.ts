@@ -48,7 +48,7 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
-    sleep: async function(ms) {
+    sleep: async function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
 

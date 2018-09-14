@@ -1,4 +1,5 @@
 import {ClientFunction} from "testcafe";
+import tcUtils from "./tc_utils";
 const selectors = require('./selectors');
 
 const getReadyState = ClientFunction((selectors) => {
@@ -11,6 +12,11 @@ const getCurrentTime = ClientFunction((selectors) => {
 
 const getDuration = ClientFunction((selectors) => {
     return document.querySelector(selectors.default.player.playerTag).duration;
+});
+
+const client_isFullScreen = ClientFunction (() => {
+        return document.webkitCurrentFullScreenElement &&
+            document.webkitCurrentFullScreenElement.nodeName == "DIV";
 });
 
 let self = module.exports = {
@@ -41,7 +47,8 @@ let self = module.exports = {
         let readyState = 0;
         do {
             readyState = await getReadyState(selectors);
-            console.debug("ReadyState ===> " + readyState)
+            console.debug("ReadyState ===> " + readyState);
+            await tcUtils.sleep(0.1)
         } while (readyState < 2);
     },
 
@@ -60,4 +67,13 @@ let self = module.exports = {
     stopByClick: async function (t: TestController){
         await t.click(selectors.default.player.controls.pause)
     },
+
+    playerFullScreenToggle: async function (t: TestController){
+      await t
+          .click(selectors.default.player.controls.fullScreen)
+    },
+
+    isFullScreen: async function (){
+        return client_isFullScreen()
+    }
 };
