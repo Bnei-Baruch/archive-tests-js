@@ -100,7 +100,6 @@ test('Apply Topic Filter', async t => {
 
         .expect(getLocation()).contains(ruLessons);
 
-    //await ClientFunction(() => window.history.back());
     const goBack = ClientFunction(() => window.history.back());
     await goBack();
 
@@ -123,7 +122,6 @@ test('Apply Topic Filter', async t => {
         .expect(Selector(selectors.common.headerPagination).innerText).contains(results_21_30);
 
     //Press Back, Verify Results shown 1-10 again
-    //const goBack = ClientFunction(() => window.history.back());
     await goBack();
 
     await t
