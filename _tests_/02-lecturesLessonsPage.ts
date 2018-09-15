@@ -14,8 +14,10 @@ import selectors from '../src/selectors'
 import texts from '../src/texts'
 import config from '../src/config'
 import tcUtils from '../src/tc_utils'
+import {ClientFunction} from 'testcafe';
 
 const link = `${config.basePath}/${config.lang}/lessons`;
+const getLocation = ClientFunction(() => window.location.href);
 
 fixture`Lectures & Lessons`.page(`${link}`);
 test('Smoke Test - Lectures & Lessons', async t => {
@@ -50,6 +52,83 @@ test('Apply Daily Filter', async t => {
 
     await tcUtils.applyFilter(tab, filterName, input);
 });
+
+
+fixture`Lectures & Lessons`.page(`${link}`);
+test('Apply Topic Filter', async t => {
+
+    /*
+       filter Topic -> Jewish Culture -> Holidays->17 Tammuz & press Apply button
+              ==> Verify 8 results
+       Switch Interface Language to Russian ==>  Verify 8 results
+       Press Back ==>
+            Verify we are again in English Interface and 8 filter results
+       Press Remove Filter button ==>  Verify more than 10,000 results
+       Pagination: move to page 3 ==> Verify Results shown: 21-30
+       Press Back ==> Results shown 1-10 again
+    */
+
+    const results_1_8 = '1 - 8';// of 8
+    const results_1_10 = '1 - 10';
+    const results_21_30 = '21 - 30';
+    const results10K = 10000; //'Results 1 - 10 of 10875';
+    const enLessons = '/en/lessons';
+    const ruLessons = '/ru/lessons';
+
+    const tab = 'Daily Lessons';
+    const filterName = 'Topics';
+    const input = 'Jewish culture/Holidays/17 Tamuz';
+
+    await t
+        .maximizeWindow()
+
+        //todo - need update applyFilter to support multiple levels
+        // await tcUtils.applyFilter(tab, filterName, input);
+
+        .click(Selector('a').withText(tab))
+        .click(Selector('small').withText(filterName))
+        .click(Selector('a').withText('Jewish culture'))
+        .click(Selector('a').withText('Holidays'))
+        .click(Selector('a').withText('17 Tamuz'))
+        .click(Selector('button').withText('Apply'))
+
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(results_1_8)
+
+        .click(Selector('.ui.item.dropdown'))
+        .click(Selector('a').withText('Russian'))
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(results_1_8)
+
+        .expect(getLocation()).contains(ruLessons);
+
+    const goBack = ClientFunction(() => window.history.back());
+    await goBack();
+
+    await t
+        //check En Interface+ 1-8 results
+        .expect(getLocation()).contains(enLessons)
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(results_1_8)
+
+        //press Remove button
+        .click(Selector('.times.icon'));
+
+
+    const total = await Selector(selectors.common.headerPagination).innerText;
+    await t
+        //verify more 10,000 results
+        .expect(tcUtils.getTotalResults(total)).gt(results10K)
+
+        // Pagination: move to page 3, Verify Results shown: 21-30
+        .click(Selector('.item.distance-2'))
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(results_21_30);
+
+    //Press Back, Verify Results shown 1-10 again
+    await goBack();
+
+    await t
+        .expect(Selector(selectors.common.headerPagination).innerText).contains(results_1_10);
+
+});
+
 
 // npm run testcafe chrome _tests_/02-lecturesLessonsPage.ts
 

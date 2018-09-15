@@ -55,7 +55,13 @@ export const tcUtils = {
             .click(Selector(selectors.query.openedBox).withAttribute('data-level').withText(filterInput))
             .click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton))
             .expect(Selector(selectors.query.expectedString).innerText).eql(filterInput)
+    },
+
+    //get totalResults  : 1 - 10 of 11320
+    getTotalResults(txt: string){
+        return txt.substring(txt.indexOf('of') + 3);
     }
+
 };
 
 export default tcUtils;
