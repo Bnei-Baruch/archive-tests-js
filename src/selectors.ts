@@ -15,6 +15,8 @@ const selectors = {
         openedBox: '.filter-popup__wrapper a.item',
         openedBoxButtons: '.filter-popup__header button',
         expectedString: '.filter__wrapper .filter__text .filter__breadcrumb',
+        sourceTextAfterClear: '.filter__wrapper .filter__text',
+        clearButton: '.times.icon',
     },
     common: {
         sideBar: '.sidebar-item',
