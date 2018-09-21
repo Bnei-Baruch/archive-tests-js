@@ -59,12 +59,29 @@ export const tcUtils = {
             .expect(Selector(selectors.query.sourceTextAfterClear).innerText).eql('All')
     },
 
-    applyFilter: async function (filterName, filterInput) {
-        await t
-            .click(Selector(selectors.query.filterBy).withText(filterName))
-            .click(Selector(selectors.query.openedBox).withAttribute('data-level').withText(filterInput))
-            .click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton))
-            .expect(Selector(selectors.query.expectedString).innerText).eql(filterInput)
+    applyFilter: async function (filterName: string, filterInputs: Array<string>) {
+        await t.maximizeWindow()
+               .click(Selector(selectors.query.filterBy).withText(filterName));
+
+        filterInputs.forEach(async (inputTxt) => {
+            await t.click(Selector(selectors.query.openedBox)
+                            .withAttribute('data-level')
+                            .withText(inputTxt)
+                        );
+            });
+        
+
+        await t.click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton));
+
+        filterInputs.forEach(async (inputTxt) => {
+            await t.expect(Selector(selectors.query.resultValueBlock)
+                    .withAttribute('title', inputTxt)).ok();            
+        })
+        
+        await t.expect(Selector(selectors.query.resultValueBlock)
+            .withAttribute('title', filterInputs[filterInputs.length-1]).innerText)
+            .eql(filterInputs[filterInputs.length-1]);
+
     }
 };
 
