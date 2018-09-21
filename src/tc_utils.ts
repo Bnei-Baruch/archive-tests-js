@@ -48,23 +48,47 @@ export const tcUtils = {
         return txt.replace(/\n|\r/g, '');
     },
 
-    sleep: async function (ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    },
-
-    applyFilter: async function (tabName, filterName, filterInput) {
+    // Check result -> text was not equal All before click and becomes equal All after click
+    clearFilter: async (filterName, filterInput) => {
         await t
-            .click(Selector(selectors.query.tabName).withText(tabName))
             .click(Selector(selectors.query.filterBy).withText(filterName))
             .click(Selector(selectors.query.openedBox).withAttribute('data-level').withText(filterInput))
             .click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton))
-            .expect(Selector(selectors.query.expectedString).innerText).eql(filterInput)
+            .expect(Selector(selectors.query.expectedString).innerText).notEql('All')
+            .click(Selector(selectors.query.clearButton))
+            .expect(Selector(selectors.query.sourceTextAfterClear).innerText).eql('All')
+    },
+
+    applyFilter: async function (filterName: string, filterInputs: Array<string>) {
+        await t.maximizeWindow()
+               .click(Selector(selectors.query.filterBy).withText(filterName));
+
+        filterInputs.forEach(async (inputTxt) => {
+            await t.click(Selector(selectors.query.openedBox)
+                            .withAttribute('data-level')
+                            .withText(inputTxt)
+                        );
+            });
+        
+
+        await t.click(Selector(selectors.query.openedBoxButtons).withText(texts.query.applyButton));
+
+        filterInputs.forEach(async (inputTxt) => {
+            await t.expect(Selector(selectors.query.resultValueBlock)
+                    .withAttribute('title', inputTxt)).ok();            
+        })
+        
+        await t.expect(Selector(selectors.query.resultValueBlock)
+            .withAttribute('title', filterInputs[filterInputs.length-1]).innerText)
+            .eql(filterInputs[filterInputs.length-1]);
+
     },
 
     //get totalResults  : 1 - 10 of 11320
     getTotalResults(txt: string){
         return txt.substring(txt.indexOf('of') + 3);
     }
+
 
 };
 
