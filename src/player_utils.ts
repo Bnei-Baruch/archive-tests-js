@@ -1,31 +1,29 @@
 import {ClientFunction} from "testcafe";
+import tcUtils from "./tc_utils";
 const selectors = require('./selectors');
 
-const PLAYER_PLAY_BUTTON = "i.play.icon";
-const PLAYER_PAUSE_BUTTON = "i.pause.icon";
-
-const getReadyState = ClientFunction(() => {
-    return document.querySelector(selectors.player.playerTag).readyState;
+const getReadyState = ClientFunction((selectors) => {
+    return document.querySelector(selectors.default.player.playerTag).readyState;
 });
 
-const getPlayerCurrentTime = ClientFunction(() => {
-    return document.querySelector(selectors.player.playerTag).currentTime;
+const getCurrentTime = ClientFunction((selectors) => {
+    return document.querySelector(selectors.default.player.playerTag).currentTime;
 });
 
-module.exports = {
+const getDuration = ClientFunction((selectors) => {
+    return document.querySelector(selectors.default.player.playerTag).duration;
+});
 
-    getTimeCode: async function (page) {
-        let readyState = 0;
-        await page.waitForSelector("video");
-        do {
-            readyState = await page.$eval("video", (selector) => {
-                return selector.readyState;
-            });
-            // console.debug("ReadyState ===> " + readyState)
-        } while (readyState === 0);
-        return await page.$$eval('.mediaplayer__timecode time', (selectors) => {
-            return selectors.map(selector => selector.innerText)
-        });
+const client_isFullScreen = ClientFunction (() => {
+        return document.webkitCurrentFullScreenElement &&
+            document.webkitCurrentFullScreenElement.nodeName == "DIV";
+});
+
+let self = module.exports = {
+
+    getTimeCode: async function () {
+        await self.waitForPlayerToLoad()
+        // TODO
     },
 
     secondsToTime: function (secs) {
@@ -45,35 +43,37 @@ module.exports = {
         };
     },
 
-    waitPlayerToLoad: async function () {
+    waitForPlayerToLoad: async function () {
         let readyState = 0;
         do {
-            readyState = await getReadyState();
-            console.debug("ReadyState ===> " + readyState)
+            readyState = await getReadyState(selectors);
+            console.debug("ReadyState ===> " + readyState);
+            await tcUtils.sleep(0.1)
         } while (readyState < 2);
     },
 
     getPlayerCurrentTime:  async function () {
-        return getPlayerCurrentTime()
+        return getCurrentTime(selectors)
     },
 
-    getPlayerDuration: async function (page) {
-        return await page.$eval("video", (selector) => {
-            return selector.duration;
-        });
+    getPlayerDuration: async function () {
+        return getDuration()
     },
 
-    playByClick: async function (page){
-        await Promise.all([
-            page.waitForSelector(PLAYER_PLAY_BUTTON),
-            page.click(PLAYER_PLAY_BUTTON)
-        ]);
+    playByClick: async function (t: TestController){
+        await t.click(selectors.default.player.controls.play)
     },
 
-    stopByClick: async function (page){
-        await Promise.all([
-            page.waitForSelector(PLAYER_PAUSE_BUTTON),
-            page.click(PLAYER_PAUSE_BUTTON)
-        ]);
+    stopByClick: async function (t: TestController){
+        await t.click(selectors.default.player.controls.pause)
     },
+
+    playerFullScreenToggle: async function (t: TestController){
+      await t
+          .click(selectors.default.player.controls.fullScreen)
+    },
+
+    isFullScreen: async function (){
+        return client_isFullScreen()
+    }
 };

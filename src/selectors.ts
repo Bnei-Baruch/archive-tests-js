@@ -11,6 +11,7 @@ const selectors = {
         archiveThumbnails: '.homepage__website-sections.homepage__section a.header',
     },
     query: {
+        tabName: '.section-header__menu.menu a.item',
         filterBy: '.filters__menu.menu div.filter__wrapper small',
         openedBox: '.filter-popup__wrapper a.item',
         openedBoxButtons: '.filter-popup__header button',
@@ -69,15 +70,19 @@ const selectors = {
     player: {
         playerTag: "video",
         controls: {
+            allButtons: '.mediaplayer__controls button',
+            play: 'i.play.icon',
+            onscreen_play: '.mediaplayer__onscreen-play',
+            pause: 'i.pause.icon',
             timecode: '.mediaplayer__timecode time',
             seekbarKnob: '.seekbar__knob',
-            videoSize: '.mediaplayer__video-size',
-            videoSizesList: '.mediaplayer__video-size span',
             playbackRate: '.mediaplayer__playback-rate',
+            playbackRateDropBox: '.mediaplayer__playback-rate span',
+            fullScreen: '.player-button.player-control-fullscreen',
+            videoResolution: '.mediaplayer__video-size',
+            videoResolutionDropBox: '.mediaplayer__video-size span'
 
         }
     }
 };
-export default selectors
-
-
+export default selectors;

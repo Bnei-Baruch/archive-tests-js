@@ -82,7 +82,14 @@ export const tcUtils = {
             .withAttribute('title', filterInputs[filterInputs.length-1]).innerText)
             .eql(filterInputs[filterInputs.length-1]);
 
+    },
+
+    //get totalResults  : 1 - 10 of 11320
+    getTotalResults(txt: string){
+        return txt.substring(txt.indexOf('of') + 3);
     }
+
+
 };
 
 export default tcUtils;
