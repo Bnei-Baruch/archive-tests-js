@@ -2,12 +2,11 @@
     Player Page test suite - 2018 (c)
  */
 
-import {Selector,ClientFunction} from 'testcafe';
-import selectors from '../src/selectors.js'
-import {tcUtils} from '../src/tc_utils'
-const testconfig = require('../_testcafe_tests/testconfig');
-const texts = require('../src/texts');
-const player_utils = require('../src/player_utils');
+import {ClientFunction, Selector} from 'testcafe';
+import selectors from '../src/selectors'
+import tcUtils from '../src/tc_utils'
+import testconfig from '../src/testconfig';
+import player_utils from '../src/player_utils';
 
 const width = 1400;
 const height = 1080;
@@ -54,7 +53,7 @@ test('timeCodeUpdateByDrag', async t => {
 
 });
 
-test('timeCodeUpdateByLink', async t => {
+test.skip('timeCodeUpdateByLink', async t => {
 
 });
 
@@ -83,15 +82,37 @@ test('videoSpeed', async t => {
 });
 
 test('volumeBar', async t => {
+    await t
+        .click(selectors.player.controls.playerVolume)
+        .expect(await Selector(selectors.player.controls.playerVolumeBar)).ok()
+        .click(selectors.player.controls.playerVolume)
+        .expect(await Selector(selectors.player.controls.playerVolumeOff)).ok()
+        .click(selectors.player.controls.playerVolume)
+        .expect(await Selector(selectors.player.controls.playerVolumeUp)).ok()
+
 
 });
 
 test('audioVideoToggle', async t => {
+    await t
+        .expect(await Selector(selectors.player.controls.playerVideoMode)).ok()
+        .click(selectors.player.controls.playerAudioVideoToggle)
+        .expect(await Selector(selectors.player.controls.playerAudioMode)).ok()
+        .click(selectors.player.controls.playerAudioVideoToggle)
+        .expect(await Selector(selectors.player.controls.playerVideoMode)).ok()
 
 });
 
 test('languageSelector', async t => {
-
+    await t
+        .click(selectors.player.controls.playerLanguagesButton)
+        .expect(await Selector(selectors.player.controls.playerLanguagesList)).ok();
+        const languagesList = await tcUtils.multipleSelect(selectors.player.controls.playerLanguagesListEntries);
+    await t
+        .expect(languagesList.length).gt(0)
+        .click(await Selector(selectors.player.controls.playerLanguagesListEntries).nth(3))
+        // TODO: meanwhile disabled to to testcafe issue with user interaction
+        // .expect(await Selector(selectors.player.controls.playerLanguagesCurrentLang).innerText).eql("es")
 });
 
 test.skip('fullScreenToggle', async t => {
@@ -104,27 +125,27 @@ test.skip('fullScreenToggle', async t => {
     await t.expect(await player_utils.isFullScreen()).notOk();
 });
 
-test('sharingModeOn', async t => {
-
-});
-
 test('countPlayerButtons', async t => {
 
     let playerButtons = await tcUtils.multipleSelect(selectors.player.controls.allButtons);
     await t.expect(playerButtons.length).eql(10);
 });
 
-test('playerSkipTimeShortKeys', async t => {
+test.skip('playerSkipTimeShortKeys', async t => {
     // hold Shift and left right narrow jump by 10 seconds
 
     // hold Option and left right narrow jump by 5 seconds
 });
 
-test('sharingModeOff', async t => {
+test.skip('sharingModeOn', async t => {
 
 });
 
-test('sharingModeActions', async t => {
+test.skip('sharingModeOff', async t => {
+
+});
+
+test.skip('sharingModeActions', async t => {
 
 });
 

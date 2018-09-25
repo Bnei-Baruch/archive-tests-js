@@ -77,7 +77,19 @@ const selectors = {
             playbackRateDropBox: '.mediaplayer__playback-rate span',
             fullScreen: '.player-button.player-control-fullscreen',
             videoResolution: '.mediaplayer__video-size',
-            videoResolutionDropBox: '.mediaplayer__video-size span'
+            videoResolutionDropBox: '.mediaplayer__video-size span',
+            playerVolume: '.mediaplayer__volume',
+            playerVolumeUp: '.volume.up.icon',
+            playerVolumeDown: '.volume.down.icon',
+            playerVolumeOff: '.volume.off.icon',
+            playerVolumeBar: '.volume-popover',
+            playerAudioVideoToggle: '.mediaplayer__audiovideo',
+            playerAudioMode: ".mediaplayer audio",
+            playerVideoMode: ".mediaplayer video",
+            playerLanguagesButton: ".mediaplayer__languages",
+            playerLanguagesCurrentLang: ".mediaplayer__languages div button",
+            playerLanguagesList: ".mediaplayer__languages .visible.menu.transition",
+            playerLanguagesListEntries: ".mediaplayer__languages .visible.menu.transition .item"
 
         }
     }

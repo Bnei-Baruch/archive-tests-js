@@ -1,17 +1,17 @@
-import {ClientFunction} from "testcafe";
-import tcUtils from "./tc_utils";
-const selectors = require('./selectors');
+import {ClientFunction} from 'testcafe';
+import tcUtils from './tc_utils';
+import selectors from './selectors';
 
 const getReadyState = ClientFunction((selectors) => {
-    return document.querySelector(selectors.default.player.playerTag).readyState;
+    return document.querySelector(selectors.player.playerTag).readyState;
 });
 
 const getCurrentTime = ClientFunction((selectors) => {
-    return document.querySelector(selectors.default.player.playerTag).currentTime;
+    return document.querySelector(selectors.player.playerTag).currentTime;
 });
 
 const getDuration = ClientFunction((selectors) => {
-    return document.querySelector(selectors.default.player.playerTag).duration;
+    return document.querySelector(selectors.player.playerTag).duration;
 });
 
 const client_isFullScreen = ClientFunction (() => {
@@ -19,10 +19,10 @@ const client_isFullScreen = ClientFunction (() => {
             document.webkitCurrentFullScreenElement.nodeName == "DIV";
 });
 
-let self = module.exports = {
+const player_utils = {
 
     getTimeCode: async function () {
-        await self.waitForPlayerToLoad()
+        await player_utils.waitForPlayerToLoad()
         // TODO
     },
 
@@ -61,19 +61,20 @@ let self = module.exports = {
     },
 
     playByClick: async function (t: TestController){
-        await t.click(selectors.default.player.controls.play)
+        await t.click(selectors.player.controls.play)
     },
 
     stopByClick: async function (t: TestController){
-        await t.click(selectors.default.player.controls.pause)
+        await t.click(selectors.player.controls.pause)
     },
 
     playerFullScreenToggle: async function (t: TestController){
       await t
-          .click(selectors.default.player.controls.fullScreen)
+          .click(selectors.player.controls.fullScreen)
     },
 
     isFullScreen: async function (){
         return client_isFullScreen()
     }
 };
+export default player_utils;
