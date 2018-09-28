@@ -14,6 +14,10 @@ const getDuration = ClientFunction((selectors) => {
     return document.querySelector(selectors.player.playerTag).duration;
 });
 
+const setDuration = ClientFunction((selectors, duration) => {
+    return document.querySelector(selectors.player.playerTag).duration = duration;
+});
+
 const client_isFullScreen = ClientFunction (() => {
         return document.webkitCurrentFullScreenElement &&
             document.webkitCurrentFullScreenElement.nodeName == "DIV";
@@ -57,7 +61,11 @@ const player_utils = {
     },
 
     getPlayerDuration: async function () {
-        return getDuration()
+        return getDuration(selectors)
+    },
+
+    setPlayerDuration: async function (duration) {
+        setDuration(selectors, duration)
     },
 
     playByClick: async function (t: TestController){
