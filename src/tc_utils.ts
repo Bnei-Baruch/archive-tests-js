@@ -87,7 +87,11 @@ export const tcUtils = {
     //get totalResults  : 1 - 10 of 11320
     getTotalResults(txt: string){
         return txt.substring(txt.indexOf('of') + 3);
-    }
+    },
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    },
 
 
 };

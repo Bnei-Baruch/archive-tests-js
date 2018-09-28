@@ -26,7 +26,7 @@ test('playerTimeCode', async t => {
 
     await player_utils.waitForPlayerToLoad();
     const timeCodes = await tcUtils.multipleSelect(selectors.player.controls.timecode);
-    console.log(`Timecodes: ${timeCodes[0]}:${timeCodes[1]}`);
+    console.log(`Timecodes: ${timeCodes[0]} - ${timeCodes[1]}`);
 
     await t
         .expect(timeCodes[0]).eql('00:00')
@@ -53,8 +53,14 @@ test('timeCodeUpdateByDrag', async t => {
 
 });
 
-test.skip('timeCodeUpdateByLink', async t => {
-
+test('timeCodeUpdateByLink', async t => {
+    await t
+        .navigateTo(testconfig.resources.playerUrl + '&mediaType=video&sstart=7m28s&send=11m22s');
+    await player_utils.waitForPlayerToLoad();
+    const timeCodes = await tcUtils.multipleSelect(selectors.player.controls.timecode);
+    console.log(`Timecodes: ${timeCodes[0]} - ${timeCodes[1]}`);
+    await t
+        .expect(timeCodes[0]).eql('07:28')
 });
 
 test('videoSize', async t => {
@@ -112,11 +118,12 @@ test('languageSelector', async t => {
         .expect(languagesList.length).gt(0)
         .click(await Selector(selectors.player.controls.playerLanguagesListEntries).nth(3))
         // TODO: meanwhile disabled to to testcafe issue with user interaction
+        // https://github.com/DevExpress/testcafe/issues/2863
         // .expect(await Selector(selectors.player.controls.playerLanguagesCurrentLang).innerText).eql("es")
 });
 
 test.skip('fullScreenToggle', async t => {
-    // await setHeight(selectors.player.controls.fullScreen);
+    // FIXME: Waiting for testcafe bug fix: https://github.com/DevExpress/testcafe/issues/2863
     await player_utils.waitForPlayerToLoad();
     await t.expect(await player_utils.isFullScreen()).notOk();
     await player_utils.playerFullScreenToggle(t);
@@ -137,15 +144,41 @@ test.skip('playerSkipTimeShortKeys', async t => {
     // hold Option and left right narrow jump by 5 seconds
 });
 
-test.skip('sharingModeOn', async t => {
-
-});
-
-test.skip('sharingModeOff', async t => {
+test('sharingModeToggle', async t => {
+    await player_utils.waitForPlayerToLoad();
+    await t
+        .click(Selector(selectors.player.controls.playerSharingButton))
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingModeOn).exists).ok()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingBar).exists).ok()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingCopyButton).exists).ok()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingEndButton).exists).ok()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingStartButton).exists).ok()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.socialButtons).exists).ok()
+        .click(Selector(selectors.player.controls.playerSharingButton))
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingModeOn).exists).notOk()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingBar).exists).notOk()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingCopyButton).exists).notOk()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingEndButton).exists).notOk()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.sharingStartButton).exists).notOk()
+        .expect(Selector(selectors.player.controls.playerSharingModeControls.socialButtons).exists).notOk()
 
 });
 
 test.skip('sharingModeActions', async t => {
+    // FIXME: Waiting for testcafe bug fix: https://github.com/DevExpress/testcafe/issues/2863
+    let startTime = 300;
+    let endTime = 800;
+    await player_utils.waitForPlayerToLoad();
+    await t
+        .click(Selector(selectors.player.controls.playerSharingButton));
+    await player_utils.setPlayerDuration(startTime);
+    await t
+        .click(Selector(selectors.player.controls.playerSharingModeControls.sharingStartButton));
+    await player_utils.setPlayerDuration(endTime);
+    await t
+        .click(Selector(selectors.player.controls.playerSharingModeControls.sharingEndButton))
+        .navigateTo(await Selector(selectors.player.controls.playerSharingModeControls.sharingLinkText).innerText)
+
 
 });
 

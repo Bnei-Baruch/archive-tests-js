@@ -92,7 +92,17 @@ const selectors = {
             playerLanguagesButton: ".mediaplayer__languages",
             playerLanguagesCurrentLang: ".mediaplayer__languages div button",
             playerLanguagesList: ".mediaplayer__languages .visible.menu.transition",
-            playerLanguagesListEntries: ".mediaplayer__languages .visible.menu.transition .item"
+            playerLanguagesListEntries: ".mediaplayer__languages .visible.menu.transition .item",
+            playerSharingButton: "button .share.alternate.icon",
+            playerSharingModeControls: {
+                sharingModeOn: ".mediaplayer__onscreen-share",
+                socialButtons: ".social-buttons",
+                sharingBar: ".mediaplayer__onscreen-share-bar",
+                sharingLinkText: ".mediaplayer__onscreen-share-bar p",
+                sharingCopyButton: ".ui.mini.button.shareCopyLinkButton",
+                sharingStartButton: "button .hourglass.start.icon",
+                sharingEndButton: "button .hourglass.end.icon"
+            }
 
         }
     }
